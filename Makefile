@@ -16,7 +16,7 @@
 
 .PHONY: textlint
 textlint:
-	@docker run -it --rm -v $$PWD:/work -w /work sacloud/textlint:local .
+	@docker run -it --rm -v $$PWD:/work -w /work ghcr.io/sacloud/textlint-action:v0.0.1 .
 
 .PHONY: go-licenses-check
 go-licenses-check:
