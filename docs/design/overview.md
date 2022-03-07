@@ -41,10 +41,9 @@ libsacloudのhelper/serviceパッケージの移植やその他高レベル操�
   - helper/builderとhelper/serviceの統合
   - 統合したhelper/serviceの移植
   - helper/newsfeedの移植
-- libsacloudからの汎用処理の切り出し
-- sacloud-goに入れるべきもの/別途リポジトリを作成すべきものの仕分け
-
-TODO: 上記以外のlibsacloudからの移植対象を調査/追記
+  - helper/waitを汎化して切り出し
+  - helper/apiを汎化して切り出し
+  - 汎用処理の切り出し
 
 ### やらないこと
 
@@ -55,6 +54,29 @@ TODO: 必要に応じて記載
 - libsacloudから必要部分を移植  
 - 下位ライブラリ(IaaS/オブジェクトストレージ/PHY)を意識せず使えるようなAPIの設計
 
+### パッケージ構成
+
+```console
+- sacloud-go
+  - pkg       # Note: libsacloudからの移植、iaas-api-goなどからも利用するため独立したパッケージにする
+    - go.mod
+    - cidr
+    - mutexkv
+    - size
+    - pointer
+    - wait      
+    
+  - profile
+  - newsfeed
+  - service    
+    - iaas          # libsacloudのhelper/serviceからの移植 
+    - objectstorage # 新規
+    - phy           # 新規
+```
+
+`pkg`は独立したリポジトリにするほどでもない、sacloudドメインに非依存のコードを配置する。
+
 ## 改訂履歴
 
 - 2022/2/26: 初版作成
+- 2022/3/7: パッケージ構成追加
