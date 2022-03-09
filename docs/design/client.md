@@ -13,20 +13,73 @@ libsacloudで実装されておりPHYやオブジェクトストレージで利�
 
 このためsacloud-goでこれらを実装し共通で利用可能にする。
 
-## やること/やらないこと
-
-### やること
-
-TODO 必要に応じて追記
-
-### やらないこと
-
-TODO 必要に応じて追記
-
 ## 実装
 
-sacloud-go側で各種設定値を保持し、sacloud/go-httpの`Client`を返すところまでを実装する。  
+sacloud-go側で各種設定値を保持し、HTTPクライアントとして`HttpRequestDoer`を返すところまでを実装する。  
 各クライアント側プロジェクトから参照されることによる循環参照を防ぐためにsacloud-go配下で独立したモジュールとして実装する。
+
+### 主要コンポーネント
+
+#### `Options`
+
+APIトークンやシークレットなどのAPI/HTTPクライアントの動作に必要な値やオプション値を保持する。
+
+```go
+// Options sacloudhttp.Clientを作成する際のオプション
+type Options struct {
+    // AccessToken APIキー:トークン
+    AccessToken string
+    // AccessTokenSecret APIキー:シークレット
+    AccessTokenSecret string
+
+    // ...
+}
+```
+
+プロファイルからOptionsを生成した場合はOptions内部にprofile.ConfigValueを保持する。  
+clientパッケージで利用されないルートURLなどの設定は各アプリケーション側でここから参照して利用する。  
+
+#### `Factory`
+
+Optionsを保持し、HttpRequestDoerを生成する。
+内部的にhttp.Clientを保持し、Transportのカスタマイズなどを担当する。  
+HttpRequestDoerの実装としてsacloud/go-httpを用いる。
+
+```go
+// Factory client.HttpRequestDoerを作成して返すファクトリー
+type Factory struct {
+	options    *Options
+	httpClient *http.Client // Transportの初期化を1度だけ行うためにoptionsのHttpClientの参照をここにコピーして保持しておく
+
+	once sync.Once
+}
+```
+
+#### HttpRequestDoer
+
+HTTPリクエストを担当するインターフェース
+
+```go
+// HttpRequestDoer API/HTTPクライアントインターフェース
+type HttpRequestDoer interface {
+	Do(req *http.Request) (*http.Response, error)
+}
+```
+
+### 利用イメージ
+
+```go
+	// 環境変数/プロファイルを読み込んでオプションを組み立てる
+	opt, _ := client.DefaultOption()
+	// オプションからファクトリー生成
+	clientFactory := client.NewFactory(opt)
+	// ファクトリーからHttpRequestDoerを生成
+	doer := clientFactory.NewHttpRequestDoer()
+
+	// doerを用いてHTTPリクエスト
+    resp, err := doer.Do(http.NewRequest("GET", url, nil))
+	// ...
+```
 
 ## 改訂履歴
 
