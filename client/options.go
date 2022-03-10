@@ -17,11 +17,10 @@ package client
 import (
 	"context"
 	"net/http"
-	"os"
-	"strconv"
 
 	sacloudhttp "github.com/sacloud/go-http"
 	"github.com/sacloud/sacloud-go/client/profile"
+	"github.com/sacloud/sacloud-go/pkg/envvar"
 )
 
 // Options sacloudhttp.Clientを作成する際のオプション
@@ -92,7 +91,7 @@ func DefaultOption() (*Options, error) {
 // 同じ項目を複数箇所で指定していた場合、環境変数->プロファイルの順で上書きされたものが返される
 func DefaultOptionWithProfile(profileName string) (*Options, error) {
 	if profileName == "" {
-		profileName = stringFromEnvMulti([]string{"SAKURACLOUD_PROFILE", "USACLOUD_PROFILE"}, "")
+		profileName = envvar.StringFromEnvMulti([]string{"SAKURACLOUD_PROFILE", "USACLOUD_PROFILE"}, "")
 	}
 	fromProfile, err := OptionsFromProfile(profileName)
 	if err != nil {
@@ -159,19 +158,19 @@ func MergeOptions(opts ...*Options) *Options {
 // OptionsFromEnv 環境変数からCallerOptionsを組み立てて返す
 func OptionsFromEnv() *Options {
 	return &Options{
-		AccessToken:       stringFromEnv("SAKURACLOUD_ACCESS_TOKEN", ""),
-		AccessTokenSecret: stringFromEnv("SAKURACLOUD_ACCESS_TOKEN_SECRET", ""),
+		AccessToken:       envvar.StringFromEnv("SAKURACLOUD_ACCESS_TOKEN", ""),
+		AccessTokenSecret: envvar.StringFromEnv("SAKURACLOUD_ACCESS_TOKEN_SECRET", ""),
 
-		AcceptLanguage: stringFromEnv("SAKURACLOUD_ACCEPT_LANGUAGE", ""),
+		AcceptLanguage: envvar.StringFromEnv("SAKURACLOUD_ACCEPT_LANGUAGE", ""),
 
-		HttpRequestTimeout:   intFromEnv("SAKURACLOUD_API_REQUEST_TIMEOUT", 0),
-		HttpRequestRateLimit: intFromEnv("SAKURACLOUD_API_REQUEST_RATE_LIMIT", 0),
+		HttpRequestTimeout:   envvar.IntFromEnv("SAKURACLOUD_API_REQUEST_TIMEOUT", 0),
+		HttpRequestRateLimit: envvar.IntFromEnv("SAKURACLOUD_API_REQUEST_RATE_LIMIT", 0),
 
-		RetryMax:     intFromEnv("SAKURACLOUD_RETRY_MAX", 0),
-		RetryWaitMax: intFromEnv("SAKURACLOUD_RETRY_WAIT_MAX", 0),
-		RetryWaitMin: intFromEnv("SAKURACLOUD_RETRY_WAIT_MIN", 0),
+		RetryMax:     envvar.IntFromEnv("SAKURACLOUD_RETRY_MAX", 0),
+		RetryWaitMax: envvar.IntFromEnv("SAKURACLOUD_RETRY_WAIT_MAX", 0),
+		RetryWaitMin: envvar.IntFromEnv("SAKURACLOUD_RETRY_WAIT_MIN", 0),
 
-		Trace: stringFromEnv("SAKURACLOUD_TRACE", "") != "",
+		Trace: envvar.StringFromEnv("SAKURACLOUD_TRACE", "") != "",
 	}
 }
 
@@ -204,34 +203,4 @@ func OptionsFromProfile(profileName string) (*Options, error) {
 
 		profileConfigValue: &config,
 	}, nil
-}
-
-func stringFromEnv(key, defaultValue string) string {
-	v := os.Getenv(key)
-	if v == "" {
-		return defaultValue
-	}
-	return v
-}
-
-func stringFromEnvMulti(keys []string, defaultValue string) string {
-	for _, key := range keys {
-		v := os.Getenv(key)
-		if v != "" {
-			return v
-		}
-	}
-	return defaultValue
-}
-
-func intFromEnv(key string, defaultValue int) int {
-	v := os.Getenv(key)
-	if v == "" {
-		return defaultValue
-	}
-	i, err := strconv.ParseInt(v, 10, 64)
-	if err != nil {
-		return defaultValue
-	}
-	return int(i)
 }
