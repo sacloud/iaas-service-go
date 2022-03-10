@@ -94,7 +94,7 @@ func (f *Factory) init() {
 		}
 		f.httpClient.Transport = &sacloudhttp.RateLimitRoundTripper{
 			Transport:       f.httpClient.Transport,
-			RateLimitPerSec: f.options.HttpRequestRateLimit,
+			RateLimitPerSec: rateLimit,
 		}
 
 		if f.options.Trace {
