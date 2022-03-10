@@ -151,6 +151,12 @@ func MergeOptions(opts ...*Options) *Options {
 		if opt.Trace {
 			merged.Trace = true
 		}
+		if len(opt.RequestCustomizers) > 0 {
+			merged.RequestCustomizers = opt.RequestCustomizers
+		}
+		if opt.CheckRetryFunc != nil {
+			merged.CheckRetryFunc = opt.CheckRetryFunc
+		}
 	}
 	return merged
 }
