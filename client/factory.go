@@ -15,6 +15,7 @@
 package client
 
 import (
+	"context"
 	"net/http"
 	"sync"
 	"time"
@@ -51,18 +52,13 @@ func NewFactory(options ...*Options) *Factory {
 func (f *Factory) NewHttpRequestDoer() HttpRequestDoer {
 	f.init()
 
-	checkRetryFn := retryablehttp.DefaultRetryPolicy
-	if f.options.CheckRetryFunc != nil {
-		checkRetryFn = f.options.CheckRetryFunc
-	}
-
 	return &sacloudhttp.Client{
 		AccessToken:       f.options.AccessToken,
 		AccessTokenSecret: f.options.AccessTokenSecret,
 		UserAgent:         f.options.UserAgent,
 		AcceptLanguage:    f.options.AcceptLanguage,
 		Gzip:              f.options.Gzip,
-		CheckRetryFunc:    checkRetryFn,
+		CheckRetryFunc:    f.checkRetryFn(),
 		RetryMax:          f.options.RetryMax,
 		RetryWaitMin:      time.Duration(f.options.RetryWaitMin) * time.Second,
 		RetryWaitMax:      time.Duration(f.options.RetryWaitMax) * time.Second,
@@ -103,4 +99,32 @@ func (f *Factory) init() {
 			}
 		}
 	})
+}
+
+func (f *Factory) checkRetryFn() func(ctx context.Context, resp *http.Response, err error) (bool, error) {
+	checkRetryFn := retryablehttp.DefaultRetryPolicy
+	if len(f.options.CheckRetryStatusCodes) > 0 {
+		checkRetryFn = func(ctx context.Context, resp *http.Response, err error) (bool, error) {
+			if ctx.Err() != nil {
+				return false, ctx.Err()
+			}
+			if err != nil {
+				return retryablehttp.DefaultRetryPolicy(ctx, resp, err)
+			}
+			if resp.StatusCode == 0 {
+				return true, nil
+			}
+			for _, status := range f.options.CheckRetryStatusCodes {
+				if resp.StatusCode == status {
+					return true, nil
+				}
+			}
+			return false, nil
+		}
+	}
+	if f.options.CheckRetryFunc != nil {
+		checkRetryFn = f.options.CheckRetryFunc
+	}
+
+	return checkRetryFn
 }

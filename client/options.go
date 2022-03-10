@@ -64,7 +64,14 @@ type Options struct {
 	RequestCustomizers []sacloudhttp.RequestCustomizer
 
 	// CheckRetryFunc リトライすべきか判定するためのfunc
+	//
+	// CheckRetryStatusCodesより優先される
 	CheckRetryFunc func(ctx context.Context, resp *http.Response, err error) (bool, error)
+
+	// CheckRetryStatusCodes リトライすべきステータスコード
+	//
+	// CheckRetryFuncが指定されていない、かつこの値が指定されている場合、指定のステータスコードを持つレスポンスを受け取ったらリトライする
+	CheckRetryStatusCodes []int
 
 	// profileConfigValue プロファイルから読み込んだ値を保持する
 	profileConfigValue *profile.ConfigValue
@@ -156,6 +163,9 @@ func MergeOptions(opts ...*Options) *Options {
 		}
 		if opt.CheckRetryFunc != nil {
 			merged.CheckRetryFunc = opt.CheckRetryFunc
+		}
+		if len(opt.CheckRetryStatusCodes) > 0 {
+			merged.CheckRetryStatusCodes = opt.CheckRetryStatusCodes
 		}
 	}
 	return merged
