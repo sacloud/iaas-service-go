@@ -22,13 +22,11 @@ default: gen fmt set-license go-licenses-check goimports lint test
 
 .PHONY: test
 test:
-	(cd client; TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race);
 	(cd pkg; TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race);
 	TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race;
 
 .PHONY: testacc
 testacc:
-	(cd client; TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race);
 	(cd pkg; TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race);
 	TESTACC=1 go test ./... $(TESTARGS) --tags=acctest -v -timeout=120m -parallel=8 ;
 

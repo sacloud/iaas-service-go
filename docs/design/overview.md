@@ -44,7 +44,7 @@ libsacloudのhelper/serviceパッケージの移植やその他高レベル操�
   - helper/waitを汎化して切り出し
   - helper/apiを汎化して切り出し
   - 汎用処理の切り出し
-  - クライアント周り(helper/apiやprofile)の切り出し
+  - ~クライアント周り(helper/apiやprofile)の切り出し~ → sacloud/api-client-goへ切り出し
 
 ### やらないこと
 
@@ -67,10 +67,6 @@ TODO: 必要に応じて記載
     - pointer
     - wait      
     
-  - client    # Note: libsacloud/helper/apiなどからの移植、iaas-api-goなどからも利用するため独立したパッケージにする
-    - go.mod
-    - profile
-    - (helper/apiから切り出し)
   - newsfeed
   - service    
     - iaas          # libsacloudのhelper/serviceからの移植 
