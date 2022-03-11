@@ -32,6 +32,24 @@ type StateReadFunc func() (state interface{}, err error)
 // completeがtrueの場合待ち処理を終了する
 type StateCheckFunc func(target interface{}) (complete bool, err error)
 
+// ComposeStateCheckFunc 指定のStateCheckFuncを順に適用するするStateCheckFuncを生成する
+//
+// completeがtrueまたはerrが非nilになったら即時リターンする。
+func ComposeStateCheckFunc(funcs ...StateCheckFunc) StateCheckFunc {
+	return func(target interface{}) (bool, error) {
+		for _, f := range funcs {
+			complete, err := f(target)
+			if err != nil {
+				return false, err
+			}
+			if complete {
+				return complete, nil
+			}
+		}
+		return false, nil
+	}
+}
+
 // PollingWaiter ポーリングでステート変更を検知するWaiter
 type PollingWaiter struct {
 	// ReadFunc 対象リソースの状態を取得するためのfunc
