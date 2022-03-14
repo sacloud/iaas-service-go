@@ -53,6 +53,8 @@ func ComposeStateCheckFunc(funcs ...StateCheckFunc) StateCheckFunc {
 // PollingWaiter ポーリングでステート変更を検知するWaiter
 type PollingWaiter struct {
 	// ReadFunc 対象リソースの状態を取得するためのfunc
+	//
+	// ReadFuncがerrorを返した場合は待ち処理が即時リターンする。非エラーかつ非nilを返した場合のみStateCheckFuncでの判定処理を行う。
 	ReadFunc StateReadFunc
 
 	// StateCheckFunc ReadFuncで得たリソースの情報を元に待ちを継続するかの判定を行うためのfunc
@@ -114,18 +116,18 @@ func (w *PollingWaiter) WaitForStateAsync(ctx context.Context) (<-chan interface
 					errCh <- err
 					return
 				}
+				if state != nil {
+					complete, err := w.StateCheckFunc(state)
+					if complete {
+						compCh <- state
+						return
+					}
 
-				complete, err := w.StateCheckFunc(state)
-				if complete {
-					compCh <- state
-					return
+					if err != nil {
+						errCh <- err
+						return
+					}
 				}
-
-				if err != nil {
-					errCh <- err
-					return
-				}
-
 				// note: nilの場合もあり得る
 				progressCh <- state
 			}
