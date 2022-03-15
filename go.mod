@@ -10,6 +10,8 @@ require (
 	github.com/stretchr/testify v1.7.0
 )
 
+replace github.com/sacloud/sacloud-go/pkg => ./pkg
+
 require (
 	github.com/andres-erbsen/clock v0.0.0-20160526145045-9e14626cd129 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
