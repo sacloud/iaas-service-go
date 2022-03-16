@@ -124,7 +124,7 @@ func (r *RetryableSetup) init() {
 	if r.Options == nil {
 		r.Options = &Options{}
 	}
-	r.Options.init()
+	r.Options.Init()
 }
 
 func (r *RetryableSetup) createResource(ctx context.Context, zone string) (accessor.ID, error) {

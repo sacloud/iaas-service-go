@@ -59,7 +59,7 @@ type Options struct {
 	PollingInterval time.Duration
 }
 
-func (o *Options) init() {
+func (o *Options) Init() {
 	if o.NICUpdateWaitDuration == time.Duration(0) {
 		o.NICUpdateWaitDuration = DefaultNICUpdateWaitDuration
 	}
