@@ -19,6 +19,7 @@ import (
 
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/sacloud-go/service/iaas/containerregistry/builder"
 	"github.com/sacloud/sacloud-go/service/iaas/serviceutil"
 	"github.com/sacloud/sacloud-go/service/validate"
 )
@@ -32,7 +33,7 @@ type UpdateRequest struct {
 	IconID        *types.ID                            `request:",omitempty"`
 	AccessLevel   *types.EContainerRegistryAccessLevel `request:",omitempty"`
 	VirtualDomain *string                              `request:",omitempty"`
-	Users         *[]*User                             `request:",omitempty"`
+	Users         *[]*builder.User                     `request:",omitempty"`
 	SettingsHash  string
 }
 
@@ -64,7 +65,7 @@ func (req *UpdateRequest) ApplyRequest(ctx context.Context, caller iaas.APICalle
 	}
 	if users != nil {
 		for _, user := range users.Users {
-			applyRequest.Users = append(applyRequest.Users, &User{
+			applyRequest.Users = append(applyRequest.Users, &builder.User{
 				UserName:   user.UserName,
 				Password:   "", // パスワードは参照できないため常に空
 				Permission: user.Permission,

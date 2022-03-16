@@ -19,6 +19,7 @@ import (
 
 	"github.com/sacloud/iaas-api-go/testutil"
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/sacloud-go/service/iaas/containerregistry/builder"
 	"github.com/stretchr/testify/require"
 )
 
@@ -37,7 +38,7 @@ func TestContainerRegistryService_convertCreateRequest(t *testing.T) {
 				AccessLevel:    types.ContainerRegistryAccessLevels.ReadWrite,
 				VirtualDomain:  "container-registry.test.libsacloud.com",
 				SubDomainLabel: name,
-				Users: []*User{
+				Users: []*builder.User{
 					{
 						UserName:   "user1",
 						Password:   "password1",
@@ -54,7 +55,7 @@ func TestContainerRegistryService_convertCreateRequest(t *testing.T) {
 				AccessLevel:    types.ContainerRegistryAccessLevels.ReadWrite,
 				VirtualDomain:  "container-registry.test.libsacloud.com",
 				SubDomainLabel: name,
-				Users: []*User{
+				Users: []*builder.User{
 					{
 						UserName:   "user1",
 						Password:   "password1",

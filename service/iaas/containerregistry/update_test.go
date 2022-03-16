@@ -22,6 +22,7 @@ import (
 	"github.com/sacloud/iaas-api-go/testutil"
 	"github.com/sacloud/iaas-api-go/types"
 	"github.com/sacloud/sacloud-go/pkg/pointer"
+	"github.com/sacloud/sacloud-go/service/iaas/containerregistry/builder"
 	"github.com/stretchr/testify/require"
 )
 
@@ -38,7 +39,7 @@ func TestContainerRegistryService_convertUpdateRequest(t *testing.T) {
 		AccessLevel:    types.ContainerRegistryAccessLevels.ReadWrite,
 		VirtualDomain:  "container-registry.test.libsacloud.com",
 		SubDomainLabel: name,
-		Users: []*User{
+		Users: []*builder.User{
 			{
 				UserName:   "username",
 				Password:   "password",
@@ -77,7 +78,7 @@ func TestContainerRegistryService_convertUpdateRequest(t *testing.T) {
 				AccessLevel:    types.ContainerRegistryAccessLevels.ReadOnly,
 				VirtualDomain:  "updated.container-registry.test.libsacloud.com",
 				SubDomainLabel: current.SubDomainLabel,
-				Users: []*User{
+				Users: []*builder.User{
 					{
 						UserName:   "username",
 						Password:   "", // Usersを指定しなかった場合のパスワードは常に空となる

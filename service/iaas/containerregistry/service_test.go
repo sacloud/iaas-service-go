@@ -21,6 +21,7 @@ import (
 	"github.com/sacloud/iaas-api-go/testutil"
 	"github.com/sacloud/iaas-api-go/types"
 	"github.com/sacloud/sacloud-go/pkg/pointer"
+	"github.com/sacloud/sacloud-go/service/iaas/containerregistry/builder"
 )
 
 func TestContainerRegistryService_CRUD(t *testing.T) {
@@ -41,7 +42,7 @@ func TestContainerRegistryService_CRUD(t *testing.T) {
 					AccessLevel:    types.ContainerRegistryAccessLevels.ReadOnly,
 					VirtualDomain:  name + ".usacloud.jp",
 					SubDomainLabel: name,
-					Users: []*User{
+					Users: []*builder.User{
 						{
 							UserName:   "user1",
 							Password:   "password1",
@@ -71,7 +72,7 @@ func TestContainerRegistryService_CRUD(t *testing.T) {
 						Tags:          &types.Tags{"tag1-upd", "tag2-upd"},
 						AccessLevel:   &types.ContainerRegistryAccessLevels.ReadOnly,
 						VirtualDomain: pointer.NewString(name + "-upd.usacloud.jp"),
-						Users: &[]*User{
+						Users: &[]*builder.User{
 							{
 								UserName:   "user1",
 								Password:   "password1",

@@ -20,6 +20,7 @@ import (
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/testutil"
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/sacloud-go/service/iaas/containerregistry/builder"
 	"github.com/stretchr/testify/require"
 )
 
@@ -29,7 +30,7 @@ func TestContainerRegistryService_convertApplyRequest(t *testing.T) {
 
 	cases := []struct {
 		in     *ApplyRequest
-		expect *Builder
+		expect *builder.Builder
 	}{
 		{
 			in: &ApplyRequest{
@@ -39,7 +40,7 @@ func TestContainerRegistryService_convertApplyRequest(t *testing.T) {
 				AccessLevel:    types.ContainerRegistryAccessLevels.ReadWrite,
 				VirtualDomain:  "container-registry.test.libsacloud.com",
 				SubDomainLabel: name,
-				Users: []*User{
+				Users: []*builder.User{
 					{
 						UserName:   "user1",
 						Password:   "password1",
@@ -48,7 +49,7 @@ func TestContainerRegistryService_convertApplyRequest(t *testing.T) {
 				},
 				SettingsHash: "aaaaaaaa",
 			},
-			expect: &Builder{
+			expect: &builder.Builder{
 				ID:             0,
 				Name:           name,
 				Description:    "desc",
@@ -56,7 +57,7 @@ func TestContainerRegistryService_convertApplyRequest(t *testing.T) {
 				AccessLevel:    types.ContainerRegistryAccessLevels.ReadWrite,
 				VirtualDomain:  "container-registry.test.libsacloud.com",
 				SubDomainLabel: name,
-				Users: []*User{
+				Users: []*builder.User{
 					{
 						UserName:   "user1",
 						Password:   "password1",

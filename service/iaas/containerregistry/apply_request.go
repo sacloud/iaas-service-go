@@ -17,6 +17,7 @@ package containerregistry
 import (
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/sacloud-go/service/iaas/containerregistry/builder"
 	"github.com/sacloud/sacloud-go/service/validate"
 )
 
@@ -30,7 +31,7 @@ type ApplyRequest struct {
 	AccessLevel    types.EContainerRegistryAccessLevel
 	VirtualDomain  string
 	SubDomainLabel string
-	Users          []*User
+	Users          []*builder.User
 
 	SettingsHash string
 }
@@ -39,8 +40,8 @@ func (req *ApplyRequest) Validate() error {
 	return validate.Struct(req)
 }
 
-func (req *ApplyRequest) Builder(caller iaas.APICaller) (*Builder, error) {
-	return &Builder{
+func (req *ApplyRequest) Builder(caller iaas.APICaller) (*builder.Builder, error) {
+	return &builder.Builder{
 		ID:             req.ID,
 		Name:           req.Name,
 		Description:    req.Description,
