@@ -20,6 +20,7 @@ import (
 
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/sacloud-go/service/iaas/certificateauthority/builder"
 	"github.com/sacloud/sacloud-go/service/iaas/serviceutil"
 	"github.com/sacloud/sacloud-go/service/validate"
 )
@@ -32,8 +33,8 @@ type UpdateRequest struct {
 	Tags        *types.Tags `request:",omitempty"`
 	IconID      *types.ID   `request:",omitempty"`
 
-	Clients []*ClientCert `request:",omitempty"` // Note: API的に証明書の削除はできないため、指定した以上の証明書が存在する可能性がある
-	Servers []*ServerCert `request:",omitempty"` // Note: API的に証明書の削除はできないため、指定した以上の証明書が存在する可能性がある
+	Clients []*builder.ClientCert `request:",omitempty"` // Note: API的に証明書の削除はできないため、指定した以上の証明書が存在する可能性がある
+	Servers []*builder.ServerCert `request:",omitempty"` // Note: API的に証明書の削除はできないため、指定した以上の証明書が存在する可能性がある
 
 	PollingTimeout  time.Duration // 証明書発行待ちのタイムアウト
 	PollingInterval time.Duration // 証明書発行待ちのポーリング間隔

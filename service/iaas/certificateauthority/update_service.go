@@ -17,13 +17,15 @@ package certificateauthority
 import (
 	"context"
 	"fmt"
+
+	"github.com/sacloud/sacloud-go/service/iaas/certificateauthority/builder"
 )
 
-func (s *Service) Update(req *UpdateRequest) (*CertificateAuthority, error) {
+func (s *Service) Update(req *UpdateRequest) (*builder.CertificateAuthority, error) {
 	return s.UpdateWithContext(context.Background(), req)
 }
 
-func (s *Service) UpdateWithContext(ctx context.Context, req *UpdateRequest) (*CertificateAuthority, error) {
+func (s *Service) UpdateWithContext(ctx context.Context, req *UpdateRequest) (*builder.CertificateAuthority, error) {
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}

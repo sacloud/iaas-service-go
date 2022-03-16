@@ -18,15 +18,16 @@ import (
 	"context"
 
 	"github.com/sacloud/iaas-api-go"
+	"github.com/sacloud/sacloud-go/service/iaas/certificateauthority/builder"
 )
 
-func (s *Service) Read(req *ReadRequest) (*CertificateAuthority, error) {
+func (s *Service) Read(req *ReadRequest) (*builder.CertificateAuthority, error) {
 	return s.ReadWithContext(context.Background(), req)
 }
 
-func (s *Service) ReadWithContext(ctx context.Context, req *ReadRequest) (*CertificateAuthority, error) {
+func (s *Service) ReadWithContext(ctx context.Context, req *ReadRequest) (*builder.CertificateAuthority, error) {
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
-	return read(ctx, iaas.NewCertificateAuthorityOp(s.caller), req.ID)
+	return builder.Read(ctx, iaas.NewCertificateAuthorityOp(s.caller), req.ID)
 }

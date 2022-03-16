@@ -21,6 +21,7 @@ import (
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/testutil"
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/sacloud-go/service/iaas/certificateauthority/builder"
 )
 
 func TestCertificateAuthorityService_CRUD(t *testing.T) {
@@ -47,7 +48,7 @@ func TestCertificateAuthorityService_CRUD(t *testing.T) {
 					OrganizationUnit: []string{"ou1", "ou2"},
 					CommonName:       "www.usacloud.jp",
 					NotAfter:         time.Now().Add(365 * 24 * time.Hour),
-					Clients: []*ClientCert{
+					Clients: []*builder.ClientCert{
 						{
 							Country:        "JP",
 							Organization:   "usacloud",

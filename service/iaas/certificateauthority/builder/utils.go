@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package certificateauthority
+package builder
 
 import (
 	"context"
@@ -21,7 +21,7 @@ import (
 	"github.com/sacloud/iaas-api-go/types"
 )
 
-func read(ctx context.Context, apiClient iaas.CertificateAuthorityAPI, id types.ID) (*CertificateAuthority, error) {
+func Read(ctx context.Context, apiClient iaas.CertificateAuthorityAPI, id types.ID) (*CertificateAuthority, error) {
 	current, err := apiClient.Read(ctx, id)
 	if err != nil {
 		return nil, err

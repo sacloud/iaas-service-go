@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package certificateauthority
+package builder
 
 import (
 	"context"
@@ -131,7 +131,7 @@ func (b *Builder) create(ctx context.Context) (*CertificateAuthority, error) {
 		return nil, err
 	}
 
-	return read(ctx, b.Client, created.ID)
+	return Read(ctx, b.Client, created.ID)
 }
 
 func (b *Builder) update(ctx context.Context) (*CertificateAuthority, error) {
@@ -152,7 +152,7 @@ func (b *Builder) update(ctx context.Context) (*CertificateAuthority, error) {
 		return nil, err
 	}
 
-	return read(ctx, b.Client, updated.ID)
+	return Read(ctx, b.Client, updated.ID)
 }
 
 func (b *Builder) reconcileClients(ctx context.Context, id types.ID) error {

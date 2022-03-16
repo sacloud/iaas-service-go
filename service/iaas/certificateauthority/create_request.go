@@ -18,6 +18,7 @@ import (
 	"time"
 
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/sacloud-go/service/iaas/certificateauthority/builder"
 	"github.com/sacloud/sacloud-go/service/validate"
 )
 
@@ -33,8 +34,8 @@ type CreateRequest struct {
 	CommonName       string
 	NotAfter         time.Time
 
-	Clients []*ClientCert // Note: API的に証明書の削除はできないため、指定した以上の証明書が存在する可能性がある
-	Servers []*ServerCert // Note: API的に証明書の削除はできないため、指定した以上の証明書が存在する可能性がある
+	Clients []*builder.ClientCert // Note: API的に証明書の削除はできないため、指定した以上の証明書が存在する可能性がある
+	Servers []*builder.ServerCert // Note: API的に証明書の削除はできないため、指定した以上の証明書が存在する可能性がある
 
 	PollingTimeout  time.Duration // 証明書発行待ちのタイムアウト
 	PollingInterval time.Duration // 証明書発行待ちのポーリング間隔
