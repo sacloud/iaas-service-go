@@ -12,20 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package validate
+package iaas
 
-import (
-	"fmt"
-	"testing"
+// UpdateLevel Update時にどのレベルの変更が必要か
+type UpdateLevel int
+
+const (
+	// UpdateLevelNone 変更なし
+	UpdateLevelNone UpdateLevel = iota
+	// UpdateLevelSimple 単純な更新のみ(再起動不要)
+	UpdateLevelSimple
+	// UpdateLevelNeedShutdown シャットダウンが必要な変更
+	UpdateLevelNeedShutdown
 )
-
-type Foo struct {
-	Required string `validate:"required"`
-}
-
-func TestValidator_Struct(t *testing.T) {
-	err := Struct(&Foo{})
-
-	fmt.Println(err)
-	// Output: Key: 'Foo.Required' Error:Field validation for 'Required' failed on the 'required' tag
-}

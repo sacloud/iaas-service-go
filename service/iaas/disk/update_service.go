@@ -12,20 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package validate
+package disk
 
 import (
+	"context"
 	"fmt"
-	"testing"
+
+	"github.com/sacloud/iaas-api-go"
 )
 
-type Foo struct {
-	Required string `validate:"required"`
+func (s *Service) Update(req *UpdateRequest) (*iaas.Disk, error) {
+	return s.UpdateWithContext(context.Background(), req)
 }
 
-func TestValidator_Struct(t *testing.T) {
-	err := Struct(&Foo{})
+func (s *Service) UpdateWithContext(ctx context.Context, req *UpdateRequest) (*iaas.Disk, error) {
+	if err := req.Validate(); err != nil {
+		return nil, err
+	}
 
-	fmt.Println(err)
-	// Output: Key: 'Foo.Required' Error:Field validation for 'Required' failed on the 'required' tag
+	applyRequest, err := req.ApplyRequest(ctx, s.caller)
+	if err != nil {
+		return nil, fmt.Errorf("processing request parameter failed: %s", err)
+	}
+	return s.ApplyWithContext(ctx, applyRequest)
 }

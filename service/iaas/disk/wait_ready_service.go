@@ -12,20 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package validate
+package disk
 
 import (
-	"fmt"
-	"testing"
+	"context"
+
+	"github.com/sacloud/iaas-api-go"
+	"github.com/sacloud/iaas-api-go/helper/wait"
 )
 
-type Foo struct {
-	Required string `validate:"required"`
+func (s *Service) WaitReady(req *WaitReadyRequest) error {
+	return s.WaitReadyWithContext(context.Background(), req)
 }
 
-func TestValidator_Struct(t *testing.T) {
-	err := Struct(&Foo{})
+func (s *Service) WaitReadyWithContext(ctx context.Context, req *WaitReadyRequest) error {
+	if err := req.Validate(); err != nil {
+		return err
+	}
 
-	fmt.Println(err)
-	// Output: Key: 'Foo.Required' Error:Field validation for 'Required' failed on the 'required' tag
+	client := iaas.NewDiskOp(s.caller)
+	_, err := wait.UntilDiskIsReady(ctx, client, req.Zone, req.ID)
+	return err
 }

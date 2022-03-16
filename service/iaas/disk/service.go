@@ -12,20 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package validate
+package disk
 
-import (
-	"fmt"
-	"testing"
-)
+import "github.com/sacloud/iaas-api-go"
 
-type Foo struct {
-	Required string `validate:"required"`
+// Service provides a high-level API of for Disk
+type Service struct {
+	caller iaas.APICaller
 }
 
-func TestValidator_Struct(t *testing.T) {
-	err := Struct(&Foo{})
-
-	fmt.Println(err)
-	// Output: Key: 'Foo.Required' Error:Field validation for 'Required' failed on the 'required' tag
+// New returns new service instance of Disk
+func New(caller iaas.APICaller) *Service {
+	return &Service{caller: caller}
 }
