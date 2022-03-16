@@ -32,7 +32,7 @@ testacc:
 
 .PHONY: tools
 tools:
-	go install golang.org/x/tools/cmd/goimports@latest
+	go install github.com/rinchsan/gosimports/cmd/gosimports@latest
 	go install golang.org/x/tools/cmd/stringer@latest
 	go install github.com/sacloud/addlicense@latest
 	go install github.com/client9/misspell/cmd/misspell@latest
@@ -50,9 +50,10 @@ gen: _gen fmt goimports set-license
 _gen:
 	go generate ./...
 
-.PHONY: goimports
-goimports: fmt
-	goimports -l -w .
+.PHONY: goimports gosimports
+goimports: gosimports
+gosimports: fmt
+	gosimports -l -w .
 
 .PHONY: fmt
 fmt:
