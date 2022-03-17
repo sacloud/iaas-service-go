@@ -19,10 +19,10 @@ import (
 )
 
 type DeleteRequest struct {
-	Zone string `request:"-" validate:"required"`
+	Zone string `service:"-" validate:"required"`
 
 	IPv6Addr       string `validate:"required,ipv6"`
-	FailIfNotFound bool   `request:"-"`
+	FailIfNotFound bool   `service:"-"`
 }
 
 func (req *DeleteRequest) Validate() error {

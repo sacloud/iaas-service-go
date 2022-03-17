@@ -26,26 +26,26 @@ import (
 )
 
 type UpdateStandardRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
-	Name        *string     `request:",omitempty" validate:"omitempty,min=1"`
-	Description *string     `request:",omitempty" validate:"omitempty,min=1,max=512"`
-	Tags        *types.Tags `request:",omitempty"`
-	IconID      *types.ID   `request:",omitempty"`
+	Name        *string     `service:",omitempty" validate:"omitempty,min=1"`
+	Description *string     `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Tags        *types.Tags `service:",omitempty"`
+	IconID      *types.ID   `service:",omitempty"`
 
-	AdditionalNICSettings *[]*AdditionalStandardNICSettingUpdate `request:"-"` // Indexが同じものを手動でマージする
-	RouterSetting         *RouterSettingUpdate                   `request:",omitempty,recursive"`
+	AdditionalNICSettings *[]*AdditionalStandardNICSettingUpdate `service:"-"` // Indexが同じものを手動でマージする
+	RouterSetting         *RouterSettingUpdate                   `service:",omitempty,recursive"`
 	NoWait                bool
 
 	SettingsHash string
 }
 
 type AdditionalStandardNICSettingUpdate struct {
-	SwitchID       *types.ID `request:",omitempty"`
-	IPAddress      *string   `request:",omitempty"`
-	NetworkMaskLen *int      `request:",omitempty"`
-	Index          int       `request:",omitempty"`
+	SwitchID       *types.ID `service:",omitempty"`
+	IPAddress      *string   `service:",omitempty"`
+	NetworkMaskLen *int      `service:",omitempty"`
+	Index          int       `service:",omitempty"`
 }
 
 func (req *UpdateStandardRequest) Validate() error {

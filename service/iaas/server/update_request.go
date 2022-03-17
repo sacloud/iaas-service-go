@@ -29,22 +29,22 @@ type UpdateRequest struct {
 	Zone string   `validate:"required"`
 	ID   types.ID `validate:"required"`
 
-	Name            *string                 `request:",omitempty" validate:"omitempty,min=1"`
-	Description     *string                 `request:",omitempty" validate:"omitempty,min=0,max=512"`
-	Tags            *types.Tags             `request:",omitempty"`
-	IconID          *types.ID               `request:",omitempty"`
-	CPU             *int                    `request:",omitempty"`
-	MemoryGB        *int                    `request:",omitempty"`
-	GPU             *int                    `request:",omitempty"`
-	Commitment      *types.ECommitment      `request:",omitempty"`
-	Generation      *types.EPlanGeneration  `request:",omitempty"`
-	InterfaceDriver *types.EInterfaceDriver `request:",omitempty"`
+	Name            *string                 `service:",omitempty" validate:"omitempty,min=1"`
+	Description     *string                 `service:",omitempty" validate:"omitempty,min=0,max=512"`
+	Tags            *types.Tags             `service:",omitempty"`
+	IconID          *types.ID               `service:",omitempty"`
+	CPU             *int                    `service:",omitempty"`
+	MemoryGB        *int                    `service:",omitempty"`
+	GPU             *int                    `service:",omitempty"`
+	Commitment      *types.ECommitment      `service:",omitempty"`
+	Generation      *types.EPlanGeneration  `service:",omitempty"`
+	InterfaceDriver *types.EInterfaceDriver `service:",omitempty"`
 
-	CDROMID       *types.ID `request:",omitempty"`
-	PrivateHostID *types.ID `request:",omitempty"`
+	CDROMID       *types.ID `service:",omitempty"`
+	PrivateHostID *types.ID `service:",omitempty"`
 
-	NetworkInterfaces *[]*NetworkInterface         `request:",omitempty"`
-	Disks             *[]*diskService.ApplyRequest `request:",omitempty"`
+	NetworkInterfaces *[]*NetworkInterface         `service:",omitempty"`
+	Disks             *[]*diskService.ApplyRequest `service:",omitempty"`
 	NoWait            bool
 	ForceShutdown     bool
 }

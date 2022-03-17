@@ -20,11 +20,11 @@ import (
 )
 
 type DeleteRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
-	FailIfNotFound bool `request:"-"`
-	Force          bool `request:"-"` // trueの場合IPv6やサブネットも一緒に削除する(falseの場合これらがあるとDeleteでエラーとなる)
+	FailIfNotFound bool `service:"-"`
+	Force          bool `service:"-"` // trueの場合IPv6やサブネットも一緒に削除する(falseの場合これらがあるとDeleteでエラーとなる)
 }
 
 func (req *DeleteRequest) Validate() error {

@@ -20,10 +20,10 @@ import (
 )
 
 type BootRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
-	NoWait bool `request:"-"`
+	NoWait bool `service:"-"`
 }
 
 func (req *BootRequest) Validate() error {

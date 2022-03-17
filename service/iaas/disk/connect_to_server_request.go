@@ -20,8 +20,8 @@ import (
 )
 
 type ConnectToServerRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
 	ServerID types.ID `validate:"required"`
 }

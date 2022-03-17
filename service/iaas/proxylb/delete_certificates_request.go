@@ -20,7 +20,7 @@ import (
 )
 
 type DeleteCertificatesRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 }
 
 func (req *DeleteCertificatesRequest) Validate() error {

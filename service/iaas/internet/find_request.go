@@ -23,12 +23,12 @@ import (
 )
 
 type FindRequest struct {
-	Zone string `request:"-" validate:"required"`
+	Zone string `service:"-" validate:"required"`
 
-	Names       []string `request:"-"`
-	Tags        []string `request:"-"`
-	SwitchIDs   []string `request:"-"`
-	SwitchNames []string `request:"-"`
+	Names       []string `service:"-"`
+	Tags        []string `service:"-"`
+	SwitchIDs   []string `service:"-"`
+	SwitchNames []string `service:"-"`
 
 	Sort  search.SortKeys
 	Count int

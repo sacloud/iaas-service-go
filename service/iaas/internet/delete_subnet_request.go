@@ -20,10 +20,10 @@ import (
 )
 
 type DeleteSubnetRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
-	FailIfNotFound bool     `request:"-"`
+	FailIfNotFound bool     `service:"-"`
 	SubnetID       types.ID `validate:"required"`
 }
 

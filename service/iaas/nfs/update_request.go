@@ -28,10 +28,10 @@ type UpdateRequest struct {
 	Zone string   `validate:"required"`
 	ID   types.ID `validate:"required"`
 
-	Name        *string     `request:",omitempty" validate:"omitempty,min=1"`
-	Description *string     `request:",omitempty" validate:"omitempty,min=1,max=512"`
-	Tags        *types.Tags `request:",omitempty"`
-	IconID      *types.ID   `request:",omitempty"`
+	Name        *string     `service:",omitempty" validate:"omitempty,min=1"`
+	Description *string     `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Tags        *types.Tags `service:",omitempty"`
+	IconID      *types.ID   `service:",omitempty"`
 }
 
 func (req *UpdateRequest) Validate() error {

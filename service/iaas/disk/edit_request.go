@@ -21,10 +21,10 @@ import (
 )
 
 type EditRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-"`
 
-	NoWait bool `request:"-"` // trueの場合ディスクの修正完了まで待たずに即時復帰する
+	NoWait bool `service:"-"` // trueの場合ディスクの修正完了まで待たずに即時復帰する
 
 	HostName string
 	Password string

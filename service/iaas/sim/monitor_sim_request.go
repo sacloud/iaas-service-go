@@ -22,7 +22,7 @@ import (
 )
 
 type MonitorSIMRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 
 	Start time.Time
 	End   time.Time

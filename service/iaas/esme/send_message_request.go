@@ -21,7 +21,7 @@ import (
 )
 
 type SendMessageRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 
 	Destination string `validate:"required"`
 	Sender      string `validate:"required"`

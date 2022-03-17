@@ -25,15 +25,15 @@ import (
 )
 
 type UpdateRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 
-	Name          *string                              `request:",omitempty" validate:"omitempty,min=1"`
-	Description   *string                              `request:",omitempty" validate:"omitempty,min=1,max=512"`
-	Tags          *types.Tags                          `request:",omitempty"`
-	IconID        *types.ID                            `request:",omitempty"`
-	AccessLevel   *types.EContainerRegistryAccessLevel `request:",omitempty"`
-	VirtualDomain *string                              `request:",omitempty"`
-	Users         *[]*builder.User                     `request:",omitempty"`
+	Name          *string                              `service:",omitempty" validate:"omitempty,min=1"`
+	Description   *string                              `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Tags          *types.Tags                          `service:",omitempty"`
+	IconID        *types.ID                            `service:",omitempty"`
+	AccessLevel   *types.EContainerRegistryAccessLevel `service:",omitempty"`
+	VirtualDomain *string                              `service:",omitempty"`
+	Users         *[]*builder.User                     `service:",omitempty"`
 	SettingsHash  string
 }
 

@@ -22,7 +22,7 @@ import (
 )
 
 type FindRequest struct {
-	Zone string `request:"-" validate:"required"`
+	Zone string `service:"-" validate:"required"`
 
 	Sort  search.SortKeys
 	Count int

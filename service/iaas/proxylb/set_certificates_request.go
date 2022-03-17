@@ -21,7 +21,7 @@ import (
 )
 
 type SetCertificatesRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 
 	PrimaryCerts    *iaas.ProxyLBPrimaryCert
 	AdditionalCerts []*iaas.ProxyLBAdditionalCert

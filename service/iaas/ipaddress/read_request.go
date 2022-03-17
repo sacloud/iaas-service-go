@@ -19,9 +19,9 @@ import (
 )
 
 type ReadRequest struct {
-	Zone string `request:"-" validate:"required"`
+	Zone string `service:"-" validate:"required"`
 
-	IPAddress string `request:"-" validate:"required,ipv4"`
+	IPAddress string `service:"-" validate:"required,ipv4"`
 }
 
 func (req *ReadRequest) Validate() error {

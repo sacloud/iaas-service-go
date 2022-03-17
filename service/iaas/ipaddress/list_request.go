@@ -19,7 +19,7 @@ import (
 )
 
 type ListRequest struct {
-	Zone string `request:"-" validate:"required"`
+	Zone string `service:"-" validate:"required"`
 }
 
 func (req *ListRequest) Validate() error {

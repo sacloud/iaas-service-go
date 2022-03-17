@@ -20,11 +20,11 @@ import (
 )
 
 type DeleteRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 
-	FailIfNotFound bool `request:"-"`
+	FailIfNotFound bool `service:"-"`
 
-	WaitForRelease        bool     `request:"-"` // trueの場合、他リソースから参照されている間は削除を待ち合わせし続ける
+	WaitForRelease        bool     `service:"-"` // trueの場合、他リソースから参照されている間は削除を待ち合わせし続ける
 	WaitForReleaseTimeout int      // WaitForReleaseがtrueの場合の待ち時間タイムアウト(デフォルト:1時間)
 	WaitForReleaseTick    int      // WaitForReleaseがtrueの場合の待ち処理のポーリング間隔(デフォルト:5秒)
 	Zones                 []string // WaitForReleaseがtrueの場合の待ち処理で対象リソースを検索するゾーンのリスト、デフォルトはiaas.SakuraCloudZones

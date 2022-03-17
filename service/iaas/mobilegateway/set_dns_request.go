@@ -20,8 +20,8 @@ import (
 )
 
 type SetDNSRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
 	DNS1 string `validate:"required,ipv4"`
 	DNS2 string `validate:"required,ipv4"`

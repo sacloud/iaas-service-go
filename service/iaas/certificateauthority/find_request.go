@@ -23,8 +23,8 @@ import (
 )
 
 type FindRequest struct {
-	Names []string `request:"-"`
-	Tags  []string `request:"-"`
+	Names []string `service:"-"`
+	Tags  []string `service:"-"`
 
 	Sort  search.SortKeys
 	Count int

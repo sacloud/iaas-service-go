@@ -22,11 +22,11 @@ import (
 )
 
 type UpdateRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
-	Name        *string `request:",omitempty" validate:"omitempty,min=1"`
-	Description *string `request:",omitempty" validate:"omitempty,min=1,max=512"`
+	Name        *string `service:",omitempty" validate:"omitempty,min=1"`
+	Description *string `service:",omitempty" validate:"omitempty,min=1,max=512"`
 }
 
 func (req *UpdateRequest) Validate() error {

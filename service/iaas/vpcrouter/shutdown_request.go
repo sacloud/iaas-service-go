@@ -20,11 +20,11 @@ import (
 )
 
 type ShutdownRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
-	NoWait        bool `request:"-"`
-	ForceShutdown bool `request:"-"`
+	NoWait        bool `service:"-"`
+	ForceShutdown bool `service:"-"`
 }
 
 func (req *ShutdownRequest) Validate() error {

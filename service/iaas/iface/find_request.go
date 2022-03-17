@@ -23,13 +23,13 @@ import (
 )
 
 type FindRequest struct {
-	Zone string `request:"-" validate:"required"`
+	Zone string `service:"-" validate:"required"`
 
-	MACAddresses      []string `request:"-" validate:"omitempty,dive,mac"`
-	ServerIDs         []string `request:"-"`
-	ServerNames       []string `request:"-"`
-	PacketFilterIDs   []string `request:"-"`
-	PacketFilterNames []string `request:"-"`
+	MACAddresses      []string `service:"-" validate:"omitempty,dive,mac"`
+	ServerIDs         []string `service:"-"`
+	ServerNames       []string `service:"-"`
+	PacketFilterIDs   []string `service:"-"`
+	PacketFilterNames []string `service:"-"`
 
 	Sort  search.SortKeys
 	Count int

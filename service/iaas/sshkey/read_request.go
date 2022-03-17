@@ -20,7 +20,7 @@ import (
 )
 
 type ReadRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 }
 
 func (req *ReadRequest) Validate() error {

@@ -27,18 +27,18 @@ type UpdateRequest struct {
 	Zone string   `validate:"required"`
 	ID   types.ID `validate:"required"`
 
-	Name                            *string                           `request:",omitempty"`
-	Description                     *string                           `request:",omitempty" validate:"omitempty,min=0,max=512"`
-	Tags                            *types.Tags                       `request:",omitempty"`
-	IconID                          *types.ID                         `request:",omitempty"`
-	PrivateInterface                *PrivateInterfaceSettingUpdate    `request:",omitempty,recursive"`
-	StaticRoutes                    *[]*iaas.MobileGatewayStaticRoute `request:",omitempty"`
-	SIMRoutes                       *[]*SIMRouteSetting               `request:",omitempty"`
-	InternetConnectionEnabled       *bool                             `request:",omitempty"`
-	InterDeviceCommunicationEnabled *bool                             `request:",omitempty"`
-	DNS                             *DNSSettingUpdate                 `request:",omitempty,recursive"`
-	SIMs                            *[]*SIMSetting                    `request:",omitempty"`
-	TrafficConfig                   *TrafficConfigUpdate              `request:",omitempty,recursive"`
+	Name                            *string                           `service:",omitempty"`
+	Description                     *string                           `service:",omitempty" validate:"omitempty,min=0,max=512"`
+	Tags                            *types.Tags                       `service:",omitempty"`
+	IconID                          *types.ID                         `service:",omitempty"`
+	PrivateInterface                *PrivateInterfaceSettingUpdate    `service:",omitempty,recursive"`
+	StaticRoutes                    *[]*iaas.MobileGatewayStaticRoute `service:",omitempty"`
+	SIMRoutes                       *[]*SIMRouteSetting               `service:",omitempty"`
+	InternetConnectionEnabled       *bool                             `service:",omitempty"`
+	InterDeviceCommunicationEnabled *bool                             `service:",omitempty"`
+	DNS                             *DNSSettingUpdate                 `service:",omitempty,recursive"`
+	SIMs                            *[]*SIMSetting                    `service:",omitempty"`
+	TrafficConfig                   *TrafficConfigUpdate              `service:",omitempty,recursive"`
 
 	SettingsHash string
 	NoWait       bool
@@ -46,23 +46,23 @@ type UpdateRequest struct {
 
 // PrivateInterfaceSetting represents API parameter/response structure
 type PrivateInterfaceSettingUpdate struct {
-	SwitchID       *types.ID `request:",omitempty"`
-	IPAddress      *string   `request:",omitempty" validate:"omitempty,ipv4"`
-	NetworkMaskLen *int      `request:",omitempty"`
+	SwitchID       *types.ID `service:",omitempty"`
+	IPAddress      *string   `service:",omitempty" validate:"omitempty,ipv4"`
+	NetworkMaskLen *int      `service:",omitempty"`
 }
 
 type DNSSettingUpdate struct {
-	DNS1 *string `request:",omitempty" validate:"required_with=DNS2,omitempty,ipv4"`
-	DNS2 *string `request:",omitempty" validate:"required_with=DNS1,omitempty,ipv4"`
+	DNS1 *string `service:",omitempty" validate:"required_with=DNS2,omitempty,ipv4"`
+	DNS2 *string `service:",omitempty" validate:"required_with=DNS1,omitempty,ipv4"`
 }
 
 type TrafficConfigUpdate struct {
-	TrafficQuotaInMB       *int    `request:",omitempty"`
-	BandWidthLimitInKbps   *int    `request:",omitempty"`
-	EmailNotifyEnabled     *bool   `request:",omitempty"`
-	SlackNotifyEnabled     *bool   `request:",omitempty"`
-	SlackNotifyWebhooksURL *string `request:",omitempty"`
-	AutoTrafficShaping     *bool   `request:",omitempty"`
+	TrafficQuotaInMB       *int    `service:",omitempty"`
+	BandWidthLimitInKbps   *int    `service:",omitempty"`
+	EmailNotifyEnabled     *bool   `service:",omitempty"`
+	SlackNotifyEnabled     *bool   `service:",omitempty"`
+	SlackNotifyWebhooksURL *string `service:",omitempty"`
+	AutoTrafficShaping     *bool   `service:",omitempty"`
 }
 
 func (req *UpdateRequest) Validate() error {

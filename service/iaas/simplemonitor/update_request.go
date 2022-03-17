@@ -22,22 +22,22 @@ import (
 )
 
 type UpdateRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 
-	Description        *string                        `request:",omitempty" validate:"omitempty,min=1,max=512"`
-	Tags               *types.Tags                    `request:",omitempty"`
-	IconID             *types.ID                      `request:",omitempty"`
-	MaxCheckAttempts   *int                           `request:",omitempty"`
-	RetryInterval      *int                           `request:",omitempty"`
-	DelayLoop          *int                           `request:",omitempty"`
-	Enabled            *types.StringFlag              `request:",omitempty"`
-	HealthCheck        *iaas.SimpleMonitorHealthCheck `request:",omitempty"`
-	NotifyEmailEnabled *types.StringFlag              `request:",omitempty"`
-	NotifyEmailHTML    *types.StringFlag              `request:",omitempty"`
-	NotifySlackEnabled *types.StringFlag              `request:",omitempty"`
-	SlackWebhooksURL   *string                        `request:",omitempty"`
-	NotifyInterval     *int                           `request:",omitempty"`
-	Timeout            *int                           `request:",omitempty"`
+	Description        *string                        `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Tags               *types.Tags                    `service:",omitempty"`
+	IconID             *types.ID                      `service:",omitempty"`
+	MaxCheckAttempts   *int                           `service:",omitempty"`
+	RetryInterval      *int                           `service:",omitempty"`
+	DelayLoop          *int                           `service:",omitempty"`
+	Enabled            *types.StringFlag              `service:",omitempty"`
+	HealthCheck        *iaas.SimpleMonitorHealthCheck `service:",omitempty"`
+	NotifyEmailEnabled *types.StringFlag              `service:",omitempty"`
+	NotifyEmailHTML    *types.StringFlag              `service:",omitempty"`
+	NotifySlackEnabled *types.StringFlag              `service:",omitempty"`
+	SlackWebhooksURL   *string                        `service:",omitempty"`
+	NotifyInterval     *int                           `service:",omitempty"`
+	Timeout            *int                           `service:",omitempty"`
 	SettingsHash       string
 }
 

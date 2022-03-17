@@ -20,7 +20,7 @@ import (
 )
 
 type GetCertificatesRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 }
 
 func (req *GetCertificatesRequest) Validate() error {

@@ -25,15 +25,15 @@ import (
 )
 
 type UpdateRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
-	Name          *string     `request:",omitempty" validate:"omitempty,min=1"`
-	Description   *string     `request:",omitempty" validate:"omitempty,min=1,max=512"`
-	Tags          *types.Tags `request:",omitempty"`
-	IconID        *types.ID   `request:",omitempty"`
-	BandWidthMbps *int        `request:",omitempty"`
-	EnableIPv6    *bool       `request:",omitempty"`
+	Name          *string     `service:",omitempty" validate:"omitempty,min=1"`
+	Description   *string     `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Tags          *types.Tags `service:",omitempty"`
+	IconID        *types.ID   `service:",omitempty"`
+	BandWidthMbps *int        `service:",omitempty"`
+	EnableIPv6    *bool       `service:",omitempty"`
 }
 
 func (req *UpdateRequest) Validate() error {

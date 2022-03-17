@@ -22,9 +22,9 @@ import (
 )
 
 type UpdateRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 
-	Name *string `request:",omitempty" validate:"omitempty,min=1"`
+	Name *string `service:",omitempty" validate:"omitempty,min=1"`
 }
 
 func (req *UpdateRequest) Validate() error {

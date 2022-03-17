@@ -22,17 +22,17 @@ import (
 )
 
 type UpdateRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 
-	Name               *string               `request:",omitempty" validate:"omitempty,min=1"`
-	Description        *string               `request:",omitempty" validate:"omitempty,min=1,max=512"`
-	Tags               *types.Tags           `request:",omitempty"`
-	IconID             *types.ID             `request:",omitempty"`
-	HealthCheck        *iaas.GSLBHealthCheck `request:",omitempty"`
-	DelayLoop          *int                  `request:",omitempty"`
-	Weighted           *types.StringFlag     `request:",omitempty"`
-	SorryServer        *string               `request:",omitempty"`
-	DestinationServers iaas.GSLBServers      `request:",omitempty"`
+	Name               *string               `service:",omitempty" validate:"omitempty,min=1"`
+	Description        *string               `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Tags               *types.Tags           `service:",omitempty"`
+	IconID             *types.ID             `service:",omitempty"`
+	HealthCheck        *iaas.GSLBHealthCheck `service:",omitempty"`
+	DelayLoop          *int                  `service:",omitempty"`
+	Weighted           *types.StringFlag     `service:",omitempty"`
+	SorryServer        *string               `service:",omitempty"`
+	DestinationServers iaas.GSLBServers      `service:",omitempty"`
 	SettingsHash       string
 }
 

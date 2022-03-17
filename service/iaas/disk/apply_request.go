@@ -24,8 +24,8 @@ import (
 )
 
 type ApplyRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-"` // TODO Builderを更新対応させる(変更できない値の場合はエラーにするとか)
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-"` // TODO Builderを更新対応させる(変更できない値の場合はエラーにするとか)
 
 	Name            string `validate:"required"`
 	Description     string `validate:"min=0,max=512"`

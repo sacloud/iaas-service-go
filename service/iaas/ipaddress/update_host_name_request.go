@@ -19,10 +19,10 @@ import (
 )
 
 type UpdateHostNameRequest struct {
-	Zone string `request:"-" validate:"required"`
+	Zone string `service:"-" validate:"required"`
 
-	IPAddress     string `request:"-" validate:"required,ipv4"`
-	HostName      string `request:"-" validate:"required"`
+	IPAddress     string `service:"-" validate:"required,ipv4"`
+	HostName      string `service:"-" validate:"required"`
 	RetryMax      int
 	RetryInterval int
 }

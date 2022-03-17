@@ -24,9 +24,9 @@ import (
 )
 
 type FindRequest struct {
-	Names []string     `request:"-"`
-	Tags  []string     `request:"-"`
-	Scope types.EScope `request:"-"`
+	Names []string     `service:"-"`
+	Tags  []string     `service:"-"`
+	Scope types.EScope `service:"-"`
 
 	Sort  search.SortKeys
 	Count int

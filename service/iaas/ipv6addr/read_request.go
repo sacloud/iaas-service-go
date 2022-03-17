@@ -19,7 +19,7 @@ import (
 )
 
 type ReadRequest struct {
-	Zone string `request:"-" validate:"required"`
+	Zone string `service:"-" validate:"required"`
 
 	IPv6Addr string `validate:"required,ipv6"`
 }

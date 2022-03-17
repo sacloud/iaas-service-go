@@ -35,7 +35,7 @@ func TestUpdateRequest(t *testing.T) {
 		Zone: "is1a",
 		ID:   1,
 		Name: pointer.NewString(""),
-		//Description: pointer.NewString(""), // 未指定パラメータは元の値を保持(request:,omitemptyが必要)
+		//Description: pointer.NewString(""), // 未指定パラメータは元の値を保持(service:,omitemptyが必要)
 		Tags: &types.Tags{},
 	}
 

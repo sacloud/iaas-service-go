@@ -24,7 +24,7 @@ import (
 )
 
 type ApplyRequest struct {
-	ID types.ID `request:"-"`
+	ID types.ID `service:"-"`
 
 	Name        string `validate:"required"`
 	Description string `validate:"min=0,max=512"`

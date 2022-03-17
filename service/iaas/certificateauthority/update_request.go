@@ -26,15 +26,15 @@ import (
 )
 
 type UpdateRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 
-	Name        *string     `request:",omitempty" validate:"omitempty,min=1"`
-	Description *string     `request:",omitempty" validate:"omitempty,min=1,max=512"`
-	Tags        *types.Tags `request:",omitempty"`
-	IconID      *types.ID   `request:",omitempty"`
+	Name        *string     `service:",omitempty" validate:"omitempty,min=1"`
+	Description *string     `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Tags        *types.Tags `service:",omitempty"`
+	IconID      *types.ID   `service:",omitempty"`
 
-	Clients []*builder.ClientCert `request:",omitempty"` // Note: API的に証明書の削除はできないため、指定した以上の証明書が存在する可能性がある
-	Servers []*builder.ServerCert `request:",omitempty"` // Note: API的に証明書の削除はできないため、指定した以上の証明書が存在する可能性がある
+	Clients []*builder.ClientCert `service:",omitempty"` // Note: API的に証明書の削除はできないため、指定した以上の証明書が存在する可能性がある
+	Servers []*builder.ServerCert `service:",omitempty"` // Note: API的に証明書の削除はできないため、指定した以上の証明書が存在する可能性がある
 
 	PollingTimeout  time.Duration // 証明書発行待ちのタイムアウト
 	PollingInterval time.Duration // 証明書発行待ちのポーリング間隔

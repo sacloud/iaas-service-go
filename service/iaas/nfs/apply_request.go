@@ -23,7 +23,7 @@ import (
 
 type ApplyRequest struct {
 	ID   types.ID // for update
-	Zone string   `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
 
 	Name           string `validate:"required"`
 	Description    string `validate:"min=0,max=512"`

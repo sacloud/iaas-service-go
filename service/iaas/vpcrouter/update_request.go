@@ -26,50 +26,50 @@ import (
 )
 
 type UpdateRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
-	Name        *string     `request:",omitempty" validate:"omitempty,min=1"`
-	Description *string     `request:",omitempty" validate:"omitempty,min=1,max=512"`
-	Tags        *types.Tags `request:",omitempty"`
-	IconID      *types.ID   `request:",omitempty"`
+	Name        *string     `service:",omitempty" validate:"omitempty,min=1"`
+	Description *string     `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Tags        *types.Tags `service:",omitempty"`
+	IconID      *types.ID   `service:",omitempty"`
 
-	NICSetting            *PremiumNICSettingUpdate              `request:",omitempty,recursive"`
-	AdditionalNICSettings *[]*AdditionalPremiumNICSettingUpdate `request:"-"` // Indexが同じものを手動でマージする
-	RouterSetting         *RouterSettingUpdate                  `request:",omitempty,recursive"`
+	NICSetting            *PremiumNICSettingUpdate              `service:",omitempty,recursive"`
+	AdditionalNICSettings *[]*AdditionalPremiumNICSettingUpdate `service:"-"` // Indexが同じものを手動でマージする
+	RouterSetting         *RouterSettingUpdate                  `service:",omitempty,recursive"`
 	NoWait                bool
 
 	SettingsHash string
 }
 
 type PremiumNICSettingUpdate struct {
-	IPAddresses      *[]string `request:",omitempty"`
-	VirtualIPAddress *string   `request:",omitempty"`
-	IPAliases        *[]string `request:",omitempty"`
+	IPAddresses      *[]string `service:",omitempty"`
+	VirtualIPAddress *string   `service:",omitempty"`
+	IPAliases        *[]string `service:",omitempty"`
 }
 
 type AdditionalPremiumNICSettingUpdate struct {
-	SwitchID         *types.ID `request:",omitempty"`
-	IPAddresses      *[]string `request:",omitempty"`
-	VirtualIPAddress *string   `request:",omitempty"`
-	NetworkMaskLen   *int      `request:",omitempty"`
+	SwitchID         *types.ID `service:",omitempty"`
+	IPAddresses      *[]string `service:",omitempty"`
+	VirtualIPAddress *string   `service:",omitempty"`
+	NetworkMaskLen   *int      `service:",omitempty"`
 	Index            int
 }
 
 type RouterSettingUpdate struct {
-	InternetConnectionEnabled *bool                                `request:",omitempty"`
-	StaticNAT                 *[]*iaas.VPCRouterStaticNAT          `request:",omitempty,recursive"`
-	PortForwarding            *[]*iaas.VPCRouterPortForwarding     `request:",omitempty,recursive"`
-	Firewall                  *[]*iaas.VPCRouterFirewall           `request:",omitempty,recursive"`
-	DHCPServer                *[]*iaas.VPCRouterDHCPServer         `request:",omitempty,recursive"`
-	DHCPStaticMapping         *[]*iaas.VPCRouterDHCPStaticMapping  `request:",omitempty,recursive"`
-	PPTPServer                *iaas.VPCRouterPPTPServer            `request:",omitempty,recursive"`
-	L2TPIPsecServer           *iaas.VPCRouterL2TPIPsecServer       `request:",omitempty,recursive"`
-	WireGuard                 *iaas.VPCRouterWireGuard             `request:",omitempty,recursive"`
-	RemoteAccessUsers         *[]*iaas.VPCRouterRemoteAccessUser   `request:",omitempty,recursive"`
-	SiteToSiteIPsecVPN        *[]*iaas.VPCRouterSiteToSiteIPsecVPN `request:",omitempty,recursive"`
-	StaticRoute               *[]*iaas.VPCRouterStaticRoute        `request:",omitempty,recursive"`
-	SyslogHost                *string                              `request:",omitempty"`
+	InternetConnectionEnabled *bool                                `service:",omitempty"`
+	StaticNAT                 *[]*iaas.VPCRouterStaticNAT          `service:",omitempty,recursive"`
+	PortForwarding            *[]*iaas.VPCRouterPortForwarding     `service:",omitempty,recursive"`
+	Firewall                  *[]*iaas.VPCRouterFirewall           `service:",omitempty,recursive"`
+	DHCPServer                *[]*iaas.VPCRouterDHCPServer         `service:",omitempty,recursive"`
+	DHCPStaticMapping         *[]*iaas.VPCRouterDHCPStaticMapping  `service:",omitempty,recursive"`
+	PPTPServer                *iaas.VPCRouterPPTPServer            `service:",omitempty,recursive"`
+	L2TPIPsecServer           *iaas.VPCRouterL2TPIPsecServer       `service:",omitempty,recursive"`
+	WireGuard                 *iaas.VPCRouterWireGuard             `service:",omitempty,recursive"`
+	RemoteAccessUsers         *[]*iaas.VPCRouterRemoteAccessUser   `service:",omitempty,recursive"`
+	SiteToSiteIPsecVPN        *[]*iaas.VPCRouterSiteToSiteIPsecVPN `service:",omitempty,recursive"`
+	StaticRoute               *[]*iaas.VPCRouterStaticRoute        `service:",omitempty,recursive"`
+	SyslogHost                *string                              `service:",omitempty"`
 }
 
 func (req *UpdateRequest) Validate() error {

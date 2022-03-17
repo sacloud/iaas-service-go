@@ -20,11 +20,11 @@ import (
 )
 
 type DeleteRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
-	FailIfNotFound bool `request:"-"`
-	Force          bool `request:"-"` // trueの場合は電源OFF(強制終了)してから削除
+	FailIfNotFound bool `service:"-"`
+	Force          bool `service:"-"` // trueの場合は電源OFF(強制終了)してから削除
 }
 
 func (req *DeleteRequest) Validate() error {

@@ -20,7 +20,7 @@ import (
 )
 
 type HealthStatusRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 }
 
 func (req *HealthStatusRequest) Validate() error {

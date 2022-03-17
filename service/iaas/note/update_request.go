@@ -22,13 +22,13 @@ import (
 )
 
 type UpdateRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 
-	Name    *string     `request:",omitempty" validate:"omitempty,min=1"`
-	Tags    *types.Tags `request:",omitempty"`
-	IconID  *types.ID   `request:",omitempty"`
-	Class   *string     `request:",omitempty" validate:"omitempty,oneof=shell yaml_cloud_config"`
-	Content *string     `request:",omitempty"`
+	Name    *string     `service:",omitempty" validate:"omitempty,min=1"`
+	Tags    *types.Tags `service:",omitempty"`
+	IconID  *types.ID   `service:",omitempty"`
+	Class   *string     `service:",omitempty" validate:"omitempty,oneof=shell yaml_cloud_config"`
+	Content *string     `service:",omitempty"`
 }
 
 func (req *UpdateRequest) Validate() error {

@@ -24,16 +24,16 @@ import (
 )
 
 type UpdateRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 
-	Name         *string                         `request:",omitempty" validate:"omitempty,min=1"`
-	Description  *string                         `request:",omitempty" validate:"omitempty,min=1,max=512"`
-	Tags         *types.Tags                     `request:",omitempty"`
-	IconID       *types.ID                       `request:",omitempty"`
-	Switch       *iaas.LocalRouterSwitch         `request:",omitempty"`
-	Interface    *iaas.LocalRouterInterface      `request:",omitempty"`
-	Peers        *[]*iaas.LocalRouterPeer        `request:",omitempty"`
-	StaticRoutes *[]*iaas.LocalRouterStaticRoute `request:",omitempty"`
+	Name         *string                         `service:",omitempty" validate:"omitempty,min=1"`
+	Description  *string                         `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Tags         *types.Tags                     `service:",omitempty"`
+	IconID       *types.ID                       `service:",omitempty"`
+	Switch       *iaas.LocalRouterSwitch         `service:",omitempty"`
+	Interface    *iaas.LocalRouterInterface      `service:",omitempty"`
+	Peers        *[]*iaas.LocalRouterPeer        `service:",omitempty"`
+	StaticRoutes *[]*iaas.LocalRouterStaticRoute `service:",omitempty"`
 	SettingsHash string
 }
 

@@ -20,7 +20,7 @@ import (
 )
 
 type RenewLetsEncryptCertRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 }
 
 func (req *RenewLetsEncryptCertRequest) Validate() error {

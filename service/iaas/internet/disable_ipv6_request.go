@@ -20,8 +20,8 @@ import (
 )
 
 type DisableIPv6Request struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 }
 
 func (req *DisableIPv6Request) Validate() error {

@@ -22,24 +22,24 @@ import (
 )
 
 type UpdateRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 
-	Name          *string                    `request:",omitempty" validate:"omitempty,min=1"`
-	Description   *string                    `request:",omitempty" validate:"omitempty,min=1,max=512"`
-	Tags          *types.Tags                `request:",omitempty"`
-	IconID        *types.ID                  `request:",omitempty"`
-	Plan          *types.EProxyLBPlan        `request:",omitempty" validate:"omitempty,oneof=100 500 1000 5000 10000 50000 100000 400000"`
-	HealthCheck   *iaas.ProxyLBHealthCheck   `request:",omitempty"`
-	SorryServer   *iaas.ProxyLBSorryServer   `request:",omitempty"`
-	BindPorts     *[]*iaas.ProxyLBBindPort   `request:",omitempty"`
-	Servers       *[]*iaas.ProxyLBServer     `request:",omitempty"`
-	Rules         *[]*iaas.ProxyLBRule       `request:",omitempty"`
-	LetsEncrypt   *iaas.ProxyLBACMESetting   `request:",omitempty"`
-	StickySession *iaas.ProxyLBStickySession `request:",omitempty"`
-	Gzip          *iaas.ProxyLBGzip          `request:",omitempty"`
-	ProxyProtocol *iaas.ProxyLBProxyProtocol `request:",omitempty"`
-	Syslog        *iaas.ProxyLBSyslog        `request:",omitempty"`
-	Timeout       *iaas.ProxyLBTimeout       `request:",omitempty"`
+	Name          *string                    `service:",omitempty" validate:"omitempty,min=1"`
+	Description   *string                    `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Tags          *types.Tags                `service:",omitempty"`
+	IconID        *types.ID                  `service:",omitempty"`
+	Plan          *types.EProxyLBPlan        `service:",omitempty" validate:"omitempty,oneof=100 500 1000 5000 10000 50000 100000 400000"`
+	HealthCheck   *iaas.ProxyLBHealthCheck   `service:",omitempty"`
+	SorryServer   *iaas.ProxyLBSorryServer   `service:",omitempty"`
+	BindPorts     *[]*iaas.ProxyLBBindPort   `service:",omitempty"`
+	Servers       *[]*iaas.ProxyLBServer     `service:",omitempty"`
+	Rules         *[]*iaas.ProxyLBRule       `service:",omitempty"`
+	LetsEncrypt   *iaas.ProxyLBACMESetting   `service:",omitempty"`
+	StickySession *iaas.ProxyLBStickySession `service:",omitempty"`
+	Gzip          *iaas.ProxyLBGzip          `service:",omitempty"`
+	ProxyProtocol *iaas.ProxyLBProxyProtocol `service:",omitempty"`
+	Syslog        *iaas.ProxyLBSyslog        `service:",omitempty"`
+	Timeout       *iaas.ProxyLBTimeout       `service:",omitempty"`
 	SettingsHash  string
 }
 

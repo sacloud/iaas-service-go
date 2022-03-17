@@ -49,7 +49,7 @@ func MonitorCondition(start, end time.Time) (*iaas.MonitorCondition, error) {
 func RequestConvertTo(source interface{}, dest interface{}) error {
 	decoder := &mapconv.Decoder{
 		Config: &mapconv.DecoderConfig{
-			TagName: "request", // TODO 後で"service"にする
+			TagName: "service",
 			FilterFuncs: map[string]mapconv.FilterFunc{
 				"gb_to_mb": gbToMb,
 			},

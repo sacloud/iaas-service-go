@@ -24,9 +24,9 @@ import (
 )
 
 type ApplyRequest struct {
-	Zone string `request:"-" validate:"required"`
+	Zone string `service:"-" validate:"required"`
 
-	ID                              types.ID `request:"-"`
+	ID                              types.ID `service:"-"`
 	Name                            string   `validate:"required"`
 	Description                     string   `validate:"min=0,max=512"`
 	Tags                            types.Tags
@@ -47,9 +47,9 @@ type ApplyRequest struct {
 
 // PrivateInterfaceSetting represents API parameter/response structure
 type PrivateInterfaceSetting struct {
-	SwitchID       types.ID `request:",omitempty"`
-	IPAddress      string   `request:",omitempty" validate:"required,ipv4"`
-	NetworkMaskLen int      `request:",omitempty"`
+	SwitchID       types.ID `service:",omitempty"`
+	IPAddress      string   `service:",omitempty" validate:"required,ipv4"`
+	NetworkMaskLen int      `service:",omitempty"`
 }
 
 // SIMRouteSetting represents API parameter/response structure
@@ -65,17 +65,17 @@ type SIMSetting struct {
 }
 
 type DNSSetting struct {
-	DNS1 string `request:",omitempty" validate:"required_with=DNS2,omitempty,ipv4"`
-	DNS2 string `request:",omitempty" validate:"required_with=DNS1,omitempty,ipv4"`
+	DNS1 string `service:",omitempty" validate:"required_with=DNS2,omitempty,ipv4"`
+	DNS2 string `service:",omitempty" validate:"required_with=DNS1,omitempty,ipv4"`
 }
 
 type TrafficConfig struct {
-	TrafficQuotaInMB       int    `request:",omitempty"`
-	BandWidthLimitInKbps   int    `request:",omitempty"`
-	EmailNotifyEnabled     bool   `request:",omitempty"`
-	SlackNotifyEnabled     bool   `request:",omitempty"`
-	SlackNotifyWebhooksURL string `request:",omitempty"`
-	AutoTrafficShaping     bool   `request:",omitempty"`
+	TrafficQuotaInMB       int    `service:",omitempty"`
+	BandWidthLimitInKbps   int    `service:",omitempty"`
+	EmailNotifyEnabled     bool   `service:",omitempty"`
+	SlackNotifyEnabled     bool   `service:",omitempty"`
+	SlackNotifyWebhooksURL string `service:",omitempty"`
+	AutoTrafficShaping     bool   `service:",omitempty"`
 }
 
 func (req *ApplyRequest) Validate() error {

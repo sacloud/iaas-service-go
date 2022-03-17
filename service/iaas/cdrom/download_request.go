@@ -22,13 +22,13 @@ import (
 )
 
 type DownloadRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
 	ChangePassword bool
 
-	Path   string    `request:"-"`
-	Writer io.Writer `request:"-"`
+	Path   string    `service:"-"`
+	Writer io.Writer `service:"-"`
 }
 
 func (req *DownloadRequest) Validate() error {

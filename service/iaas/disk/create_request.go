@@ -24,7 +24,7 @@ import (
 
 // CreateRequest ディスク作成リクエスト
 type CreateRequest struct {
-	Zone string `request:"-" validate:"required"`
+	Zone string `service:"-" validate:"required"`
 
 	Name            string `validate:"required"`
 	Description     string `validate:"min=0,max=512"`
@@ -35,7 +35,7 @@ type CreateRequest struct {
 	SourceDiskID    types.ID
 	SourceArchiveID types.ID
 	ServerID        types.ID
-	SizeGB          int `request:"SizeMB,filters=gb_to_mb"`
+	SizeGB          int `service:"SizeMB,filters=gb_to_mb"`
 	DistantFrom     []types.ID
 	OSType          ostype.ArchiveOSType
 	EditParameter   *EditParameter

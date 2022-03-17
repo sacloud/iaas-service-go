@@ -20,8 +20,8 @@ import (
 )
 
 type UpdateSIMRouteRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
 	SIMID  types.ID `validate:"required"`
 	Prefix string   `validate:"required"`

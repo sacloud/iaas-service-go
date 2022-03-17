@@ -22,8 +22,8 @@ import (
 )
 
 type UploadRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
 	Path   string `validate:"omitempty,file"`
 	Reader io.Reader

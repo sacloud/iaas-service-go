@@ -25,16 +25,16 @@ import (
 )
 
 type UpdateRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 
-	Name        *string     `request:",omitempty" validate:"omitempty,min=1"`
-	Description *string     `request:",omitempty" validate:"omitempty,min=1,max=512"`
-	Tags        *types.Tags `request:",omitempty"`
-	IconID      *types.ID   `request:",omitempty"`
+	Name        *string     `service:",omitempty" validate:"omitempty,min=1"`
+	Description *string     `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Tags        *types.Tags `service:",omitempty"`
+	IconID      *types.ID   `service:",omitempty"`
 
-	Activate *bool                             `request:",omitempty"`
-	IMEI     *string                           `request:",omitempty"`
-	Carriers *[]*iaas.SIMNetworkOperatorConfig `request:",omitempty"`
+	Activate *bool                             `service:",omitempty"`
+	IMEI     *string                           `service:",omitempty"`
+	Carriers *[]*iaas.SIMNetworkOperatorConfig `service:",omitempty"`
 }
 
 func (req *UpdateRequest) Validate() error {

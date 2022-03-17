@@ -22,8 +22,8 @@ import (
 )
 
 type AddSubnetRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-" validate:"required"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-" validate:"required"`
 
 	NetworkMaskLen int    `validate:"required,min=24,max=28"`
 	NextHop        string `validate:"required,ipv4"`

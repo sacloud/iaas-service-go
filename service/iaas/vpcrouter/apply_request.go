@@ -24,8 +24,8 @@ import (
 
 // ApplyRequest Applyサービスへのパラメータ
 type ApplyRequest struct {
-	Zone string   `request:"-" validate:"required"`
-	ID   types.ID `request:"-"`
+	Zone string   `service:"-" validate:"required"`
+	ID   types.ID `service:"-"`
 
 	Name        string `validate:"required"`
 	Description string `validate:"min=0,max=512"`

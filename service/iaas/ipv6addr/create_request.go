@@ -21,7 +21,7 @@ import (
 )
 
 type CreateRequest struct {
-	Zone string `request:"-" validate:"required"`
+	Zone string `service:"-" validate:"required"`
 
 	IPv6Addr string `validate:"required,ipv6"`
 	HostName string `validate:"required"`

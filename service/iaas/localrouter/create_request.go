@@ -25,8 +25,8 @@ type CreateRequest struct {
 	Description  string `validate:"min=0,max=512"`
 	Tags         types.Tags
 	IconID       types.ID
-	Switch       *iaas.LocalRouterSwitch    `request:",omitempty" validate:"required_with=Interface"`
-	Interface    *iaas.LocalRouterInterface `request:",omitempty" validate:"required_with=Switch"`
+	Switch       *iaas.LocalRouterSwitch    `service:",omitempty" validate:"required_with=Interface"`
+	Interface    *iaas.LocalRouterInterface `service:",omitempty" validate:"required_with=Switch"`
 	Peers        []*iaas.LocalRouterPeer
 	StaticRoutes []*iaas.LocalRouterStaticRoute
 }

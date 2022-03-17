@@ -20,9 +20,9 @@ import (
 )
 
 type DeleteRequest struct {
-	ID types.ID `request:"-" validate:"required"`
+	ID types.ID `service:"-" validate:"required"`
 
-	FailIfNotFound bool `request:"-"`
+	FailIfNotFound bool `service:"-"`
 }
 
 func (req *DeleteRequest) Validate() error {
