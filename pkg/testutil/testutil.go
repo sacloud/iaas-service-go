@@ -35,18 +35,18 @@ const (
 	CharSetNumber = "012346789"
 )
 
-const defaultResourceNamePrefix = "sacloud-go-testutil-"
+// Random ランダムな文字列を生成して返す
+func Random(strlen int, charSet string) string {
+	return RandomName("", strlen, charSet)
+}
 
 // RandomName ランダムな文字列を生成して返す
 func RandomName(prefix string, strlen int, charSet string) string {
-	if prefix == "" {
-		prefix = defaultResourceNamePrefix
-	}
 	result := make([]byte, strlen)
 	for i := 0; i < strlen; i++ {
 		result[i] = charSet[rand.Intn(len(charSet))]
 	}
-	return string(result)
+	return prefix + string(result)
 }
 
 // IsAccTest TESTACC環境変数が指定されているか
