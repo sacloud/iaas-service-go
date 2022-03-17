@@ -12,20 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package validate
+package disk
 
 import (
-	"fmt"
-	"testing"
+	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/sacloud-go/service/validate"
 )
 
-type Foo struct {
-	Required string `validate:"required"`
+type ReadRequest struct {
+	Zone string   `request:"-" validate:"required"`
+	ID   types.ID `request:"-" validate:"required"`
 }
 
-func TestValidator_Struct(t *testing.T) {
-	err := Struct(&Foo{})
-
-	fmt.Println(err)
-	// Output: Key: 'Foo.Required' Error:Field validation for 'Required' failed on the 'required' tag
+func (req *ReadRequest) Validate() error {
+	return validate.Struct(req)
 }
