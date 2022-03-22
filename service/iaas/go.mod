@@ -2,11 +2,13 @@ module github.com/sacloud/sacloud-go/service/iaas
 
 go 1.17
 
+replace github.com/sacloud/sacloud-go => ../../
+
 require (
 	github.com/sacloud/ftps v1.1.0
 	github.com/sacloud/iaas-api-go v0.0.0-20220322065038-82f6f69bb617
 	github.com/sacloud/packages-go v0.0.1
-	github.com/sacloud/sacloud-go v0.0.0-20220317060010-e514788840a8
+	github.com/sacloud/sacloud-go v0.0.0-00010101000000-000000000000
 	github.com/stretchr/testify v1.7.1
 	golang.org/x/crypto v0.0.0-20220214200702-86341886e292
 )
