@@ -22,7 +22,7 @@ import (
 
 	"github.com/sacloud/ftps"
 	"github.com/sacloud/iaas-api-go"
-	"github.com/sacloud/sacloud-go/pkg/size"
+	"github.com/sacloud/packages-go/size"
 )
 
 func (s *Service) Create(req *CreateRequest) (*iaas.CDROM, error) {

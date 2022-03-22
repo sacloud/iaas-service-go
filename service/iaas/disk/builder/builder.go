@@ -24,7 +24,7 @@ import (
 	"github.com/sacloud/iaas-api-go/helper/query"
 	"github.com/sacloud/iaas-api-go/ostype"
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/pkg/size"
+	"github.com/sacloud/packages-go/size"
 	service "github.com/sacloud/sacloud-go/service/iaas"
 )
 
