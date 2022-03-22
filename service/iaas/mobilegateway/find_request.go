@@ -17,7 +17,7 @@ package mobilegateway
 import (
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/search"
-	"github.com/sacloud/sacloud-go/pkg/objutil"
+	"github.com/sacloud/packages-go/objutil"
 	"github.com/sacloud/sacloud-go/service/iaas/serviceutil"
 	"github.com/sacloud/sacloud-go/service/validate"
 )

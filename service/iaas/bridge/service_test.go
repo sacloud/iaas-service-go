@@ -19,7 +19,7 @@ import (
 
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/testutil"
-	"github.com/sacloud/sacloud-go/pkg/pointer"
+	"github.com/sacloud/packages-go/pointer"
 )
 
 func TestBridgeService_CRUD(t *testing.T) {

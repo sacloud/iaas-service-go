@@ -21,7 +21,7 @@ import (
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/testutil"
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/pkg/pointer"
+	"github.com/sacloud/packages-go/pointer"
 )
 
 func TestService_CRUD(t *testing.T) {

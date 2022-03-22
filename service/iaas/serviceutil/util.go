@@ -20,7 +20,7 @@ import (
 
 	iaas "github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/mapconv"
-	"github.com/sacloud/sacloud-go/pkg/size"
+	"github.com/sacloud/packages-go/size"
 )
 
 func HandleNotFoundError(err error, ignoreNotFoundError bool) error {
