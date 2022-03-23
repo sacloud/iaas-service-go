@@ -16,7 +16,7 @@ package proxylb
 
 import (
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type HealthStatusRequest struct {
@@ -24,5 +24,5 @@ type HealthStatusRequest struct {
 }
 
 func (req *HealthStatusRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }

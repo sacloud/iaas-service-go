@@ -15,7 +15,7 @@
 package ipv6addr
 
 import (
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type UpdateRequest struct {
@@ -26,5 +26,5 @@ type UpdateRequest struct {
 }
 
 func (req *UpdateRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }

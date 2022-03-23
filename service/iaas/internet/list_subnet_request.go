@@ -16,7 +16,7 @@ package internet
 
 import (
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type ListSubnetRequest struct {
@@ -25,5 +25,5 @@ type ListSubnetRequest struct {
 }
 
 func (req *ListSubnetRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }

@@ -17,8 +17,8 @@ package internet
 import (
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/packages-go/validate"
 	"github.com/sacloud/sacloud-go/service/iaas/serviceutil"
-	"github.com/sacloud/sacloud-go/service/validate"
 )
 
 type UpdateSubnetRequest struct {
@@ -30,7 +30,7 @@ type UpdateSubnetRequest struct {
 }
 
 func (req *UpdateSubnetRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }
 
 func (req *UpdateSubnetRequest) ToRequestParameter(current *iaas.Internet) (*iaas.InternetUpdateSubnetRequest, error) {

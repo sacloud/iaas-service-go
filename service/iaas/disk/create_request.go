@@ -19,7 +19,7 @@ import (
 
 	"github.com/sacloud/iaas-api-go/ostype"
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 // CreateRequest ディスク作成リクエスト
@@ -49,7 +49,7 @@ func (req *CreateRequest) Validate() error {
 			return fmt.Errorf("SourceDiskID or SourceArchiveID must be empty if OSType has a value")
 		}
 	}
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }
 
 func (req *CreateRequest) ApplyRequest() *ApplyRequest {

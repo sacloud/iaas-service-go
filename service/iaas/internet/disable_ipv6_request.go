@@ -16,7 +16,7 @@ package internet
 
 import (
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type DisableIPv6Request struct {
@@ -25,5 +25,5 @@ type DisableIPv6Request struct {
 }
 
 func (req *DisableIPv6Request) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }

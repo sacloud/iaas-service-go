@@ -12,20 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package validate
+package iaas
 
-import (
-	"fmt"
-	"testing"
-)
-
-type Foo struct {
-	Required string `validate:"required"`
-}
-
-func TestValidator_Struct(t *testing.T) {
-	err := Struct(&Foo{})
-
-	fmt.Println(err)
-	// Output: Key: 'Foo.Required' Error:Field validation for 'Required' failed on the 'required' tag
-}
+// Version バージョン
+const Version = "0.0.1-dev"

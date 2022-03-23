@@ -16,7 +16,7 @@ package server
 
 import (
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type DeleteRequest struct {
@@ -29,5 +29,5 @@ type DeleteRequest struct {
 }
 
 func (req *DeleteRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }

@@ -16,7 +16,7 @@ package loadbalancer
 
 import (
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type WaitBootRequest struct {
@@ -25,5 +25,5 @@ type WaitBootRequest struct {
 }
 
 func (req *WaitBootRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }

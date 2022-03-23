@@ -18,7 +18,7 @@ import (
 	"time"
 
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type MonitorSIMRequest struct {
@@ -29,5 +29,5 @@ type MonitorSIMRequest struct {
 }
 
 func (req *MonitorSIMRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }

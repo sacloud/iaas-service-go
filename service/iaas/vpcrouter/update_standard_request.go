@@ -20,9 +20,9 @@ import (
 
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/packages-go/validate"
 	"github.com/sacloud/sacloud-go/service/iaas/serviceutil"
 	vpcRouterBuilder "github.com/sacloud/sacloud-go/service/iaas/vpcrouter/builder"
-	"github.com/sacloud/sacloud-go/service/validate"
 )
 
 type UpdateStandardRequest struct {
@@ -49,7 +49,7 @@ type AdditionalStandardNICSettingUpdate struct {
 }
 
 func (req *UpdateStandardRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }
 
 func (req *UpdateStandardRequest) ApplyRequest(ctx context.Context, caller iaas.APICaller) (*ApplyRequest, error) {

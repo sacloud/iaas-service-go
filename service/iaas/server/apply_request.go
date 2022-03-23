@@ -19,10 +19,10 @@ import (
 
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/packages-go/validate"
 	diskService "github.com/sacloud/sacloud-go/service/iaas/disk"
 	diskBuilder "github.com/sacloud/sacloud-go/service/iaas/disk/builder"
 	serverBuilder "github.com/sacloud/sacloud-go/service/iaas/server/builder"
-	"github.com/sacloud/sacloud-go/service/validate"
 )
 
 type ApplyRequest struct {
@@ -52,7 +52,7 @@ type ApplyRequest struct {
 }
 
 func (req *ApplyRequest) Validate() error {
-	if err := validate.Struct(req); err != nil {
+	if err := validate.New().Struct(req); err != nil {
 		return err
 	}
 	// nic

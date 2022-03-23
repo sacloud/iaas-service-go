@@ -16,8 +16,8 @@ package vpcrouter
 
 import (
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/packages-go/validate"
 	vpcRouterBuilder "github.com/sacloud/sacloud-go/service/iaas/vpcrouter/builder"
-	"github.com/sacloud/sacloud-go/service/validate"
 )
 
 type CreateStandardRequest struct {
@@ -37,7 +37,7 @@ type CreateStandardRequest struct {
 }
 
 func (req *CreateStandardRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }
 
 func (req *CreateStandardRequest) ApplyRequest() *ApplyRequest {

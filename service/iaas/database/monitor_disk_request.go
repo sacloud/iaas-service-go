@@ -18,7 +18,7 @@ import (
 	"time"
 
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type MonitorDiskRequest struct {
@@ -30,5 +30,5 @@ type MonitorDiskRequest struct {
 }
 
 func (req *MonitorDiskRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }

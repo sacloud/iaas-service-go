@@ -16,7 +16,7 @@ package database
 
 import (
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type ListParameterRequest struct {
@@ -25,5 +25,5 @@ type ListParameterRequest struct {
 }
 
 func (req *ListParameterRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }
