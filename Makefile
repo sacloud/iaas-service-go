@@ -1,5 +1,5 @@
 #
-# Copyright 2022 The sacloud/sacloud-go Authors
+# Copyright 2022 The sacloud/iaas-service-go Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-AUTHOR          ?="The sacloud/sacloud-go Authors"
+AUTHOR          ?="The sacloud/iaas-service-go Authors"
 COPYRIGHT_YEAR  ?="2022"
 COPYRIGHT_FILES ?=$$(find . -name "*.go" -print | grep -v "/vendor/")
 
@@ -22,13 +22,11 @@ default: gen fmt set-license go-licenses-check goimports lint test
 
 .PHONY: test
 test:
-	(TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race);
-	(cd service/iaas; TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race);
+	TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race
 
 .PHONY: testacc
 testacc:
-	(TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race);
-	(cd service/iaas; TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race);
+	TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race
 
 .PHONY: tools
 tools:
@@ -48,8 +46,7 @@ gen: _gen fmt goimports set-license
 
 .PHONY: _gen
 _gen:
-	(go generate ./...)
-	(cd service/iaas; go generate ./...)
+	go generate ./...
 
 .PHONY: goimports gosimports
 goimports: gosimports
@@ -62,7 +59,7 @@ fmt:
 
 .PHONY: godoc
 godoc:
-	echo "URL: http://localhost:6060/pkg/github.com/sacloud/sacloud-go/"
+	echo "URL: http://localhost:6060/pkg/github.com/sacloud/iaas-service-go/"
 	godoc -http=localhost:6060
 
 .PHONY: lint-all
@@ -71,19 +68,17 @@ lint-all: lint-go lint-text
 .PHONY: lint lint-go
 lint: lint-go
 lint-go:
-	(golangci-lint run ./...)
-	(cd service/iaas; golangci-lint run ./...)
+	golangci-lint run ./...
 
 .PHONY: textlint lint-text
 textlint: lint-text
 lint-text:
-	@docker run -it --rm -v $$PWD:/work -w /work ghcr.io/sacloud/textlint-action:v0.0.1 .
+	docker run -it --rm -v $$PWD:/work -w /work ghcr.io/sacloud/textlint-action:v0.0.1 .
 
 .PHONY: set-license
 set-license:
-	@addlicense -c $(AUTHOR) -y $(COPYRIGHT_YEAR) $(COPYRIGHT_FILES)
+	addlicense -c $(AUTHOR) -y $(COPYRIGHT_YEAR) $(COPYRIGHT_FILES)
 
 .PHONY: go-licenses-check
 go-licenses-check:
-	(go-licenses check .)
-	(cd service/iaas; go-licenses check .)
+	go-licenses check .
