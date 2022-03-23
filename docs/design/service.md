@@ -1,6 +1,6 @@
-# sacloud-go/service
+# iaas-service-go/service
 
-- URL: https://github.com/sacloud/sacloud-go/pull/21
+- URL: https://github.com/sacloud/iaas-service-go/pull/21
 - Author: @yamamoto-febc
 
 ## 概要
