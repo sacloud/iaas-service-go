@@ -30,8 +30,14 @@ Iaas APIとはライブラリで処理すべき内容が異なっている。
 
 各ライブラリは単体でも利用可能とするが、Usacloudに対するlibsacloudのhelper/serviceパッケージのように、各APIに対し統一的にCRUD+L操作が行えるようにしたい。  
 
-そこで、高レベルAPIライブラリとしてsacloud/sacloud-goを作成し、
+そこで、高レベルAPIライブラリとしてsacloud/xxx-service-goを作成し、
 libsacloudのhelper/serviceパッケージの移植やその他高レベル操作の実装/集約などを行いたい。  
+
+- [IaaS: sacloud/iaas-service-go](https://github.com/sacloud/iaas-service-go)  
+- [オブジェクトストレージ: sacloud/object-storage-service-go](https://github.com/sacloud/object-storage-service-go)
+- [専用サーバPHY: sacloud/phy-service-go](https://github.com/sacloud/phy-service-go)
+ 
+以降はIaaS向けであるsacloud/iaas-service-goについて記載する。
 
 ## やること/やらないこと
 
@@ -40,43 +46,16 @@ libsacloudのhelper/serviceパッケージの移植やその他高レベル操�
 - libsacloudからの移植
   - helper/builderとhelper/serviceの統合
   - 統合したhelper/serviceの移植
-  - helper/newsfeedの移植
-  - helper/waitを汎化して切り出し
-  - helper/apiを汎化して切り出し
-  - 汎用処理の切り出し
-  - ~クライアント周り(helper/apiやprofile)の切り出し~ → sacloud/api-client-goへ切り出し
-
-### やらないこと
-
-TODO: 必要に応じて記載
+  - 汎用的な処理をsacloud/packages-goに切り出し
+  - クライアント周り(helper/apiやprofile)をsacloud/api-client-goへ切り出し
 
 ## 実装
 
 - libsacloudから必要部分を移植  
 - 下位ライブラリ(IaaS/オブジェクトストレージ/PHY)を意識せず使えるようなAPIの設計
 
-### パッケージ構成
-
-```console
-- sacloud-go
-  - pkg       # Note: libsacloudからの移植、iaas-api-goなどからも利用するため独立したパッケージにする
-    - go.mod
-    - cidr
-    - mutexkv
-    - size
-    - pointer
-    - wait      
-    
-  - newsfeed
-  - service    
-    - iaas          # libsacloudのhelper/serviceからの移植 
-    - objectstorage # 新規
-    - phy           # 新規
-```
-
-`pkg`は独立したリポジトリにするほどでもない、sacloudドメインに非依存のコードを配置する。
-
 ## 改訂履歴
 
 - 2022/2/26: 初版作成
 - 2022/3/7: パッケージ構成追加
+- 2022/3/23: 各プラットフォームごとにxxx-service-goリポジトリとして独立させるように変更
