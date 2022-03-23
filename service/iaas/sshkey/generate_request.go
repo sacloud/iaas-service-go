@@ -16,8 +16,8 @@ package sshkey
 
 import (
 	"github.com/sacloud/iaas-api-go"
+	"github.com/sacloud/packages-go/validate"
 	"github.com/sacloud/sacloud-go/service/iaas/serviceutil"
-	"github.com/sacloud/sacloud-go/service/validate"
 )
 
 type GenerateRequest struct {
@@ -27,7 +27,7 @@ type GenerateRequest struct {
 }
 
 func (req *GenerateRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }
 
 func (req *GenerateRequest) ToRequestParameter() (*iaas.SSHKeyGenerateRequest, error) {

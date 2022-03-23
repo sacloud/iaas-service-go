@@ -15,7 +15,7 @@
 package ipaddress
 
 import (
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type UpdateHostNameRequest struct {
@@ -28,5 +28,5 @@ type UpdateHostNameRequest struct {
 }
 
 func (req *UpdateHostNameRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }

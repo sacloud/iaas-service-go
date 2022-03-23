@@ -17,9 +17,9 @@ package vpcrouter
 import (
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/packages-go/validate"
 	"github.com/sacloud/sacloud-go/service/iaas/setup"
 	vpcRouterBuilder "github.com/sacloud/sacloud-go/service/iaas/vpcrouter/builder"
-	"github.com/sacloud/sacloud-go/service/validate"
 )
 
 // ApplyRequest Applyサービスへのパラメータ
@@ -42,7 +42,7 @@ type ApplyRequest struct {
 }
 
 func (req *ApplyRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }
 
 // RouterSetting VPCルータの設定

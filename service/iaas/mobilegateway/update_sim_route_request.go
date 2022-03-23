@@ -16,7 +16,7 @@ package mobilegateway
 
 import (
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type UpdateSIMRouteRequest struct {
@@ -28,5 +28,5 @@ type UpdateSIMRouteRequest struct {
 }
 
 func (req *UpdateSIMRouteRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }

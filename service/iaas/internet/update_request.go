@@ -19,9 +19,9 @@ import (
 
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/packages-go/validate"
 	internetBuilder "github.com/sacloud/sacloud-go/service/iaas/internet/builder"
 	"github.com/sacloud/sacloud-go/service/iaas/serviceutil"
-	"github.com/sacloud/sacloud-go/service/validate"
 )
 
 type UpdateRequest struct {
@@ -37,7 +37,7 @@ type UpdateRequest struct {
 }
 
 func (req *UpdateRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }
 
 func (req *UpdateRequest) Builder(ctx context.Context, caller iaas.APICaller) (*internetBuilder.Builder, error) {

@@ -16,7 +16,7 @@ package server
 
 import (
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type ChangePlanRequest struct {
@@ -30,5 +30,5 @@ type ChangePlanRequest struct {
 }
 
 func (req *ChangePlanRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }

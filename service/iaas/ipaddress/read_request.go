@@ -15,7 +15,7 @@
 package ipaddress
 
 import (
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type ReadRequest struct {
@@ -25,5 +25,5 @@ type ReadRequest struct {
 }
 
 func (req *ReadRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }

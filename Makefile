@@ -22,13 +22,13 @@ default: gen fmt set-license go-licenses-check goimports lint test
 
 .PHONY: test
 test:
+	(TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race);
 	(cd service/iaas; TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race);
-	TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race;
 
 .PHONY: testacc
 testacc:
+	(TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race);
 	(cd service/iaas; TESTACC= go test ./... $(TESTARGS) -v -timeout=120m -parallel=8 -race);
-	TESTACC=1 go test ./... $(TESTARGS) --tags=acctest -v -timeout=120m -parallel=8 ;
 
 .PHONY: tools
 tools:
@@ -48,8 +48,8 @@ gen: _gen fmt goimports set-license
 
 .PHONY: _gen
 _gen:
+	(go generate ./...)
 	(cd service/iaas; go generate ./...)
-	go generate ./...
 
 .PHONY: goimports gosimports
 goimports: gosimports
@@ -71,7 +71,8 @@ lint-all: lint-go lint-text
 .PHONY: lint lint-go
 lint: lint-go
 lint-go:
-	golangci-lint run ./...
+	(golangci-lint run ./...)
+	(cd service/iaas; golangci-lint run ./...)
 
 .PHONY: textlint lint-text
 textlint: lint-text
@@ -84,4 +85,5 @@ set-license:
 
 .PHONY: go-licenses-check
 go-licenses-check:
-	go-licenses check .
+	(go-licenses check .)
+	(cd service/iaas; go-licenses check .)

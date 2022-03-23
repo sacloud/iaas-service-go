@@ -18,8 +18,8 @@ import (
 	"fmt"
 
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/packages-go/validate"
 	serverBuilder "github.com/sacloud/sacloud-go/service/iaas/server/builder"
-	"github.com/sacloud/sacloud-go/service/validate"
 )
 
 type NetworkInterface struct {
@@ -29,7 +29,7 @@ type NetworkInterface struct {
 }
 
 func (s *NetworkInterface) Validate() error {
-	if err := validate.Struct(s); err != nil {
+	if err := validate.New().Struct(s); err != nil {
 		return err
 	}
 	if s.Upstream == "" || s.Upstream == "shared" || s.Upstream == "disconnected" {

@@ -18,7 +18,7 @@ import (
 	"io"
 
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type DownloadRequest struct {
@@ -30,5 +30,5 @@ type DownloadRequest struct {
 }
 
 func (req *DownloadRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }

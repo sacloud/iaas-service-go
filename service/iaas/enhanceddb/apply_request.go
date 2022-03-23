@@ -17,8 +17,8 @@ package enhanceddb
 import (
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/packages-go/validate"
 	"github.com/sacloud/sacloud-go/service/iaas/enhanceddb/builder"
-	"github.com/sacloud/sacloud-go/service/validate"
 )
 
 type ApplyRequest struct {
@@ -35,7 +35,7 @@ type ApplyRequest struct {
 }
 
 func (req *ApplyRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }
 
 func (req *ApplyRequest) Builder(caller iaas.APICaller) (*builder.Builder, error) {

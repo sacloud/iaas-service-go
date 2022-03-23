@@ -19,8 +19,8 @@ import (
 
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/types"
+	"github.com/sacloud/packages-go/validate"
 	internetBuilder "github.com/sacloud/sacloud-go/service/iaas/internet/builder"
-	"github.com/sacloud/sacloud-go/service/validate"
 )
 
 type CreateRequest struct {
@@ -38,7 +38,7 @@ type CreateRequest struct {
 }
 
 func (req *CreateRequest) Validate() error {
-	if err := validate.Struct(req); err != nil {
+	if err := validate.New().Struct(req); err != nil {
 		return err
 	}
 	if req.EnableIPv6 && req.NoWait {

@@ -16,7 +16,7 @@ package archive
 
 import (
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/sacloud-go/service/validate"
+	"github.com/sacloud/packages-go/validate"
 )
 
 type WaitReadyRequest struct {
@@ -25,5 +25,5 @@ type WaitReadyRequest struct {
 }
 
 func (req *WaitReadyRequest) Validate() error {
-	return validate.Struct(req)
+	return validate.New().Struct(req)
 }
