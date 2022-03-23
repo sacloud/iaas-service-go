@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/sacloud/ftps v1.1.0
-	github.com/sacloud/iaas-api-go v0.0.0-20220322065038-82f6f69bb617
+	github.com/sacloud/iaas-api-go v0.0.1
 	github.com/sacloud/packages-go v0.0.2
 	github.com/stretchr/testify v1.7.1
 	golang.org/x/crypto v0.0.0-20220214200702-86341886e292
@@ -26,7 +26,7 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/mapstructure v1.4.3 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/sacloud/api-client-go v0.0.2 // indirect
+	github.com/sacloud/api-client-go v0.0.3 // indirect
 	github.com/sacloud/go-http v0.0.4 // indirect
 	go.uber.org/ratelimit v0.2.0 // indirect
 	golang.org/x/sys v0.0.0-20210806184541-e5e7981a1069 // indirect
