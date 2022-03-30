@@ -8,10 +8,7 @@
 
 ## 概要
 
-:baby_symbol: iaas-service-goは設計/開発中です。  
-概要や設計、実装方針については[docs/overview.md](https://github.com/sacloud/iaas-service-go/blob/main/docs/design/overview.md)を参照してください。
-
-iaas-service-goは[sacloud/libsacloud v2](https://github.com/sacloud/libsacloud)の後継プロジェクトで、さくらのクラウド APIのうちのIaaS部分を担当します。
+iaas-service-goは[sacloud/libsacloud v2](https://github.com/sacloud/libsacloud)の後継プロジェクトで、さくらのクラウド APIのうちのIaaS部分を担当します。  
 [sacloud/iaas-api-go](https://github.com/sacloud/iaas-api-go)を用いた高レベルAPIを提供します。  
 
 概要/設計/実装方針: [docs/overview.md](https://github.com/sacloud/iaas-service-go/blob/main/docs/design/overview.md)
