@@ -75,21 +75,6 @@ func TestDiskDirector_Builder(t *testing.T) {
 				},
 			},
 		},
-		{
-			name: "windows",
-			in: &Director{
-				OSType: ostype.Windows2019,
-				EditParameter: &EditRequest{
-					IPAddress: "192.2.0.1",
-				},
-			},
-			out: &FromWindowsBuilder{
-				OSType: ostype.Windows2019,
-				EditParameter: &WindowsEditRequest{
-					IPAddress: "192.2.0.1",
-				},
-			},
-		},
 	}
 
 	for _, tt := range cases {

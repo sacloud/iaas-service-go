@@ -35,18 +35,6 @@ func (d *EditRequest) ToUnixDiskEditRequest() *UnixEditRequest {
 	return &req
 }
 
-// ToWindowsDiskEditRequest Windows系パラメータへの変換
-func (d *EditRequest) ToWindowsDiskEditRequest() *WindowsEditRequest {
-	if d == nil {
-		return nil
-	}
-	return &WindowsEditRequest{
-		IPAddress:      d.IPAddress,
-		NetworkMaskLen: d.NetworkMaskLen,
-		DefaultRoute:   d.DefaultRoute,
-	}
-}
-
 // UnixEditRequest Unix系の場合のディスクの修正リクエスト
 type UnixEditRequest struct {
 	HostName string
@@ -168,26 +156,4 @@ func (u *UnixEditRequest) prepareDiskEditParameter(ctx context.Context, client *
 	editReq.Notes = notes
 
 	return editReq, generatedSSHKey, generatedNotes, nil
-}
-
-// WindowsEditRequest Windows系の場合のディスクの修正リクエスト
-type WindowsEditRequest struct {
-	IPAddress      string
-	NetworkMaskLen int
-	DefaultRoute   string
-}
-
-func (w *WindowsEditRequest) prepareDiskEditParameter() *iaas.DiskEditRequest {
-	editReq := &iaas.DiskEditRequest{Background: true}
-
-	if w.IPAddress != "" {
-		editReq.UserIPAddress = w.IPAddress
-	}
-	if w.NetworkMaskLen > 0 || w.DefaultRoute != "" {
-		editReq.UserSubnet = &iaas.DiskEditUserSubnet{
-			NetworkMaskLen: w.NetworkMaskLen,
-			DefaultRoute:   w.DefaultRoute,
-		}
-	}
-	return editReq
 }

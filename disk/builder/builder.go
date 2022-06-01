@@ -205,7 +205,7 @@ type FromFixedArchiveBuilder struct {
 
 // Validate 設定値の検証
 func (d *FromFixedArchiveBuilder) Validate(ctx context.Context, zone string) error {
-	if d.OSType.IsSupportDiskEdit() || d.OSType.IsWindows() {
+	if d.OSType.IsSupportDiskEdit() {
 		return fmt.Errorf("invalid OSType: %s", d.OSType.String())
 	}
 	if err := validateDiskPlan(ctx, d.Client, zone, d.PlanID, d.SizeGB); err != nil {
@@ -274,103 +274,6 @@ func (d *FromFixedArchiveBuilder) createDiskParameter(ctx context.Context, clien
 }
 
 func (d *FromFixedArchiveBuilder) NoWaitFlag() bool {
-	return d.NoWait
-}
-
-// FromWindowsBuilder Windows系パブリックアーカイブからディスクを作成するリクエスト
-type FromWindowsBuilder struct {
-	OSType ostype.ArchiveOSType
-
-	Name        string
-	SizeGB      int
-	DistantFrom []types.ID
-	PlanID      types.ID
-	Connection  types.EDiskConnection
-	Description string
-	Tags        types.Tags
-	IconID      types.ID
-
-	EditParameter *WindowsEditRequest
-
-	Client *APIClient
-	NoWait bool
-
-	ID types.ID
-}
-
-// Validate 設定値の検証
-func (d *FromWindowsBuilder) Validate(ctx context.Context, zone string) error {
-	if !d.OSType.IsWindows() {
-		return fmt.Errorf("invalid OSType: %s", d.OSType.String())
-	}
-	if err := validateDiskPlan(ctx, d.Client, zone, d.PlanID, d.SizeGB); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Build ディスクの構築
-func (d *FromWindowsBuilder) Build(ctx context.Context, zone string, serverID types.ID) (*BuildResult, error) {
-	res, err := build(ctx, d.Client, zone, serverID, d.DistantFrom, d)
-	if err != nil {
-		return nil, err
-	}
-	d.ID = res.DiskID
-	return res, nil
-}
-
-// Update ディスクの更新
-func (d *FromWindowsBuilder) Update(ctx context.Context, zone string) (*UpdateResult, error) {
-	return update(ctx, d.Client, zone, d)
-}
-
-// DiskID ディスクID取得
-func (d *FromWindowsBuilder) DiskID() types.ID {
-	return d.ID
-}
-
-// UpdateLevel Update時にどのレベルの変更が必要か
-func (d *FromWindowsBuilder) UpdateLevel(ctx context.Context, zone string, disk *iaas.Disk) service.UpdateLevel {
-	return updateLevel(disk, d.EditParameter != nil, d)
-}
-
-func (d *FromWindowsBuilder) updateDiskParameter() *iaas.DiskUpdateRequest {
-	return &iaas.DiskUpdateRequest{
-		Name:        d.Name,
-		Description: d.Description,
-		Tags:        d.Tags,
-		IconID:      d.IconID,
-		Connection:  d.Connection,
-	}
-}
-
-func (d *FromWindowsBuilder) createDiskParameter(ctx context.Context, client *APIClient, zone string, serverID types.ID) (*iaas.DiskCreateRequest, *iaas.DiskEditRequest, error) {
-	archive, err := query.FindArchiveByOSType(ctx, client.Archive, zone, d.OSType)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	createReq := &iaas.DiskCreateRequest{
-		DiskPlanID:      d.PlanID,
-		SizeMB:          d.SizeGB * size.GiB,
-		Connection:      d.Connection,
-		SourceArchiveID: archive.ID,
-		ServerID:        serverID,
-		Name:            d.Name,
-		Description:     d.Description,
-		Tags:            d.Tags,
-		IconID:          d.IconID,
-	}
-
-	var editReq *iaas.DiskEditRequest
-	if d.EditParameter != nil {
-		editReq = d.EditParameter.prepareDiskEditParameter()
-	}
-
-	return createReq, editReq, nil
-}
-
-func (d *FromWindowsBuilder) NoWaitFlag() bool {
 	return d.NoWait
 }
 
