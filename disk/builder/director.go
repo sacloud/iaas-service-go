@@ -104,21 +104,6 @@ func (d *Director) Builder() Builder {
 			NoWait:        d.NoWait,
 			Client:        d.Client,
 		}
-	case d.OSType.IsWindows():
-		return &FromWindowsBuilder{
-			OSType:        d.OSType,
-			Name:          d.Name,
-			SizeGB:        d.SizeGB,
-			DistantFrom:   d.DistantFrom,
-			PlanID:        d.PlanID,
-			Connection:    d.Connection,
-			Description:   d.Description,
-			Tags:          d.Tags,
-			IconID:        d.IconID,
-			EditParameter: d.EditParameter.ToWindowsDiskEditRequest(),
-			NoWait:        d.NoWait,
-			Client:        d.Client,
-		}
 	default:
 		// 現在はOSTypeにディスクの修正不可のアーカイブはないためここには到達しない
 		return &FromFixedArchiveBuilder{
