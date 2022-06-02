@@ -29,13 +29,17 @@ type UpdateRequest struct {
 	Tags        *types.Tags `service:",omitempty"`
 	IconID      *types.ID   `service:",omitempty"`
 
-	Zones        *[]string `validate:"omitempty,required"`
-	Config       *string   `validate:"omitempty,required"`
-	ServerPrefix *string   `validate:"omitempty,required"`
-	Up           *int      `validate:"omitempty,required"`
-	Down         *int      `validate:"omitempty,required"`
+	Zones               *[]string                 `validate:"omitempty,required"`
+	Config              *string                   `validate:"omitempty,required"`
+	CPUThresholdScaling UpdateCPUThresholdScaling `service:"-" validate:"dive"`
 
 	SettingsHash string
+}
+
+type UpdateCPUThresholdScaling struct {
+	ServerPrefix *string `validate:"omitempty,required"`
+	Up           *int    `validate:"omitempty,required"`
+	Down         *int    `validate:"omitempty,required"`
 }
 
 func (req *UpdateRequest) Validate() error {
@@ -50,5 +54,15 @@ func (req *UpdateRequest) ToRequestParameter(current *iaas.AutoScale) (*iaas.Aut
 	if err := serviceutil.RequestConvertTo(req, r); err != nil {
 		return nil, err
 	}
+	if req.CPUThresholdScaling.ServerPrefix != nil {
+		r.CPUThresholdScaling.ServerPrefix = *req.CPUThresholdScaling.ServerPrefix
+	}
+	if req.CPUThresholdScaling.Up != nil {
+		r.CPUThresholdScaling.Up = *req.CPUThresholdScaling.Up
+	}
+	if req.CPUThresholdScaling.Down != nil {
+		r.CPUThresholdScaling.Down = *req.CPUThresholdScaling.Down
+	}
+
 	return r, nil
 }
