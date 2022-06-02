@@ -55,6 +55,8 @@ github.com/sacloud/go-http v0.1.0 h1:aJehFqD+zprlUjCcmI+rZxxS7mA0f6wCyhGYWDMs4BU
 github.com/sacloud/go-http v0.1.0/go.mod h1:aYTXNuAnPmD6Ar3ktDaR1gPxJCPv2CqpppcYciy1hmo=
 github.com/sacloud/iaas-api-go v1.1.0 h1:xi4L1ODTwqrhPA0XZtz668ryFw3sKqvQC3T2Dadwbu4=
 github.com/sacloud/iaas-api-go v1.1.0/go.mod h1:1Z4TS6WzE68pinZ1fDrZlU1uw5aefjbP8bzD/W1durE=
+github.com/sacloud/iaas-api-go v1.1.1 h1:t3mJJoag0CaAwJ7y/+tu6e0/Yo9DaUM8/5wfbjAFhWQ=
+github.com/sacloud/iaas-api-go v1.1.1/go.mod h1:1Z4TS6WzE68pinZ1fDrZlU1uw5aefjbP8bzD/W1durE=
 github.com/sacloud/packages-go v0.0.2 h1:tvA/V8tjzaCeuQQVwby1Olq6RmjMI/LEdAe65+qcpYM=
 github.com/sacloud/packages-go v0.0.2/go.mod h1:Eny1qnbKr9n/5yfXDiwOC+0YMiBhK1HBYGjjmxes+CI=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=

@@ -26,12 +26,17 @@ type CreateRequest struct {
 	Tags        types.Tags
 	IconID      types.ID
 
-	Zones        []string `validate:"required"`
-	Config       string   `validate:"required"`
-	ServerPrefix string   `validate:"required"`
-	Up           int      `validate:"required"`
-	Down         int      `validate:"required"`
-	APIKeyID     string   `validate:"required"`
+	Zones               []string                  `validate:"required"`
+	Config              string                    `validate:"required"`
+	CPUThresholdScaling CreateCPUThresholdScaling `validate:"dive"`
+
+	APIKeyID string `validate:"required"`
+}
+
+type CreateCPUThresholdScaling struct {
+	ServerPrefix string `validate:"required"`
+	Up           int    `validate:"required"`
+	Down         int    `validate:"required"`
 }
 
 func (req *CreateRequest) Validate() error {
@@ -40,15 +45,17 @@ func (req *CreateRequest) Validate() error {
 
 func (req *CreateRequest) ToRequestParameter() (*iaas.AutoScaleCreateRequest, error) {
 	return &iaas.AutoScaleCreateRequest{
-		Name:         req.Name,
-		Description:  req.Description,
-		Tags:         req.Tags,
-		IconID:       req.IconID,
-		Zones:        req.Zones,
-		Config:       req.Config,
-		ServerPrefix: req.ServerPrefix,
-		Up:           req.Up,
-		Down:         req.Down,
-		APIKeyID:     req.APIKeyID,
+		Name:        req.Name,
+		Description: req.Description,
+		Tags:        req.Tags,
+		IconID:      req.IconID,
+		Zones:       req.Zones,
+		Config:      req.Config,
+		CPUThresholdScaling: &iaas.AutoScaleCPUThresholdScaling{
+			ServerPrefix: req.CPUThresholdScaling.ServerPrefix,
+			Up:           req.CPUThresholdScaling.Up,
+			Down:         req.CPUThresholdScaling.Down,
+		},
+		APIKeyID: req.APIKeyID,
 	}, nil
 }

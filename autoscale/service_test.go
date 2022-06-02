@@ -57,15 +57,17 @@ func TestAutoScaleService_CRUD(t *testing.T) {
 		Create: &testutil.CRUDTestFunc{
 			Func: func(ctx *testutil.CRUDTestContext, _ iaas.APICaller) (interface{}, error) {
 				return svc.Create(&CreateRequest{
-					Name:         name,
-					Description:  "test",
-					Tags:         types.Tags{"tag1", "tag2"},
-					Zones:        []string{testutil.TestZone()},
-					Config:       fmt.Sprintf(autoScaleConfigTemplate, testServerName, testutil.TestZone()),
-					ServerPrefix: testServerName,
-					Up:           80,
-					Down:         50,
-					APIKeyID:     apiKey,
+					Name:        name,
+					Description: "test",
+					Tags:        types.Tags{"tag1", "tag2"},
+					Zones:       []string{testutil.TestZone()},
+					Config:      fmt.Sprintf(autoScaleConfigTemplate, testServerName, testutil.TestZone()),
+					CPUThresholdScaling: CreateCPUThresholdScaling{
+						ServerPrefix: testServerName,
+						Up:           80,
+						Down:         50,
+					},
+					APIKeyID: apiKey,
 				})
 			},
 		},
@@ -78,15 +80,16 @@ func TestAutoScaleService_CRUD(t *testing.T) {
 			{
 				Func: func(ctx *testutil.CRUDTestContext, _ iaas.APICaller) (interface{}, error) {
 					return svc.Update(&UpdateRequest{
-						ID:           ctx.ID,
-						Name:         pointer.NewString(name + "-upd"),
-						Description:  pointer.NewString("test-upd"),
-						Tags:         &types.Tags{"tag1-upd", "tag2-upd"},
-						Zones:        &[]string{testutil.TestZone()},
-						Config:       pointer.NewString(fmt.Sprintf(autoScaleConfigTemplateUpd, testServerName, testutil.TestZone())),
-						ServerPrefix: pointer.NewString(testServerName),
-						Up:           pointer.NewInt(80),
-						Down:         pointer.NewInt(50),
+						ID:          ctx.ID,
+						Name:        pointer.NewString(name + "-upd"),
+						Description: pointer.NewString("test-upd"),
+						Tags:        &types.Tags{"tag1-upd", "tag2-upd"},
+						Zones:       &[]string{testutil.TestZone()},
+						Config:      pointer.NewString(fmt.Sprintf(autoScaleConfigTemplateUpd, testServerName, testutil.TestZone())),
+						CPUThresholdScaling: UpdateCPUThresholdScaling{
+							Up:   pointer.NewInt(80),
+							Down: pointer.NewInt(50),
+						},
 					})
 				},
 			},
