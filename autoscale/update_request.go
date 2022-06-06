@@ -29,17 +29,17 @@ type UpdateRequest struct {
 	Tags        *types.Tags `service:",omitempty"`
 	IconID      *types.ID   `service:",omitempty"`
 
-	Zones               *[]string                 `validate:"omitempty,required"`
-	Config              *string                   `validate:"omitempty,required"`
+	Zones               *[]string                 `service:",omitempty" validate:"omitempty,required"`
+	Config              *string                   `service:",omitempty" validate:"omitempty,required"`
 	CPUThresholdScaling UpdateCPUThresholdScaling `service:"-" validate:"dive"`
 
 	SettingsHash string
 }
 
 type UpdateCPUThresholdScaling struct {
-	ServerPrefix *string `validate:"omitempty,required"`
-	Up           *int    `validate:"omitempty,required"`
-	Down         *int    `validate:"omitempty,required"`
+	ServerPrefix *string `service:",omitempty" validate:"omitempty,required"`
+	Up           *int    `service:",omitempty" validate:"omitempty,required"`
+	Down         *int    `service:",omitempty" validate:"omitempty,required"`
 }
 
 func (req *UpdateRequest) Validate() error {
