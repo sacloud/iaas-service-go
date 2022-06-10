@@ -153,7 +153,7 @@ func (r *RetryableSetup) waitForCopyWithCleanup(ctx context.Context, zone string
 		Interval: r.Options.PollingInterval,
 	}
 
-	//wait
+	// wait
 	compChan, progressChan, errChan := waiter.WaitForStateAsync(ctx)
 	var state interface{}
 	var err error

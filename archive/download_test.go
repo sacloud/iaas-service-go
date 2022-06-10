@@ -35,10 +35,10 @@ func TestArchiveService_downloadAfterBuild(t *testing.T) {
 
 	// file
 	filename := "test-archive-source.tmp"
-	if err := os.WriteFile(filename, []byte("test"), 0755); err != nil {
+	if err := os.WriteFile(filename, []byte("test"), 0600); err != nil {
 		t.Fatal(err)
 	}
-	defer os.Remove(filename) // nolint
+	defer os.Remove(filename)
 
 	// create
 	archive, err := svc.Create(&CreateRequest{

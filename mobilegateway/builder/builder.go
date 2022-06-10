@@ -72,8 +72,8 @@ type SIMRouteSetting struct {
 	Prefix string
 }
 
-// BuilderFromResource 既存のMobileGatewayからBuilderを組み立てて返す
-func BuilderFromResource(ctx context.Context, caller iaas.APICaller, zone string, id types.ID) (*Builder, error) {
+// FromResource 既存のMobileGatewayからBuilderを組み立てて返す
+func FromResource(ctx context.Context, caller iaas.APICaller, zone string, id types.ID) (*Builder, error) {
 	mgwOp := iaas.NewMobileGatewayOp(caller)
 	current, err := mgwOp.Read(ctx, zone, id)
 	if err != nil {

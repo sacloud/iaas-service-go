@@ -42,11 +42,9 @@ func TestBuilder_Build(t *testing.T) {
 	var testZone = testutil.TestZone()
 
 	testutil.RunCRUD(t, &testutil.CRUDTestCase{
-		SetupAPICallerFunc: func() iaas.APICaller {
-			return testutil.SingletonAPICaller()
-		},
-		Parallel:          true,
-		IgnoreStartupWait: true,
+		SetupAPICallerFunc: testutil.SingletonAPICaller,
+		Parallel:           true,
+		IgnoreStartupWait:  true,
 		Setup: func(ctx *testutil.CRUDTestContext, caller iaas.APICaller) error {
 			swOp := iaas.NewSwitchOp(caller)
 
@@ -119,11 +117,9 @@ func TestBuilder_BuildWithRouter(t *testing.T) {
 	var testZone = testutil.TestZone()
 
 	testutil.RunCRUD(t, &testutil.CRUDTestCase{
-		SetupAPICallerFunc: func() iaas.APICaller {
-			return testutil.SingletonAPICaller()
-		},
-		Parallel:          true,
-		IgnoreStartupWait: true,
+		SetupAPICallerFunc: testutil.SingletonAPICaller,
+		Parallel:           true,
+		IgnoreStartupWait:  true,
 		Setup: func(ctx *testutil.CRUDTestContext, caller iaas.APICaller) error {
 			routerBuilder := &builder.Builder{
 				Name:           testutil.ResourceName("vpc-router-builder"),

@@ -84,8 +84,8 @@ func TestServerService_convertUpdateRequest(t *testing.T) {
 		diskOp.Delete(ctx, zone, disk.ID)                     // nolint
 	}()
 
-	cdromId := types.ID(102)
-	privateHostId := types.ID(103)
+	cdromID := types.ID(102)
+	privateHostID := types.ID(103)
 	// test
 	cases := []struct {
 		in     *UpdateRequest
@@ -103,8 +103,8 @@ func TestServerService_convertUpdateRequest(t *testing.T) {
 				Commitment:      &types.Commitments.DedicatedCPU,
 				Generation:      &types.PlanGenerations.G200,
 				InterfaceDriver: &types.InterfaceDrivers.E1000,
-				CDROMID:         &cdromId,
-				PrivateHostID:   &privateHostId,
+				CDROMID:         &cdromID,
+				PrivateHostID:   &privateHostID,
 				NetworkInterfaces: &[]*NetworkInterface{
 					{Upstream: "shared"},
 					{Upstream: "105"},

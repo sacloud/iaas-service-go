@@ -34,11 +34,9 @@ func TestSIMBuilder_Build(t *testing.T) {
 	imeiUpd := "123456789012346"
 
 	testutil.RunCRUD(t, &testutil.CRUDTestCase{
-		SetupAPICallerFunc: func() iaas.APICaller {
-			return testutil.SingletonAPICaller()
-		},
-		Parallel:          true,
-		IgnoreStartupWait: true,
+		SetupAPICallerFunc: testutil.SingletonAPICaller,
+		Parallel:           true,
+		IgnoreStartupWait:  true,
 		Create: &testutil.CRUDTestFunc{
 			Func: func(ctx *testutil.CRUDTestContext, caller iaas.APICaller) (interface{}, error) {
 				builder := &Builder{

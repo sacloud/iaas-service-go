@@ -41,7 +41,7 @@ func (s *Service) UploadWithContext(ctx context.Context, req *UploadRequest) err
 	}
 
 	if resource.Scope != types.Scopes.User {
-		return fmt.Errorf("Archive[%s] is not allowed to download", req.ID)
+		return fmt.Errorf("archive[%s] is not allowed to download", req.ID)
 	}
 
 	ftpServer, err := client.OpenFTP(ctx, req.Zone, req.ID, &iaas.OpenFTPRequest{ChangePassword: true})
