@@ -101,7 +101,7 @@ func (d *FromUnixBuilder) Build(ctx context.Context, zone string, serverID types
 	}
 
 	if d.EditParameter != nil {
-		if d.EditParameter.IsSSHKeysEphemeral {
+		if d.EditParameter.IsSSHKeysEphemeral && d.generatedSSHKey != nil {
 			if err := d.Client.SSHKey.Delete(ctx, d.generatedSSHKey.ID); err != nil {
 				return nil, err
 			}
@@ -339,7 +339,7 @@ func (d *FromDiskOrArchiveBuilder) Build(ctx context.Context, zone string, serve
 	}
 
 	if d.EditParameter != nil {
-		if d.EditParameter.IsSSHKeysEphemeral {
+		if d.EditParameter.IsSSHKeysEphemeral && d.generatedSSHKey != nil {
 			if err := d.Client.SSHKey.Delete(ctx, d.generatedSSHKey.ID); err != nil {
 				return nil, err
 			}
