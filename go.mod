@@ -1,10 +1,10 @@
 module github.com/sacloud/iaas-service-go
 
-go 1.17
+go 1.18
 
 require (
 	github.com/sacloud/ftps v1.1.0
-	github.com/sacloud/iaas-api-go v1.1.2
+	github.com/sacloud/iaas-api-go v1.1.3-0.20220609084952-abc75ddaa6cf
 	github.com/sacloud/packages-go v0.0.2
 	github.com/stretchr/testify v1.7.1
 	golang.org/x/crypto v0.0.0-20220214200702-86341886e292
