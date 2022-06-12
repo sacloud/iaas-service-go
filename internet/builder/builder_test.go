@@ -27,11 +27,9 @@ func TestBuilder_Build(t *testing.T) {
 	var testZone = testutil.TestZone()
 
 	testutil.RunCRUD(t, &testutil.CRUDTestCase{
-		SetupAPICallerFunc: func() iaas.APICaller {
-			return testutil.SingletonAPICaller()
-		},
-		Parallel:          true,
-		IgnoreStartupWait: true,
+		SetupAPICallerFunc: testutil.SingletonAPICaller,
+		Parallel:           true,
+		IgnoreStartupWait:  true,
 		Create: &testutil.CRUDTestFunc{
 			Func: func(ctx *testutil.CRUDTestContext, caller iaas.APICaller) (interface{}, error) {
 				builder := &Builder{

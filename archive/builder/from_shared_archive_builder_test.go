@@ -31,11 +31,9 @@ func TestFromSharedArchiveBuilder_Build(t *testing.T) {
 	var shareInfo *iaas.ArchiveShareInfo
 
 	testutil.RunCRUD(t, &testutil.CRUDTestCase{
-		SetupAPICallerFunc: func() iaas.APICaller {
-			return testutil.SingletonAPICaller()
-		},
-		Parallel:          true,
-		IgnoreStartupWait: true,
+		SetupAPICallerFunc: testutil.SingletonAPICaller,
+		Parallel:           true,
+		IgnoreStartupWait:  true,
 		Setup: func(ctx *testutil.CRUDTestContext, caller iaas.APICaller) error {
 			archiveOp := iaas.NewArchiveOp(caller)
 			source, err := query.FindArchiveByOSType(ctx, archiveOp, zoneFrom, ostype.CentOS)

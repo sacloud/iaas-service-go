@@ -290,8 +290,7 @@ func (b *Builder) reconcileServers(ctx context.Context, id types.ID) error {
 	if currentCerts != nil {
 		// delete
 		for _, target := range b.deletedServers(currentCerts.CertificateAuthority) {
-			switch target.IssueState {
-			case "available":
+			if target.IssueState == "available" {
 				if err := b.Client.RevokeServer(ctx, id, target.ID); err != nil {
 					return err
 				}

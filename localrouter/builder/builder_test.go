@@ -28,11 +28,9 @@ func TestLocalRouterBuilder_Build(t *testing.T) {
 	var sw *iaas.Switch
 
 	testutil.RunCRUD(t, &testutil.CRUDTestCase{
-		SetupAPICallerFunc: func() iaas.APICaller {
-			return testutil.SingletonAPICaller()
-		},
-		Parallel:          true,
-		IgnoreStartupWait: true,
+		SetupAPICallerFunc: testutil.SingletonAPICaller,
+		Parallel:           true,
+		IgnoreStartupWait:  true,
 		Setup: func(ctx *testutil.CRUDTestContext, caller iaas.APICaller) error {
 			lrOp := iaas.NewLocalRouterOp(caller)
 			lr, err := lrOp.Create(ctx, &iaas.LocalRouterCreateRequest{
@@ -114,11 +112,9 @@ func TestLocalRouterBuilder_Build(t *testing.T) {
 
 func TestLocalRouterBuilder_minimum(t *testing.T) {
 	testutil.RunCRUD(t, &testutil.CRUDTestCase{
-		SetupAPICallerFunc: func() iaas.APICaller {
-			return testutil.SingletonAPICaller()
-		},
-		Parallel:          true,
-		IgnoreStartupWait: true,
+		SetupAPICallerFunc: testutil.SingletonAPICaller,
+		Parallel:           true,
+		IgnoreStartupWait:  true,
 		Create: &testutil.CRUDTestFunc{
 			Func: func(ctx *testutil.CRUDTestContext, caller iaas.APICaller) (interface{}, error) {
 				builder := &Builder{

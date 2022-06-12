@@ -380,11 +380,9 @@ func TestBuilder_Build_BlackBox(t *testing.T) {
 	var testZone = testutil.TestZone()
 
 	testutil.RunCRUD(t, &testutil.CRUDTestCase{
-		SetupAPICallerFunc: func() iaas.APICaller {
-			return testutil.SingletonAPICaller()
-		},
-		Parallel:          true,
-		IgnoreStartupWait: true,
+		SetupAPICallerFunc: testutil.SingletonAPICaller,
+		Parallel:           true,
+		IgnoreStartupWait:  true,
 
 		Setup: func(ctx *testutil.CRUDTestContext, caller iaas.APICaller) error {
 			switchOp := iaas.NewSwitchOp(caller)
@@ -518,16 +516,16 @@ func getBlackBoxTestBuilder(switchID types.ID) *Builder {
 					GenerateSSHKeyName:        "libsacloud-ssh-key-generated",
 					GenerateSSHKeyDescription: "libsacloud-ssh-key-generated-for-builder",
 					GenerateSSHKeyPassPhrase:  "libsacloud-test-passphrase",
-					//IPAddress      string
-					//NetworkMaskLen int
-					//DefaultRoute   string
-					//SSHKeys   []string
-					//SSHKeyIDs []types.ID
+					// IPAddress      string
+					// NetworkMaskLen int
+					// DefaultRoute   string
+					// SSHKeys   []string
+					// SSHKeyIDs []types.ID
 					IsNotesEphemeral: true,
 					NoteContents: []string{
 						`libsacloud-startup-script-for-builder`,
 					},
-					//Notes          []*iaas.DiskEditNote{},
+					// Notes          []*iaas.DiskEditNote{},
 				},
 				Client: disk.NewBuildersAPIClient(testutil.SingletonAPICaller()),
 			},
@@ -547,7 +545,7 @@ func connectToServerViaSSH(t testutil.TestT, user, ip string, privateKey []byte,
 		Auth: []ssh.AuthMethod{
 			ssh.PublicKeys(signer),
 		},
-		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+		HostKeyCallback: ssh.InsecureIgnoreHostKey(), // nolint:gosec
 		Timeout:         10 * time.Second,
 	}
 

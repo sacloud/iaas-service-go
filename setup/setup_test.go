@@ -32,10 +32,8 @@ func TestRetryableSetup(t *testing.T) {
 	testZone := testutil.TestZone()
 
 	testutil.RunCRUD(t, &testutil.CRUDTestCase{
-		Parallel: true,
-		SetupAPICallerFunc: func() iaas.APICaller {
-			return testutil.SingletonAPICaller()
-		},
+		Parallel:           true,
+		SetupAPICallerFunc: testutil.SingletonAPICaller,
 
 		Setup: func(ctx *testutil.CRUDTestContext, caller iaas.APICaller) error {
 			switchOp := iaas.NewSwitchOp(caller)

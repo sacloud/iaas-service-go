@@ -29,11 +29,9 @@ func TestStandardArchiveBuilder_Build(t *testing.T) {
 	var sourceArchive *iaas.Archive
 
 	testutil.RunCRUD(t, &testutil.CRUDTestCase{
-		SetupAPICallerFunc: func() iaas.APICaller {
-			return testutil.SingletonAPICaller()
-		},
-		Parallel:          true,
-		IgnoreStartupWait: true,
+		SetupAPICallerFunc: testutil.SingletonAPICaller,
+		Parallel:           true,
+		IgnoreStartupWait:  true,
 		Setup: func(ctx *testutil.CRUDTestContext, caller iaas.APICaller) error {
 			archiveOp := iaas.NewArchiveOp(caller)
 			source, err := query.FindArchiveByOSType(ctx, archiveOp, testZone, ostype.CentOS)

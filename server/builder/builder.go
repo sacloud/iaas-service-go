@@ -700,11 +700,10 @@ func (b *Builder) reconcileInterfaces(ctx context.Context, zone string, server *
 		var desired *nicState
 		if i == 0 {
 			desired = desiredState.nic
-		} else {
-			if len(desiredState.additionalNICs) > i-1 {
-				desired = desiredState.additionalNICs[i-1]
-			}
+		} else if len(desiredState.additionalNICs) > i-1 {
+			desired = desiredState.additionalNICs[i-1]
 		}
+
 		if desired == nil {
 			// disconnect and delete
 			if !nic.SwitchID.IsEmpty() {
@@ -801,7 +800,7 @@ func (b *Builder) isPlanChanged(server *iaas.Server) bool {
 		b.GPU != server.GPU ||
 		b.Commitment != server.ServerPlanCommitment ||
 		(b.Generation != types.PlanGenerations.Default && b.Generation != server.ServerPlanGeneration)
-	//b.Generation != server.ServerPlanGeneration
+	// b.Generation != server.ServerPlanGeneration
 }
 
 func (b *Builder) userData() []string {

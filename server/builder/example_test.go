@@ -56,7 +56,7 @@ func Example_builder() {
 		//		DisplayIPAddress: "192.168.0.1",
 		//		PacketFilterID:  types.ID(123456789012),
 		//	},
-		//},
+		// },
 
 		// IconID:          types.ID(123456789012),
 		// CDROMID:         types.ID(123456789012),
