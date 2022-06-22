@@ -59,7 +59,7 @@ type RouterSetting struct {
 	L2TPIPsecServer           *iaas.VPCRouterL2TPIPsecServer
 	WireGuard                 *iaas.VPCRouterWireGuard
 	RemoteAccessUsers         []*iaas.VPCRouterRemoteAccessUser
-	SiteToSiteIPsecVPN        []*iaas.VPCRouterSiteToSiteIPsecVPN
+	SiteToSiteIPsecVPN        *iaas.VPCRouterSiteToSiteIPsecVPN
 	StaticRoute               []*iaas.VPCRouterStaticRoute
 	SyslogHost                string
 }
