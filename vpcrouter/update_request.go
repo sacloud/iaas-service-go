@@ -57,19 +57,19 @@ type AdditionalPremiumNICSettingUpdate struct {
 }
 
 type RouterSettingUpdate struct {
-	InternetConnectionEnabled *bool                                `service:",omitempty"`
-	StaticNAT                 *[]*iaas.VPCRouterStaticNAT          `service:",omitempty,recursive"`
-	PortForwarding            *[]*iaas.VPCRouterPortForwarding     `service:",omitempty,recursive"`
-	Firewall                  *[]*iaas.VPCRouterFirewall           `service:",omitempty,recursive"`
-	DHCPServer                *[]*iaas.VPCRouterDHCPServer         `service:",omitempty,recursive"`
-	DHCPStaticMapping         *[]*iaas.VPCRouterDHCPStaticMapping  `service:",omitempty,recursive"`
-	PPTPServer                *iaas.VPCRouterPPTPServer            `service:",omitempty,recursive"`
-	L2TPIPsecServer           *iaas.VPCRouterL2TPIPsecServer       `service:",omitempty,recursive"`
-	WireGuard                 *iaas.VPCRouterWireGuard             `service:",omitempty,recursive"`
-	RemoteAccessUsers         *[]*iaas.VPCRouterRemoteAccessUser   `service:",omitempty,recursive"`
-	SiteToSiteIPsecVPN        *[]*iaas.VPCRouterSiteToSiteIPsecVPN `service:",omitempty,recursive"`
-	StaticRoute               *[]*iaas.VPCRouterStaticRoute        `service:",omitempty,recursive"`
-	SyslogHost                *string                              `service:",omitempty"`
+	InternetConnectionEnabled *bool                               `service:",omitempty"`
+	StaticNAT                 *[]*iaas.VPCRouterStaticNAT         `service:",omitempty,recursive"`
+	PortForwarding            *[]*iaas.VPCRouterPortForwarding    `service:",omitempty,recursive"`
+	Firewall                  *[]*iaas.VPCRouterFirewall          `service:",omitempty,recursive"`
+	DHCPServer                *[]*iaas.VPCRouterDHCPServer        `service:",omitempty,recursive"`
+	DHCPStaticMapping         *[]*iaas.VPCRouterDHCPStaticMapping `service:",omitempty,recursive"`
+	PPTPServer                *iaas.VPCRouterPPTPServer           `service:",omitempty,recursive"`
+	L2TPIPsecServer           *iaas.VPCRouterL2TPIPsecServer      `service:",omitempty,recursive"`
+	WireGuard                 *iaas.VPCRouterWireGuard            `service:",omitempty,recursive"`
+	RemoteAccessUsers         *[]*iaas.VPCRouterRemoteAccessUser  `service:",omitempty,recursive"`
+	SiteToSiteIPsecVPN        *iaas.VPCRouterSiteToSiteIPsecVPN   `service:",omitempty,recursive"`
+	StaticRoute               *[]*iaas.VPCRouterStaticRoute       `service:",omitempty,recursive"`
+	SyslogHost                *string                             `service:",omitempty"`
 }
 
 func (req *UpdateRequest) Validate() error {

@@ -23,6 +23,7 @@ import (
 	"github.com/sacloud/iaas-api-go/helper/cleanup"
 	"github.com/sacloud/iaas-api-go/testutil"
 	"github.com/sacloud/iaas-api-go/types"
+	internetService "github.com/sacloud/iaas-service-go/internet"
 	"github.com/sacloud/iaas-service-go/setup"
 	vpcRouterBuilder "github.com/sacloud/iaas-service-go/vpcrouter/builder"
 	"github.com/sacloud/packages-go/pointer"
@@ -36,9 +37,10 @@ func TestVPCRouterService_convertUpdateRequest(t *testing.T) {
 	name := testutil.ResourceName("vpc-router-service-update")
 
 	// setup
-	internetOp := iaas.NewInternetOp(caller)
-	router, err := internetOp.Create(ctx, zone, &iaas.InternetCreateRequest{
+	internetSvc := internetService.New(caller)
+	router, err := internetSvc.CreateWithContext(ctx, &internetService.CreateRequest{
 		Name:           name,
+		Zone:           zone,
 		NetworkMaskLen: 28,
 		BandWidthMbps:  100,
 	})
@@ -112,9 +114,9 @@ func TestVPCRouterService_convertUpdateRequest(t *testing.T) {
 	}
 
 	defer func() {
-		iaas.NewVPCRouterOp(caller).Delete(ctx, zone, vpcRouter.ID) // nolint
-		swOp.Delete(ctx, zone, additionalSwitch.ID)                 // nolint
-		cleanup.DeleteInternet(ctx, internetOp, zone, router.ID)    // nolint
+		iaas.NewVPCRouterOp(caller).Delete(ctx, zone, vpcRouter.ID)              // nolint
+		swOp.Delete(ctx, zone, additionalSwitch.ID)                              // nolint
+		cleanup.DeleteInternet(ctx, iaas.NewInternetOp(caller), zone, router.ID) // nolint
 	}()
 
 	// test
