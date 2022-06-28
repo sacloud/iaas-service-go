@@ -6,7 +6,7 @@ require (
 	github.com/sacloud/ftps v1.1.0
 	github.com/sacloud/iaas-api-go v1.1.3-0.20220623073822-98f8c80efc49
 	github.com/sacloud/packages-go v0.0.3
-	github.com/stretchr/testify v1.7.1
+	github.com/stretchr/testify v1.7.5
 	golang.org/x/crypto v0.0.0-20220214200702-86341886e292
 )
 
@@ -31,5 +31,5 @@ require (
 	go.uber.org/ratelimit v0.2.0 // indirect
 	golang.org/x/sys v0.0.0-20210806184541-e5e7981a1069 // indirect
 	golang.org/x/text v0.3.7 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
