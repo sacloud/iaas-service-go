@@ -64,6 +64,7 @@ type RouterSetting struct {
 	SiteToSiteIPsecVPN        *iaas.VPCRouterSiteToSiteIPsecVPN
 	StaticRoute               []*iaas.VPCRouterStaticRoute
 	SyslogHost                string
+	ScheduledMaintenance      *iaas.VPCRouterScheduledMaintenance
 }
 
 func (b *Builder) init() {
@@ -248,6 +249,7 @@ func (b *Builder) create(ctx context.Context, zone string) (*iaas.VPCRouter, err
 					SiteToSiteIPsecVPN:        b.RouterSetting.SiteToSiteIPsecVPN,
 					StaticRoute:               b.RouterSetting.StaticRoute,
 					SyslogHost:                b.RouterSetting.SyslogHost,
+					ScheduledMaintenance:      b.RouterSetting.ScheduledMaintenance,
 				},
 				SettingsHash: vpcRouter.SettingsHash,
 			})
@@ -380,6 +382,7 @@ func (b *Builder) update(ctx context.Context, zone string, id types.ID) (*iaas.V
 			SiteToSiteIPsecVPN:        b.RouterSetting.SiteToSiteIPsecVPN,
 			StaticRoute:               b.RouterSetting.StaticRoute,
 			SyslogHost:                b.RouterSetting.SyslogHost,
+			ScheduledMaintenance:      b.RouterSetting.ScheduledMaintenance,
 		},
 		SettingsHash: vpcRouter.SettingsHash,
 	})

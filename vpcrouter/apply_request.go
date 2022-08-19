@@ -62,6 +62,7 @@ type RouterSetting struct {
 	SiteToSiteIPsecVPN        *iaas.VPCRouterSiteToSiteIPsecVPN
 	StaticRoute               []*iaas.VPCRouterStaticRoute
 	SyslogHost                string
+	ScheduledMaintenance      *iaas.VPCRouterScheduledMaintenance
 }
 
 func (req *ApplyRequest) Builder(caller iaas.APICaller) *builder.Builder {
@@ -107,5 +108,6 @@ func (req *ApplyRequest) routerSetting() *builder.RouterSetting {
 		SiteToSiteIPsecVPN:        req.RouterSetting.SiteToSiteIPsecVPN,
 		StaticRoute:               req.RouterSetting.StaticRoute,
 		SyslogHost:                req.RouterSetting.SyslogHost,
+		ScheduledMaintenance:      req.RouterSetting.ScheduledMaintenance,
 	}
 }
