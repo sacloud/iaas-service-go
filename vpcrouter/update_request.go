@@ -70,6 +70,7 @@ type RouterSettingUpdate struct {
 	SiteToSiteIPsecVPN        *iaas.VPCRouterSiteToSiteIPsecVPN   `service:",omitempty,recursive"`
 	StaticRoute               *[]*iaas.VPCRouterStaticRoute       `service:",omitempty,recursive"`
 	SyslogHost                *string                             `service:",omitempty"`
+	ScheduledMaintenance      *iaas.VPCRouterScheduledMaintenance `service:",omitempty,recursive"`
 }
 
 func (req *UpdateRequest) Validate() error {
