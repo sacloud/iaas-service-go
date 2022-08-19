@@ -67,7 +67,7 @@ func TestDatabaseService_convertUpdateRequest(t *testing.T) {
 		BackupSetting: &iaas.DatabaseSettingBackup{
 			Rotate:    0,
 			Time:      "10:00",
-			DayOfWeek: []types.EBackupSpanWeekday{types.BackupSpanWeekdays.Monday},
+			DayOfWeek: []types.EDayOfTheWeek{types.DaysOfTheWeek.Monday},
 		},
 		ReplicationSetting: &iaas.DatabaseReplicationSetting{
 			Model: types.DatabaseReplicationModels.MasterSlave,
@@ -137,7 +137,7 @@ func TestDatabaseService_convertUpdateRequest(t *testing.T) {
 				ReplicaUserPassword:   "password2",
 				EnableWebUI:           true,
 				EnableBackup:          true,
-				BackupWeekdays:        []types.EBackupSpanWeekday{types.BackupSpanWeekdays.Monday},
+				BackupWeekdays:        []types.EDayOfTheWeek{types.DaysOfTheWeek.Monday},
 				BackupStartTimeHour:   10,
 				BackupStartTimeMinute: 0,
 				Parameters: map[string]interface{}{
@@ -177,7 +177,7 @@ func TestDatabaseService_convertUpdateRequest(t *testing.T) {
 				ReplicaUserPassword:   "password2",
 				EnableWebUI:           true,
 				EnableBackup:          false,
-				BackupWeekdays:        []types.EBackupSpanWeekday{types.BackupSpanWeekdays.Monday},
+				BackupWeekdays:        []types.EDayOfTheWeek{types.DaysOfTheWeek.Monday},
 				BackupStartTimeHour:   10,
 				BackupStartTimeMinute: 0,
 				Parameters: map[string]interface{}{
