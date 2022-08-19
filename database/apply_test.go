@@ -149,7 +149,7 @@ func TestCreateRequest_Validate(t *testing.T) {
 				ReplicaUserPassword:   "pass2",
 				EnableWebUI:           true,
 				EnableBackup:          true,
-				BackupWeekdays:        []types.EBackupSpanWeekday{types.BackupSpanWeekdays.Monday},
+				BackupWeekdays:        []types.EDayOfTheWeek{types.DaysOfTheWeek.Monday},
 				BackupStartTimeHour:   10,
 				BackupStartTimeMinute: 15,
 			},

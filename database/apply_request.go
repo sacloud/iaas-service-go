@@ -45,9 +45,9 @@ type ApplyRequest struct {
 	ReplicaUserPassword   string `validate:"required_with=EnableReplication"`
 	EnableWebUI           bool
 	EnableBackup          bool
-	BackupWeekdays        []types.EBackupSpanWeekday `validate:"required_with=EnableBackup,max=7"`
-	BackupStartTimeHour   int                        `validate:"omitempty,min=0,max=23"`
-	BackupStartTimeMinute int                        `validate:"omitempty,oneof=0 15 30 45"`
+	BackupWeekdays        []types.EDayOfTheWeek `validate:"required_with=EnableBackup,max=7"`
+	BackupStartTimeHour   int                   `validate:"omitempty,min=0,max=23"`
+	BackupStartTimeMinute int                   `validate:"omitempty,oneof=0 15 30 45"`
 	Parameters            map[string]interface{}
 
 	NoWait bool

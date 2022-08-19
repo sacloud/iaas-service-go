@@ -82,7 +82,7 @@ func TestDatabaseBuilder_Build(t *testing.T) {
 					BackupSetting: &iaas.DatabaseSettingBackup{
 						Rotate:    7,
 						Time:      "00:00",
-						DayOfWeek: []types.EBackupSpanWeekday{types.BackupSpanWeekdays.Monday},
+						DayOfWeek: []types.EDayOfTheWeek{types.DaysOfTheWeek.Monday},
 					},
 					ReplicationSetting: &iaas.DatabaseReplicationSetting{},
 					Parameters: map[string]interface{}{

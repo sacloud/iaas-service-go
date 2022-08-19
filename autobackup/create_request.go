@@ -29,7 +29,7 @@ type CreateRequest struct {
 	Tags                    types.Tags
 	IconID                  types.ID
 	DiskID                  types.ID `validate:"required"`
-	BackupSpanWeekdays      []types.EBackupSpanWeekday
+	BackupSpanWeekdays      []types.EDayOfTheWeek
 	MaximumNumberOfArchives int
 }
 

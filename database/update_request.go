@@ -35,15 +35,15 @@ type UpdateRequest struct {
 	Tags        *types.Tags `service:",omitempty"`
 	IconID      *types.ID   `service:",omitempty"`
 
-	SourceNetwork         *[]string                   `service:",omitempty" validate:"omitempty,dive,cidrv4"`
-	EnableReplication     *bool                       `service:",omitempty"`
-	ReplicaUserPassword   *string                     `service:",omitempty" validate:"omitempty,required_with=EnableReplication"`
-	EnableWebUI           *bool                       `service:",omitempty"`
-	EnableBackup          *bool                       `service:",omitempty"`
-	BackupWeekdays        *[]types.EBackupSpanWeekday `service:",omitempty" validate:"omitempty,required_with=EnableBackup,max=7"`
-	BackupStartTimeHour   *int                        `service:",omitempty" validate:"omitempty,min=0,max=23"`
-	BackupStartTimeMinute *int                        `service:",omitempty" validate:"omitempty,oneof=0 15 30 45"`
-	Parameters            *map[string]interface{}     `service:",omitempty"`
+	SourceNetwork         *[]string               `service:",omitempty" validate:"omitempty,dive,cidrv4"`
+	EnableReplication     *bool                   `service:",omitempty"`
+	ReplicaUserPassword   *string                 `service:",omitempty" validate:"omitempty,required_with=EnableReplication"`
+	EnableWebUI           *bool                   `service:",omitempty"`
+	EnableBackup          *bool                   `service:",omitempty"`
+	BackupWeekdays        *[]types.EDayOfTheWeek  `service:",omitempty" validate:"omitempty,required_with=EnableBackup,max=7"`
+	BackupStartTimeHour   *int                    `service:",omitempty" validate:"omitempty,min=0,max=23"`
+	BackupStartTimeMinute *int                    `service:",omitempty" validate:"omitempty,oneof=0 15 30 45"`
+	Parameters            *map[string]interface{} `service:",omitempty"`
 
 	SettingsHash string
 	NoWait       bool
@@ -65,7 +65,7 @@ func (req *UpdateRequest) ApplyRequest(ctx context.Context, caller iaas.APICalle
 	}
 
 	var bkHour, bkMinute int
-	var bkWeekdays []types.EBackupSpanWeekday
+	var bkWeekdays []types.EDayOfTheWeek
 	if current.BackupSetting != nil {
 		bkWeekdays = current.BackupSetting.DayOfWeek
 		if current.BackupSetting.Time != "" {
