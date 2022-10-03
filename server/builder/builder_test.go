@@ -545,7 +545,7 @@ func connectToServerViaSSH(t testutil.TestT, user, ip string, privateKey []byte,
 		Auth: []ssh.AuthMethod{
 			ssh.PublicKeys(signer),
 		},
-		HostKeyCallback: ssh.InsecureIgnoreHostKey(), // nolint:gosec
+		HostKeyCallback: ssh.InsecureIgnoreHostKey(), //nolint:gosec
 		Timeout:         10 * time.Second,
 	}
 

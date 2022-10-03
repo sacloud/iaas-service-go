@@ -46,7 +46,7 @@ func TestEnhancedDBService_convertUpdateRequest(t *testing.T) {
 	}
 
 	defer func() {
-		iaas.NewEnhancedDBOp(caller).Delete(context.Background(), current.ID) // nolint
+		iaas.NewEnhancedDBOp(caller).Delete(context.Background(), current.ID) //nolint
 	}()
 
 	// test

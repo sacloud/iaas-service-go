@@ -52,7 +52,7 @@ func TestContainerRegistryService_convertUpdateRequest(t *testing.T) {
 	}
 
 	defer func() {
-		iaas.NewContainerRegistryOp(caller).Delete(context.Background(), current.ID) // nolint
+		iaas.NewContainerRegistryOp(caller).Delete(context.Background(), current.ID) //nolint
 	}()
 
 	// test
