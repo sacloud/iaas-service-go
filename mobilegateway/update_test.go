@@ -116,8 +116,8 @@ func TestMobileGatewayService_convertUpdateRequest(t *testing.T) {
 	}
 
 	defer func() {
-		cleanup.DeleteMobileGateway(ctx, iaas.NewMobileGatewayOp(caller), iaas.NewSIMOp(caller), zone, mgw.ID) // nolint
-		swOp.Delete(ctx, zone, sw.ID)                                                                          // nolint
+		cleanup.DeleteMobileGateway(ctx, iaas.NewMobileGatewayOp(caller), iaas.NewSIMOp(caller), zone, mgw.ID) //nolint
+		swOp.Delete(ctx, zone, sw.ID)                                                                          //nolint
 	}()
 
 	// test

@@ -88,10 +88,10 @@ func TestLoadBalancerService_convertUpdateRequest(t *testing.T) {
 
 	defer func() {
 		lbOp := iaas.NewLoadBalancerOp(caller)
-		lbOp.Shutdown(ctx, zone, current.ID, &iaas.ShutdownOption{Force: true}) // nolint
-		wait.UntilLoadBalancerIsDown(ctx, lbOp, zone, current.ID)               // nolint
-		lbOp.Delete(ctx, zone, current.ID)                                      // nolint
-		swOp.Delete(ctx, zone, sw.ID)                                           // nolint
+		lbOp.Shutdown(ctx, zone, current.ID, &iaas.ShutdownOption{Force: true}) //nolint
+		wait.UntilLoadBalancerIsDown(ctx, lbOp, zone, current.ID)               //nolint
+		lbOp.Delete(ctx, zone, current.ID)                                      //nolint
+		swOp.Delete(ctx, zone, sw.ID)                                           //nolint
 	}()
 
 	// test

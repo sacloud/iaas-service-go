@@ -80,8 +80,8 @@ func TestServerService_convertUpdateRequest(t *testing.T) {
 	}
 
 	defer func() {
-		iaas.NewServerOp(caller).Delete(ctx, zone, server.ID) // nolint
-		diskOp.Delete(ctx, zone, disk.ID)                     // nolint
+		iaas.NewServerOp(caller).Delete(ctx, zone, server.ID) //nolint
+		diskOp.Delete(ctx, zone, disk.ID)                     //nolint
 	}()
 
 	cdromID := types.ID(102)

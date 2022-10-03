@@ -103,7 +103,7 @@ func TestLocalRouterBuilder_Build(t *testing.T) {
 				if err := lrOp.Delete(ctx, peerLocalRouter.ID); err != nil {
 					return err
 				}
-				iaas.NewSwitchOp(caller).Delete(ctx, testZone, sw.ID) // nolint
+				iaas.NewSwitchOp(caller).Delete(ctx, testZone, sw.ID) //nolint
 				return nil
 			},
 		},

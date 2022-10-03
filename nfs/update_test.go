@@ -57,10 +57,10 @@ func TestNFSService_convertUpdateRequest(t *testing.T) {
 
 	defer func() {
 		nfsOp := iaas.NewNFSOp(caller)
-		nfsOp.Shutdown(ctx, zone, current.ID, &iaas.ShutdownOption{Force: true}) // nolint
-		wait.UntilNFSIsDown(ctx, nfsOp, zone, current.ID)                        // nolint
-		nfsOp.Delete(ctx, zone, current.ID)                                      // nolint
-		swOp.Delete(ctx, zone, sw.ID)                                            // nolint
+		nfsOp.Shutdown(ctx, zone, current.ID, &iaas.ShutdownOption{Force: true}) //nolint
+		wait.UntilNFSIsDown(ctx, nfsOp, zone, current.ID)                        //nolint
+		nfsOp.Delete(ctx, zone, current.ID)                                      //nolint
+		swOp.Delete(ctx, zone, sw.ID)                                            //nolint
 	}()
 
 	// test

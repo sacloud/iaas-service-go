@@ -114,9 +114,9 @@ func TestVPCRouterService_convertUpdateRequest(t *testing.T) {
 	}
 
 	defer func() {
-		iaas.NewVPCRouterOp(caller).Delete(ctx, zone, vpcRouter.ID)              // nolint
-		swOp.Delete(ctx, zone, additionalSwitch.ID)                              // nolint
-		cleanup.DeleteInternet(ctx, iaas.NewInternetOp(caller), zone, router.ID) // nolint
+		iaas.NewVPCRouterOp(caller).Delete(ctx, zone, vpcRouter.ID)              //nolint
+		swOp.Delete(ctx, zone, additionalSwitch.ID)                              //nolint
+		cleanup.DeleteInternet(ctx, iaas.NewInternetOp(caller), zone, router.ID) //nolint
 	}()
 
 	// test

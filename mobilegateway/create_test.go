@@ -37,7 +37,7 @@ func TestMobileGatewayService_convertCreateRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer func() {
-		swOp.Delete(ctx, zone, sw.ID) // nolint
+		swOp.Delete(ctx, zone, sw.ID) //nolint
 	}()
 
 	// test

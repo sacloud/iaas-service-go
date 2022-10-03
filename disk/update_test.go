@@ -63,7 +63,7 @@ func TestDiskService_convertUpdateRequest(t *testing.T) {
 	disk = v
 
 	defer func() {
-		diskOp.Delete(context.Background(), zone, disk.ID) // nolint
+		diskOp.Delete(context.Background(), zone, disk.ID) //nolint
 	}()
 
 	var cases = []struct {

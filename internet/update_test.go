@@ -50,7 +50,7 @@ func TestInternetService_convertUpdateRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer func() {
-		cleanup.DeleteInternet(ctx, iaas.NewInternetOp(caller), zone, internet.ID) // nolint
+		cleanup.DeleteInternet(ctx, iaas.NewInternetOp(caller), zone, internet.ID) //nolint
 	}()
 
 	// test

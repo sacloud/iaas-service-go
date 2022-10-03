@@ -1,6 +1,6 @@
 module github.com/sacloud/iaas-service-go
 
-go 1.18
+go 1.19
 
 require (
 	github.com/sacloud/ftps v1.1.0

@@ -103,7 +103,7 @@ func TestDatabaseService_convertUpdateRequest(t *testing.T) {
 		if err := dbOp.Delete(ctx, zone, db.ID); err != nil {
 			return
 		}
-		iaas.NewSwitchOp(caller).Delete(ctx, zone, sw.ID) // nolint
+		iaas.NewSwitchOp(caller).Delete(ctx, zone, sw.ID) //nolint
 	}()
 
 	cases := []struct {

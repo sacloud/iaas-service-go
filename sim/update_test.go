@@ -53,7 +53,7 @@ func TestSIMService_convertUpdateRequest(t *testing.T) {
 	}
 
 	defer func() {
-		cleanup.DeleteSIM(ctx, simOp, sim.ID) // nolint
+		cleanup.DeleteSIM(ctx, simOp, sim.ID) //nolint
 	}()
 
 	// test

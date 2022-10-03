@@ -43,7 +43,7 @@ func TestUpdateRequest(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	testutil.AssertEmpty(t, result.Name, "Name")                       // nolint
-	testutil.AssertEqual(t, "fuga", result.Description, "Description") // nolint
-	testutil.AssertEmpty(t, result.Tags, "Tags")                       // nolint
+	testutil.AssertEmpty(t, result.Name, "Name")                       //nolint
+	testutil.AssertEqual(t, "fuga", result.Description, "Description") //nolint
+	testutil.AssertEmpty(t, result.Tags, "Tags")                       //nolint
 }
