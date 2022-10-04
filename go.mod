@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/sacloud/ftps v1.1.0
-	github.com/sacloud/iaas-api-go v1.3.2
+	github.com/sacloud/iaas-api-go v1.4.1
 	github.com/sacloud/packages-go v0.0.6
 	github.com/stretchr/testify v1.8.0
 	golang.org/x/crypto v0.0.0-20220214200702-86341886e292
@@ -26,8 +26,8 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/sacloud/api-client-go v0.2.1 // indirect
-	github.com/sacloud/go-http v0.1.2 // indirect
+	github.com/sacloud/api-client-go v0.2.2 // indirect
+	github.com/sacloud/go-http v0.1.3 // indirect
 	go.uber.org/ratelimit v0.2.0 // indirect
 	golang.org/x/sys v0.0.0-20220412211240-33da011f77ad // indirect
 	golang.org/x/text v0.3.7 // indirect
