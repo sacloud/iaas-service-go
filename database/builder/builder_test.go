@@ -67,11 +67,9 @@ func TestDatabaseBuilder_Build(t *testing.T) {
 					NetworkMaskLen: 24,
 					DefaultRoute:   "192.168.0.1",
 					Conf: &iaas.DatabaseRemarkDBConfCommon{
-						DatabaseName:     types.RDBMSVersions[types.RDBMSTypesPostgreSQL].Name,
-						DatabaseVersion:  types.RDBMSVersions[types.RDBMSTypesPostgreSQL].Version,
-						DatabaseRevision: types.RDBMSVersions[types.RDBMSTypesPostgreSQL].Revision,
-						DefaultUser:      "builder",
-						UserPassword:     "builder-password-dummy",
+						DatabaseName: types.RDBMSTypesPostgreSQL.String(),
+						DefaultUser:  "builder",
+						UserPassword: "builder-password-dummy",
 					},
 					CommonSetting: &iaas.DatabaseSettingCommon{
 						DefaultUser:     "builder",
