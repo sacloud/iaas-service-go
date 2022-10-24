@@ -39,8 +39,9 @@ type ApplyRequest struct {
 	Port                  int      `validate:"omitempty,min=1,max=65535"`
 	SourceNetwork         []string `validate:"dive,cidrv4"`
 	DatabaseType          string   `validate:"required,oneof=mariadb postgres"`
-	Username              string   `validate:"required"`
-	Password              string   `validate:"required"`
+	DatabaseVersion       string
+	Username              string `validate:"required"`
+	Password              string `validate:"required"`
 	EnableReplication     bool
 	ReplicaUserPassword   string `validate:"required_with=EnableReplication"`
 	EnableWebUI           bool
@@ -74,9 +75,8 @@ func (req *ApplyRequest) Builder(caller iaas.APICaller) (*builder2.Builder, erro
 		NetworkMaskLen: req.NetworkMaskLen,
 		DefaultRoute:   req.DefaultRoute,
 		Conf: &iaas.DatabaseRemarkDBConfCommon{
-			DatabaseName:     types.RDBMSVersions[types.RDBMSTypeFromString(req.DatabaseType)].Name,
-			DatabaseVersion:  types.RDBMSVersions[types.RDBMSTypeFromString(req.DatabaseType)].Version,
-			DatabaseRevision: types.RDBMSVersions[types.RDBMSTypeFromString(req.DatabaseType)].Revision,
+			DatabaseName:    types.RDBMSTypeFromString(req.DatabaseType).String(),
+			DatabaseVersion: req.DatabaseVersion,
 		},
 		CommonSetting: &iaas.DatabaseSettingCommon{
 			WebUI:           types.ToWebUI(req.EnableWebUI),

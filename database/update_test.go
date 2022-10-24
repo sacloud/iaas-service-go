@@ -50,9 +50,7 @@ func TestDatabaseService_convertUpdateRequest(t *testing.T) {
 		NetworkMaskLen: 24,
 		DefaultRoute:   "192.168.0.1",
 		Conf: &iaas.DatabaseRemarkDBConfCommon{
-			DatabaseName:     types.RDBMSVersions[types.RDBMSTypesPostgreSQL].Name,
-			DatabaseVersion:  types.RDBMSVersions[types.RDBMSTypesPostgreSQL].Version,
-			DatabaseRevision: types.RDBMSVersions[types.RDBMSTypesPostgreSQL].Revision,
+			DatabaseName: types.RDBMSTypesPostgreSQL.String(),
 		},
 		SourceID: 0,
 		CommonSetting: &iaas.DatabaseSettingCommon{
@@ -192,6 +190,9 @@ func TestDatabaseService_convertUpdateRequest(t *testing.T) {
 	for _, tc := range cases {
 		got, err := tc.in.ApplyRequest(ctx, caller)
 		require.NoError(t, err)
+
+		// データベースバージョンは比較対象としない
+		got.DatabaseVersion = ""
 		require.EqualValues(t, tc.expect, got)
 	}
 }

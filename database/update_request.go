@@ -101,6 +101,7 @@ func (req *UpdateRequest) ApplyRequest(ctx context.Context, caller iaas.APICalle
 		Port:                  current.CommonSetting.ServicePort,
 		SourceNetwork:         current.CommonSetting.SourceNetwork,
 		DatabaseType:          current.Conf.DatabaseName,
+		DatabaseVersion:       current.Conf.DatabaseVersion,
 		Username:              current.CommonSetting.DefaultUser,
 		Password:              current.CommonSetting.UserPassword,
 		EnableReplication:     current.ReplicationSetting != nil,
