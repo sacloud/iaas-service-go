@@ -6,7 +6,7 @@ require (
 	github.com/sacloud/ftps v1.1.0
 	github.com/sacloud/iaas-api-go v1.6.0
 	github.com/sacloud/packages-go v0.0.6
-	github.com/stretchr/testify v1.8.0
+	github.com/stretchr/testify v1.8.1
 	golang.org/x/crypto v0.0.0-20220214200702-86341886e292
 )
 
