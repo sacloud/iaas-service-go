@@ -29,9 +29,11 @@ type UpdateRequest struct {
 	Tags        *types.Tags `service:",omitempty"`
 	IconID      *types.ID   `service:",omitempty"`
 
-	Zones               *[]string                 `service:",omitempty" validate:"omitempty,required"`
-	Config              *string                   `service:",omitempty" validate:"omitempty,required"`
-	CPUThresholdScaling UpdateCPUThresholdScaling `service:"-" validate:"dive"`
+	Zones                  *[]string                     `service:",omitempty" validate:"omitempty,required"`
+	Config                 *string                       `service:",omitempty" validate:"omitempty,required"`
+	TriggerType            *string                       `service:",omitempty" validate:"omitempty,required,oneof=cpu router"`
+	CPUThresholdScaling    *UpdateCPUThresholdScaling    `service:"-" validate:"omitempty,dive"`
+	RouterThresholdScaling *UpdateRouterThresholdScaling `service:"-" validate:"omitempty,dive"`
 
 	SettingsHash string
 }
@@ -40,6 +42,12 @@ type UpdateCPUThresholdScaling struct {
 	ServerPrefix *string `service:",omitempty" validate:"omitempty,required"`
 	Up           *int    `service:",omitempty" validate:"omitempty,required"`
 	Down         *int    `service:",omitempty" validate:"omitempty,required"`
+}
+
+type UpdateRouterThresholdScaling struct {
+	RouterPrefix *string `service:",omitempty" validate:"omitempty,required"`
+	Direction    *string `service:",omitempty" validate:"omitempty,required,oneof=in out"`
+	Mbps         *int    `service:",omitempty" validate:"omitempty,required"`
 }
 
 func (req *UpdateRequest) Validate() error {
@@ -54,14 +62,34 @@ func (req *UpdateRequest) ToRequestParameter(current *iaas.AutoScale) (*iaas.Aut
 	if err := serviceutil.RequestConvertTo(req, r); err != nil {
 		return nil, err
 	}
-	if req.CPUThresholdScaling.ServerPrefix != nil {
-		r.CPUThresholdScaling.ServerPrefix = *req.CPUThresholdScaling.ServerPrefix
+	if req.CPUThresholdScaling != nil {
+		if r.CPUThresholdScaling == nil {
+			r.CPUThresholdScaling = &iaas.AutoScaleCPUThresholdScaling{}
+		}
+		if req.CPUThresholdScaling.ServerPrefix != nil {
+			r.CPUThresholdScaling.ServerPrefix = *req.CPUThresholdScaling.ServerPrefix
+		}
+		if req.CPUThresholdScaling.Up != nil {
+			r.CPUThresholdScaling.Up = *req.CPUThresholdScaling.Up
+		}
+		if req.CPUThresholdScaling.Down != nil {
+			r.CPUThresholdScaling.Down = *req.CPUThresholdScaling.Down
+		}
 	}
-	if req.CPUThresholdScaling.Up != nil {
-		r.CPUThresholdScaling.Up = *req.CPUThresholdScaling.Up
-	}
-	if req.CPUThresholdScaling.Down != nil {
-		r.CPUThresholdScaling.Down = *req.CPUThresholdScaling.Down
+	if req.RouterThresholdScaling != nil {
+		if r.RouterThresholdScaling == nil {
+			r.RouterThresholdScaling = &iaas.AutoScaleRouterThresholdScaling{}
+		}
+
+		if req.RouterThresholdScaling.RouterPrefix != nil {
+			r.RouterThresholdScaling.RouterPrefix = *req.RouterThresholdScaling.RouterPrefix
+		}
+		if req.RouterThresholdScaling.Direction != nil {
+			r.RouterThresholdScaling.Direction = *req.RouterThresholdScaling.Direction
+		}
+		if req.RouterThresholdScaling.Mbps != nil {
+			r.RouterThresholdScaling.Mbps = *req.RouterThresholdScaling.Mbps
+		}
 	}
 
 	return r, nil
