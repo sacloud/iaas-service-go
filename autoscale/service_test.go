@@ -62,7 +62,7 @@ func TestAutoScaleService_CRUD(t *testing.T) {
 					Tags:        types.Tags{"tag1", "tag2"},
 					Zones:       []string{testutil.TestZone()},
 					Config:      fmt.Sprintf(autoScaleConfigTemplate, testServerName, testutil.TestZone()),
-					CPUThresholdScaling: CreateCPUThresholdScaling{
+					CPUThresholdScaling: &CreateCPUThresholdScaling{
 						ServerPrefix: testServerName,
 						Up:           80,
 						Down:         50,
@@ -86,7 +86,7 @@ func TestAutoScaleService_CRUD(t *testing.T) {
 						Tags:        &types.Tags{"tag1-upd", "tag2-upd"},
 						Zones:       &[]string{testutil.TestZone()},
 						Config:      pointer.NewString(fmt.Sprintf(autoScaleConfigTemplateUpd, testServerName, testutil.TestZone())),
-						CPUThresholdScaling: UpdateCPUThresholdScaling{
+						CPUThresholdScaling: &UpdateCPUThresholdScaling{
 							Up:   pointer.NewInt(80),
 							Down: pointer.NewInt(50),
 						},

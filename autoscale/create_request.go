@@ -26,9 +26,11 @@ type CreateRequest struct {
 	Tags        types.Tags
 	IconID      types.ID
 
-	Zones               []string                  `validate:"required"`
-	Config              string                    `validate:"required"`
-	CPUThresholdScaling CreateCPUThresholdScaling `validate:"dive"`
+	Zones                  []string                      `validate:"required"`
+	Config                 string                        `validate:"required"`
+	TriggerType            string                        `validate:"omitempty,oneof=cpu router"`
+	CPUThresholdScaling    *CreateCPUThresholdScaling    `validate:"omitempty,dive"`
+	RouterThresholdScaling *CreateRouterThresholdScaling `validate:"omitempty,dive"`
 
 	APIKeyID string `validate:"required"`
 }
@@ -39,23 +41,42 @@ type CreateCPUThresholdScaling struct {
 	Down         int    `validate:"required"`
 }
 
+type CreateRouterThresholdScaling struct {
+	RouterPrefix string `validate:"required"`
+	Direction    string `validate:"required,oneof=in out"`
+	Mbps         int    `validate:"required"`
+}
+
 func (req *CreateRequest) Validate() error {
 	return validate.New().Struct(req)
 }
 
 func (req *CreateRequest) ToRequestParameter() (*iaas.AutoScaleCreateRequest, error) {
-	return &iaas.AutoScaleCreateRequest{
+	createReq := &iaas.AutoScaleCreateRequest{
 		Name:        req.Name,
 		Description: req.Description,
 		Tags:        req.Tags,
 		IconID:      req.IconID,
 		Zones:       req.Zones,
 		Config:      req.Config,
-		CPUThresholdScaling: &iaas.AutoScaleCPUThresholdScaling{
+		TriggerType: req.TriggerType,
+
+		APIKeyID: req.APIKeyID,
+	}
+	if req.CPUThresholdScaling != nil {
+		createReq.CPUThresholdScaling = &iaas.AutoScaleCPUThresholdScaling{
 			ServerPrefix: req.CPUThresholdScaling.ServerPrefix,
 			Up:           req.CPUThresholdScaling.Up,
 			Down:         req.CPUThresholdScaling.Down,
-		},
-		APIKeyID: req.APIKeyID,
-	}, nil
+		}
+	}
+	if req.RouterThresholdScaling != nil {
+		createReq.RouterThresholdScaling = &iaas.AutoScaleRouterThresholdScaling{
+			RouterPrefix: req.RouterThresholdScaling.RouterPrefix,
+			Direction:    req.RouterThresholdScaling.Direction,
+			Mbps:         req.RouterThresholdScaling.Mbps,
+		}
+	}
+
+	return createReq, nil
 }

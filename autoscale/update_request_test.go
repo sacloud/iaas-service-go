@@ -32,7 +32,7 @@ func TestUpdateRequest_ToRequestParameter(t *testing.T) {
 		IconID              *types.ID
 		Zones               *[]string
 		Config              *string
-		CPUThresholdScaling UpdateCPUThresholdScaling
+		CPUThresholdScaling *UpdateCPUThresholdScaling
 		SettingsHash        string
 	}
 	type args struct {
@@ -49,7 +49,7 @@ func TestUpdateRequest_ToRequestParameter(t *testing.T) {
 			name: "minimum",
 			fields: fields{
 				ID: 1,
-				CPUThresholdScaling: UpdateCPUThresholdScaling{
+				CPUThresholdScaling: &UpdateCPUThresholdScaling{
 					Up:   pointer.NewInt(81),
 					Down: pointer.NewInt(21),
 				},
