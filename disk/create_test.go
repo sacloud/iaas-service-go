@@ -55,6 +55,34 @@ func TestDiskService_convertCreateRequest(t *testing.T) {
 				NoWait: true,
 			},
 		},
+		{
+			in: &CreateRequest{
+				Zone:         "is1a",
+				Name:         "test",
+				SourceDiskID: types.ID(1),
+				NoWait:       true,
+			},
+			expect: &ApplyRequest{
+				Zone:         "is1a",
+				Name:         "test",
+				SourceDiskID: types.ID(1),
+				NoWait:       true,
+			},
+		},
+		{
+			in: &CreateRequest{
+				Zone:            "is1a",
+				Name:            "test",
+				SourceArchiveID: types.ID(1),
+				NoWait:          true,
+			},
+			expect: &ApplyRequest{
+				Zone:            "is1a",
+				Name:            "test",
+				SourceArchiveID: types.ID(1),
+				NoWait:          true,
+			},
+		},
 	}
 
 	for _, tc := range cases {

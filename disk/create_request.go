@@ -61,7 +61,7 @@ func (req *CreateRequest) ApplyRequest() *ApplyRequest {
 		IconID:          req.IconID,
 		DiskPlanID:      req.DiskPlanID,
 		Connection:      req.Connection,
-		SourceDiskID:    req.SourceArchiveID,
+		SourceDiskID:    req.SourceDiskID,
 		SourceArchiveID: req.SourceArchiveID,
 		ServerID:        req.ServerID,
 		SizeGB:          req.SizeGB,
