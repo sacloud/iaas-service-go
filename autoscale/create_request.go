@@ -28,9 +28,11 @@ type CreateRequest struct {
 
 	Zones                  []string                      `validate:"required"`
 	Config                 string                        `validate:"required"`
-	TriggerType            string                        `validate:"omitempty,oneof=cpu router"`
+	TriggerType            types.EAutoScaleTriggerType   `validate:"omitempty,oneof=cpu router schedule"`
 	CPUThresholdScaling    *CreateCPUThresholdScaling    `validate:"omitempty,dive"`
 	RouterThresholdScaling *CreateRouterThresholdScaling `validate:"omitempty,dive"`
+	ScheduleScaling        []*CreateScheduleScaling      `validate:"omitempty,dive"`
+	Disabled               bool
 
 	APIKeyID string `validate:"required"`
 }
@@ -47,6 +49,13 @@ type CreateRouterThresholdScaling struct {
 	Mbps         int    `validate:"required"`
 }
 
+type CreateScheduleScaling struct {
+	Action    types.EAutoScaleAction `validate:"required,oneof=up down"`
+	Hour      int                    `validate:"gte=0,lte=23"`
+	Minute    int                    `validate:"oneof=0 15 30 45"`
+	DayOfWeek []types.EDayOfTheWeek  `validate:"gt=0,unique,dive,required,oneof=sun mon tue wed thu fri sat"`
+}
+
 func (req *CreateRequest) Validate() error {
 	return validate.New().Struct(req)
 }
@@ -60,6 +69,7 @@ func (req *CreateRequest) ToRequestParameter() (*iaas.AutoScaleCreateRequest, er
 		Zones:       req.Zones,
 		Config:      req.Config,
 		TriggerType: req.TriggerType,
+		Disabled:    req.Disabled,
 
 		APIKeyID: req.APIKeyID,
 	}
@@ -76,6 +86,14 @@ func (req *CreateRequest) ToRequestParameter() (*iaas.AutoScaleCreateRequest, er
 			Direction:    req.RouterThresholdScaling.Direction,
 			Mbps:         req.RouterThresholdScaling.Mbps,
 		}
+	}
+	for _, ss := range req.ScheduleScaling {
+		createReq.ScheduleScaling = append(createReq.ScheduleScaling, &iaas.AutoScaleScheduleScaling{
+			Action:    ss.Action,
+			Hour:      ss.Hour,
+			Minute:    ss.Minute,
+			DayOfWeek: ss.DayOfWeek,
+		})
 	}
 
 	return createReq, nil

@@ -24,23 +24,24 @@ import (
 type UpdateRequest struct {
 	ID types.ID `service:"-" validate:"required"`
 
-	Name          *string                    `service:",omitempty" validate:"omitempty,min=1"`
-	Description   *string                    `service:",omitempty" validate:"omitempty,min=1,max=512"`
-	Tags          *types.Tags                `service:",omitempty"`
-	IconID        *types.ID                  `service:",omitempty"`
-	Plan          *types.EProxyLBPlan        `service:",omitempty" validate:"omitempty,oneof=100 500 1000 5000 10000 50000 100000 400000"`
-	HealthCheck   *iaas.ProxyLBHealthCheck   `service:",omitempty"`
-	SorryServer   *iaas.ProxyLBSorryServer   `service:",omitempty"`
-	BindPorts     *[]*iaas.ProxyLBBindPort   `service:",omitempty"`
-	Servers       *[]*iaas.ProxyLBServer     `service:",omitempty"`
-	Rules         *[]*iaas.ProxyLBRule       `service:",omitempty"`
-	LetsEncrypt   *iaas.ProxyLBACMESetting   `service:",omitempty"`
-	StickySession *iaas.ProxyLBStickySession `service:",omitempty"`
-	Gzip          *iaas.ProxyLBGzip          `service:",omitempty"`
-	ProxyProtocol *iaas.ProxyLBProxyProtocol `service:",omitempty"`
-	Syslog        *iaas.ProxyLBSyslog        `service:",omitempty"`
-	Timeout       *iaas.ProxyLBTimeout       `service:",omitempty"`
-	SettingsHash  string
+	Name                 *string                           `service:",omitempty" validate:"omitempty,min=1"`
+	Description          *string                           `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Tags                 *types.Tags                       `service:",omitempty"`
+	IconID               *types.ID                         `service:",omitempty"`
+	Plan                 *types.EProxyLBPlan               `service:",omitempty" validate:"omitempty,oneof=100 500 1000 5000 10000 50000 100000 400000"`
+	HealthCheck          *iaas.ProxyLBHealthCheck          `service:",omitempty"`
+	SorryServer          *iaas.ProxyLBSorryServer          `service:",omitempty"`
+	BindPorts            *[]*iaas.ProxyLBBindPort          `service:",omitempty"`
+	Servers              *[]*iaas.ProxyLBServer            `service:",omitempty"`
+	Rules                *[]*iaas.ProxyLBRule              `service:",omitempty"`
+	LetsEncrypt          *iaas.ProxyLBACMESetting          `service:",omitempty"`
+	StickySession        *iaas.ProxyLBStickySession        `service:",omitempty"`
+	Gzip                 *iaas.ProxyLBGzip                 `service:",omitempty"`
+	BackendHttpKeepAlive *iaas.ProxyLBBackendHttpKeepAlive `service:",omitempty"`
+	ProxyProtocol        *iaas.ProxyLBProxyProtocol        `service:",omitempty"`
+	Syslog               *iaas.ProxyLBSyslog               `service:",omitempty"`
+	Timeout              *iaas.ProxyLBTimeout              `service:",omitempty"`
+	SettingsHash         string
 }
 
 func (req *UpdateRequest) Validate() error {

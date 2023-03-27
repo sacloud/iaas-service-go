@@ -25,15 +25,18 @@ import (
 
 func TestUpdateRequest_ToRequestParameter(t *testing.T) {
 	type fields struct {
-		ID                  types.ID
-		Name                *string
-		Description         *string
-		Tags                *types.Tags
-		IconID              *types.ID
-		Zones               *[]string
-		Config              *string
-		CPUThresholdScaling *UpdateCPUThresholdScaling
-		SettingsHash        string
+		ID                     types.ID
+		Name                   *string
+		Description            *string
+		Tags                   *types.Tags
+		IconID                 *types.ID
+		Zones                  *[]string
+		Config                 *string
+		CPUThresholdScaling    *UpdateCPUThresholdScaling
+		RouterThresholdScaling *UpdateRouterThresholdScaling
+		ScheduleScaling        *[]*UpdateScheduleScaling
+		Disabled               *bool
+		SettingsHash           string
 	}
 	type args struct {
 		current *iaas.AutoScale
@@ -79,15 +82,18 @@ func TestUpdateRequest_ToRequestParameter(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			req := &UpdateRequest{
-				ID:                  tt.fields.ID,
-				Name:                tt.fields.Name,
-				Description:         tt.fields.Description,
-				Tags:                tt.fields.Tags,
-				IconID:              tt.fields.IconID,
-				Zones:               tt.fields.Zones,
-				Config:              tt.fields.Config,
-				CPUThresholdScaling: tt.fields.CPUThresholdScaling,
-				SettingsHash:        tt.fields.SettingsHash,
+				ID:                     tt.fields.ID,
+				Name:                   tt.fields.Name,
+				Description:            tt.fields.Description,
+				Tags:                   tt.fields.Tags,
+				IconID:                 tt.fields.IconID,
+				Zones:                  tt.fields.Zones,
+				Config:                 tt.fields.Config,
+				CPUThresholdScaling:    tt.fields.CPUThresholdScaling,
+				RouterThresholdScaling: tt.fields.RouterThresholdScaling,
+				ScheduleScaling:        tt.fields.ScheduleScaling,
+				Disabled:               tt.fields.Disabled,
+				SettingsHash:           tt.fields.SettingsHash,
 			}
 			got, err := req.ToRequestParameter(tt.args.current)
 			if (err != nil) != tt.wantErr {
