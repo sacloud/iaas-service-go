@@ -34,6 +34,8 @@ type UpdateRequest struct {
 	TriggerType            *string                       `service:",omitempty" validate:"omitempty,required,oneof=cpu router"`
 	CPUThresholdScaling    *UpdateCPUThresholdScaling    `service:"-" validate:"omitempty,dive"`
 	RouterThresholdScaling *UpdateRouterThresholdScaling `service:"-" validate:"omitempty,dive"`
+	ScheduleScaling        *[]*UpdateScheduleScaling     `service:"-" validate:"omitempty,dive"`
+	Disabled               *bool                         `service:",omitempty"`
 
 	SettingsHash string
 }
@@ -48,6 +50,13 @@ type UpdateRouterThresholdScaling struct {
 	RouterPrefix *string `service:",omitempty" validate:"omitempty,required"`
 	Direction    *string `service:",omitempty" validate:"omitempty,required,oneof=in out"`
 	Mbps         *int    `service:",omitempty" validate:"omitempty,required"`
+}
+
+type UpdateScheduleScaling struct {
+	Action    types.EAutoScaleAction `validate:"required,oneof=up down"`
+	Hour      int                    `validate:"gte=0,lte=23"`
+	Minute    int                    `validate:"oneof=0 15 30 45"`
+	DayOfWeek []types.EDayOfTheWeek  `validate:"gt=0,unique,dive,required,oneof=sun mon tue wed thu fri sat"`
 }
 
 func (req *UpdateRequest) Validate() error {
@@ -89,6 +98,17 @@ func (req *UpdateRequest) ToRequestParameter(current *iaas.AutoScale) (*iaas.Aut
 		}
 		if req.RouterThresholdScaling.Mbps != nil {
 			r.RouterThresholdScaling.Mbps = *req.RouterThresholdScaling.Mbps
+		}
+	}
+	if req.ScheduleScaling != nil {
+		r.ScheduleScaling = []*iaas.AutoScaleScheduleScaling{}
+		for _, ss := range *req.ScheduleScaling {
+			r.ScheduleScaling = append(r.ScheduleScaling, &iaas.AutoScaleScheduleScaling{
+				Action:    ss.Action,
+				Hour:      ss.Hour,
+				Minute:    ss.Minute,
+				DayOfWeek: ss.DayOfWeek,
+			})
 		}
 	}
 

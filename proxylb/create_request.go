@@ -22,24 +22,25 @@ import (
 )
 
 type CreateRequest struct {
-	Name           string `validate:"required"`
-	Description    string `validate:"min=0,max=512"`
-	Tags           types.Tags
-	IconID         types.ID
-	Plan           types.EProxyLBPlan `validate:"required,oneof=100 500 1000 5000 10000 50000 100000 400000"`
-	HealthCheck    *iaas.ProxyLBHealthCheck
-	SorryServer    *iaas.ProxyLBSorryServer
-	BindPorts      []*iaas.ProxyLBBindPort
-	Servers        []*iaas.ProxyLBServer
-	Rules          []*iaas.ProxyLBRule
-	LetsEncrypt    *iaas.ProxyLBACMESetting
-	StickySession  *iaas.ProxyLBStickySession
-	Gzip           *iaas.ProxyLBGzip
-	ProxyProtocol  *iaas.ProxyLBProxyProtocol
-	Syslog         *iaas.ProxyLBSyslog
-	Timeout        *iaas.ProxyLBTimeout
-	UseVIPFailover bool
-	Region         types.EProxyLBRegion
+	Name                 string `validate:"required"`
+	Description          string `validate:"min=0,max=512"`
+	Tags                 types.Tags
+	IconID               types.ID
+	Plan                 types.EProxyLBPlan `validate:"required,oneof=100 500 1000 5000 10000 50000 100000 400000"`
+	HealthCheck          *iaas.ProxyLBHealthCheck
+	SorryServer          *iaas.ProxyLBSorryServer
+	BindPorts            []*iaas.ProxyLBBindPort
+	Servers              []*iaas.ProxyLBServer
+	Rules                []*iaas.ProxyLBRule
+	LetsEncrypt          *iaas.ProxyLBACMESetting
+	StickySession        *iaas.ProxyLBStickySession
+	Gzip                 *iaas.ProxyLBGzip
+	BackendHttpKeepAlive *iaas.ProxyLBBackendHttpKeepAlive
+	ProxyProtocol        *iaas.ProxyLBProxyProtocol
+	Syslog               *iaas.ProxyLBSyslog
+	Timeout              *iaas.ProxyLBTimeout
+	UseVIPFailover       bool
+	Region               types.EProxyLBRegion
 }
 
 func (req *CreateRequest) Validate() error {
