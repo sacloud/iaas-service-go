@@ -12,27 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package enhanceddb
+package builder
 
 import (
 	"context"
 
-	"github.com/sacloud/iaas-service-go/enhanceddb/builder"
+	"github.com/sacloud/iaas-api-go"
+	"github.com/sacloud/iaas-api-go/types"
 )
 
-func (s *Service) Apply(req *ApplyRequest) (*builder.EnhancedDB, error) {
-	return s.ApplyWithContext(context.Background(), req)
+type EnhancedDB struct {
+	iaas.EnhancedDB
+	Config *iaas.EnhancedDBConfig
 }
 
-func (s *Service) ApplyWithContext(ctx context.Context, req *ApplyRequest) (*builder.EnhancedDB, error) {
-	if err := req.Validate(); err != nil {
-		return nil, err
-	}
-
-	builder, err := req.Builder(s.caller)
+func Read(ctx context.Context, apiClient iaas.EnhancedDBAPI, id types.ID) (*EnhancedDB, error) {
+	edb, err := apiClient.Read(ctx, id)
 	if err != nil {
 		return nil, err
 	}
-
-	return builder.Build(ctx)
+	config, err := apiClient.GetConfig(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+	return &EnhancedDB{
+		EnhancedDB: *edb,
+		Config:     config,
+	}, nil
 }
