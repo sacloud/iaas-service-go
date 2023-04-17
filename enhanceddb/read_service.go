@@ -18,16 +18,17 @@ import (
 	"context"
 
 	"github.com/sacloud/iaas-api-go"
+	"github.com/sacloud/iaas-service-go/enhanceddb/builder"
 )
 
-func (s *Service) Read(req *ReadRequest) (*iaas.EnhancedDB, error) {
+func (s *Service) Read(req *ReadRequest) (*builder.EnhancedDB, error) {
 	return s.ReadWithContext(context.Background(), req)
 }
 
-func (s *Service) ReadWithContext(ctx context.Context, req *ReadRequest) (*iaas.EnhancedDB, error) {
+func (s *Service) ReadWithContext(ctx context.Context, req *ReadRequest) (*builder.EnhancedDB, error) {
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
 	client := iaas.NewEnhancedDBOp(s.caller)
-	return client.Read(ctx, req.ID)
+	return builder.Read(ctx, client, req.ID)
 }

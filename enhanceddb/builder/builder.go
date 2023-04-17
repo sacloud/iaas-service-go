@@ -36,14 +36,14 @@ type Builder struct {
 	Client       iaas.EnhancedDBAPI
 }
 
-func (b *Builder) Build(ctx context.Context) (*iaas.EnhancedDB, error) {
+func (b *Builder) Build(ctx context.Context) (*EnhancedDB, error) {
 	if b.ID.IsEmpty() {
 		return b.create(ctx)
 	}
 	return b.update(ctx)
 }
 
-func (b *Builder) create(ctx context.Context) (*iaas.EnhancedDB, error) {
+func (b *Builder) create(ctx context.Context) (*EnhancedDB, error) {
 	created, err := b.Client.Create(ctx, &iaas.EnhancedDBCreateRequest{
 		Name:         b.Name,
 		Description:  b.Description,
@@ -55,12 +55,16 @@ func (b *Builder) create(ctx context.Context) (*iaas.EnhancedDB, error) {
 		return nil, err
 	}
 
-	return created, b.Client.SetPassword(ctx, created.ID, &iaas.EnhancedDBSetPasswordRequest{
+	err = b.Client.SetPassword(ctx, created.ID, &iaas.EnhancedDBSetPasswordRequest{
 		Password: b.Password,
 	})
+	if err != nil {
+		return nil, err
+	}
+	return Read(ctx, b.Client, created.ID)
 }
 
-func (b *Builder) update(ctx context.Context) (*iaas.EnhancedDB, error) {
+func (b *Builder) update(ctx context.Context) (*EnhancedDB, error) {
 	current, err := b.Client.Read(ctx, b.ID)
 	if err != nil {
 		return nil, err
@@ -89,5 +93,5 @@ func (b *Builder) update(ctx context.Context) (*iaas.EnhancedDB, error) {
 		}
 	}
 
-	return updated, nil
+	return Read(ctx, b.Client, b.ID)
 }

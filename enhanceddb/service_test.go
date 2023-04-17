@@ -26,8 +26,8 @@ import (
 
 func TestEnhancedDBService_CRUD(t *testing.T) {
 	svc := New(testutil.SingletonAPICaller())
-	name := testutil.ResourceName("container-registry")
-	dbName := sacloudTestUtil.Random(10, sacloudTestUtil.CharSetAlpha)
+	name := testutil.ResourceName("enhanced-database")
+	dbName := sacloudTestUtil.Random(32, sacloudTestUtil.CharSetAlpha)
 	password := sacloudTestUtil.Random(16, sacloudTestUtil.CharSetAlpha)
 
 	testutil.RunCRUD(t, &testutil.CRUDTestCase{

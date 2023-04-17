@@ -18,14 +18,14 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/sacloud/iaas-api-go"
+	"github.com/sacloud/iaas-service-go/enhanceddb/builder"
 )
 
-func (s *Service) Update(req *UpdateRequest) (*iaas.EnhancedDB, error) {
+func (s *Service) Update(req *UpdateRequest) (*builder.EnhancedDB, error) {
 	return s.UpdateWithContext(context.Background(), req)
 }
 
-func (s *Service) UpdateWithContext(ctx context.Context, req *UpdateRequest) (*iaas.EnhancedDB, error) {
+func (s *Service) UpdateWithContext(ctx context.Context, req *UpdateRequest) (*builder.EnhancedDB, error) {
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}

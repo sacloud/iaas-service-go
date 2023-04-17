@@ -17,14 +17,14 @@ package enhanceddb
 import (
 	"context"
 
-	"github.com/sacloud/iaas-api-go"
+	"github.com/sacloud/iaas-service-go/enhanceddb/builder"
 )
 
-func (s *Service) Create(req *CreateRequest) (*iaas.EnhancedDB, error) {
+func (s *Service) Create(req *CreateRequest) (*builder.EnhancedDB, error) {
 	return s.CreateWithContext(context.Background(), req)
 }
 
-func (s *Service) CreateWithContext(ctx context.Context, req *CreateRequest) (*iaas.EnhancedDB, error) {
+func (s *Service) CreateWithContext(ctx context.Context, req *CreateRequest) (*builder.EnhancedDB, error) {
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
