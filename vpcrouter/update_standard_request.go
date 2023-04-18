@@ -30,7 +30,7 @@ type UpdateStandardRequest struct {
 	ID   types.ID `service:"-" validate:"required"`
 
 	Name        *string     `service:",omitempty" validate:"omitempty,min=1"`
-	Description *string     `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Description *string     `service:",omitempty" validate:"omitempty,min=0,max=512"`
 	Tags        *types.Tags `service:",omitempty"`
 	IconID      *types.ID   `service:",omitempty"`
 
