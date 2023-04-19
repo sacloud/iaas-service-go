@@ -25,7 +25,7 @@ type UpdateRequest struct {
 	ID types.ID `service:"-" validate:"required"`
 
 	Name        *string `service:",omitempty" validate:"omitempty,min=1"`
-	Description *string `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Description *string `service:",omitempty" validate:"omitempty,max=512"`
 }
 
 func (req *UpdateRequest) Validate() error {

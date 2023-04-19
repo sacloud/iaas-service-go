@@ -31,7 +31,7 @@ type UpdateRequest struct {
 	ID   types.ID `validate:"required"`
 
 	Name        *string     `service:",omitempty" validate:"omitempty,min=1"`
-	Description *string     `service:",omitempty" validate:"omitempty,min=1,max=512"`
+	Description *string     `service:",omitempty" validate:"omitempty,max=512"`
 	Tags        *types.Tags `service:",omitempty"`
 	IconID      *types.ID   `service:",omitempty"`
 
