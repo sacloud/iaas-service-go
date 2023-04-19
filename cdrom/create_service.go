@@ -20,8 +20,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/sacloud/ftps"
 	"github.com/sacloud/iaas-api-go"
+	"github.com/sacloud/iaas-service-go/ftps"
 	"github.com/sacloud/packages-go/size"
 )
 
