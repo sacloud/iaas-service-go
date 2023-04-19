@@ -18,7 +18,7 @@ import "time"
 
 var (
 	//	DefaultNICUpdateWaitDuration デフォルトのNIC更新待ち
-	DefaultNICUpdateWaitDuration = 5 * time.Second
+	DefaultNICUpdateWaitDuration = 20 * time.Second
 
 	// DefaultMaxRetryCount デフォルトリトライ最大数
 	DefaultMaxRetryCount = 3
