@@ -29,7 +29,11 @@ type ApplyRequest struct {
 	Tags         types.Tags
 	IconID       types.ID
 	DatabaseName string
-	Password     string
+	DatabaseType types.EnhancedDBType
+	Region       types.EnhancedDBRegion
+
+	Password        string
+	AllowedNetworks []string
 
 	SettingsHash string
 }
@@ -40,14 +44,17 @@ func (req *ApplyRequest) Validate() error {
 
 func (req *ApplyRequest) Builder(caller iaas.APICaller) (*builder.Builder, error) {
 	return &builder.Builder{
-		ID:           req.ID,
-		Name:         req.Name,
-		Description:  req.Description,
-		Tags:         req.Tags,
-		IconID:       req.IconID,
-		DatabaseName: req.DatabaseName,
-		Password:     req.Password,
-		SettingsHash: req.SettingsHash,
-		Client:       iaas.NewEnhancedDBOp(caller),
+		ID:              req.ID,
+		Name:            req.Name,
+		Description:     req.Description,
+		Tags:            req.Tags,
+		IconID:          req.IconID,
+		DatabaseName:    req.DatabaseName,
+		DatabaseType:    req.DatabaseType,
+		Region:          req.Region,
+		Password:        req.Password,
+		AllowedNetworks: req.AllowedNetworks,
+		SettingsHash:    req.SettingsHash,
+		Client:          iaas.NewEnhancedDBOp(caller),
 	}, nil
 }

@@ -25,7 +25,11 @@ type CreateRequest struct {
 	Tags         types.Tags
 	IconID       types.ID
 	DatabaseName string
-	Password     string
+	DatabaseType types.EnhancedDBType
+	Region       types.EnhancedDBRegion
+
+	Password        string
+	AllowedNetworks []string
 }
 
 func (req *CreateRequest) Validate() error {
@@ -34,11 +38,14 @@ func (req *CreateRequest) Validate() error {
 
 func (req *CreateRequest) ApplyRequest() *ApplyRequest {
 	return &ApplyRequest{
-		Name:         req.Name,
-		Description:  req.Description,
-		Tags:         req.Tags,
-		IconID:       req.IconID,
-		DatabaseName: req.DatabaseName,
-		Password:     req.Password,
+		Name:            req.Name,
+		Description:     req.Description,
+		Tags:            req.Tags,
+		IconID:          req.IconID,
+		DatabaseName:    req.DatabaseName,
+		DatabaseType:    req.DatabaseType,
+		Region:          req.Region,
+		Password:        req.Password,
+		AllowedNetworks: req.AllowedNetworks,
 	}
 }

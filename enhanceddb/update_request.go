@@ -31,7 +31,8 @@ type UpdateRequest struct {
 	Tags        *types.Tags `service:",omitempty"`
 	IconID      *types.ID   `service:",omitempty"`
 
-	Password string
+	Password        string
+	AllowedNetworks []string
 
 	SettingsHash string
 }
@@ -48,14 +49,15 @@ func (req *UpdateRequest) ApplyRequest(ctx context.Context, caller iaas.APICalle
 	}
 
 	applyRequest := &ApplyRequest{
-		ID:           req.ID,
-		Name:         current.Name,
-		Description:  current.Description,
-		Tags:         current.Tags,
-		IconID:       current.IconID,
-		DatabaseName: current.DatabaseName,
-		Password:     req.Password,
-		SettingsHash: current.SettingsHash,
+		ID:              req.ID,
+		Name:            current.Name,
+		Description:     current.Description,
+		Tags:            current.Tags,
+		IconID:          current.IconID,
+		DatabaseName:    current.DatabaseName,
+		Password:        req.Password,
+		AllowedNetworks: req.AllowedNetworks,
+		SettingsHash:    current.SettingsHash,
 	}
 
 	if err := serviceutil.RequestConvertTo(req, applyRequest); err != nil {
