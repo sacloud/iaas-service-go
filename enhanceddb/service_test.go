@@ -42,6 +42,8 @@ func TestEnhancedDBService_CRUD(t *testing.T) {
 					Description:  "test",
 					Tags:         types.Tags{"tag1", "tag2"},
 					DatabaseName: dbName,
+					DatabaseType: types.EnhancedDBTypesTiDB,
+					Region:       types.EnhancedDBRegionsIs1,
 					Password:     password,
 				})
 			},

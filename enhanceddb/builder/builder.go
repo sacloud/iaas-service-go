@@ -31,7 +31,12 @@ type Builder struct {
 	Tags         types.Tags
 	IconID       types.ID
 	DatabaseName string
-	Password     string
+	DatabaseType types.EnhancedDBType
+	Region       types.EnhancedDBRegion
+
+	Password        string
+	AllowedNetworks []string
+
 	SettingsHash string
 	Client       iaas.EnhancedDBAPI
 }
@@ -50,6 +55,8 @@ func (b *Builder) create(ctx context.Context) (*EnhancedDB, error) {
 		Tags:         b.Tags,
 		IconID:       b.IconID,
 		DatabaseName: b.DatabaseName,
+		DatabaseType: b.DatabaseType,
+		Region:       b.Region,
 	})
 	if err != nil {
 		return nil, err
@@ -61,6 +68,17 @@ func (b *Builder) create(ctx context.Context) (*EnhancedDB, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	if b.AllowedNetworks == nil {
+		b.AllowedNetworks = []string{}
+	}
+	err = b.Client.SetConfig(ctx, created.ID, &iaas.EnhancedDBSetConfigRequest{
+		AllowedNetworks: b.AllowedNetworks,
+	})
+	if err != nil {
+		return nil, err
+	}
+
 	return Read(ctx, b.Client, created.ID)
 }
 
@@ -87,6 +105,15 @@ func (b *Builder) update(ctx context.Context) (*EnhancedDB, error) {
 	if b.Password != "" {
 		err := b.Client.SetPassword(ctx, updated.ID, &iaas.EnhancedDBSetPasswordRequest{
 			Password: b.Password,
+		})
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if b.AllowedNetworks != nil {
+		err = b.Client.SetConfig(ctx, updated.ID, &iaas.EnhancedDBSetConfigRequest{
+			AllowedNetworks: b.AllowedNetworks,
 		})
 		if err != nil {
 			return nil, err
