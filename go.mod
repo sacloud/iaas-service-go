@@ -7,7 +7,7 @@ require (
 	github.com/sacloud/iaas-api-go v1.11.2-0.20230808040020-104bc72d03c1
 	github.com/sacloud/packages-go v0.0.9
 	github.com/stretchr/testify v1.8.4
-	golang.org/x/crypto v0.10.0
+	golang.org/x/crypto v0.12.0
 )
 
 require (
@@ -32,7 +32,7 @@ require (
 	github.com/sacloud/go-http v0.1.6 // indirect
 	go.uber.org/ratelimit v0.2.0 // indirect
 	golang.org/x/net v0.10.0 // indirect
-	golang.org/x/sys v0.9.0 // indirect
-	golang.org/x/text v0.10.0 // indirect
+	golang.org/x/sys v0.11.0 // indirect
+	golang.org/x/text v0.12.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
