@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/sacloud/ftps v1.2.0
-	github.com/sacloud/iaas-api-go v1.11.1
+	github.com/sacloud/iaas-api-go v1.11.2-0.20230808040020-104bc72d03c1
 	github.com/sacloud/packages-go v0.0.9
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/crypto v0.10.0

@@ -36,6 +36,7 @@ type Builder struct {
 	CPU             int
 	MemoryGB        int
 	GPU             int
+	CPUModel        string
 	Commitment      types.ECommitment
 	Generation      types.EPlanGeneration
 	InterfaceDriver types.EInterfaceDriver
@@ -127,6 +128,7 @@ func BuilderFromResource(ctx context.Context, caller iaas.APICaller, zone string
 		CPU:             current.CPU,
 		MemoryGB:        current.MemoryMB * size.GiB,
 		GPU:             current.GPU,
+		CPUModel:        current.ServerPlanCPUModel,
 		Commitment:      current.ServerPlanCommitment,
 		Generation:      current.ServerPlanGeneration,
 		InterfaceDriver: current.InterfaceDriver,
@@ -155,6 +157,7 @@ var (
 	defaultCPU             = 1
 	defaultMemoryGB        = 1
 	defaultGPU             = 0
+	defaultCPUModel        = ""
 	defaultCommitment      = types.Commitments.Standard
 	defaultGeneration      = types.PlanGenerations.Default
 	defaultInterfaceDriver = types.InterfaceDrivers.VirtIO
@@ -200,6 +203,7 @@ func (b *Builder) Validate(ctx context.Context, zone string) error {
 		CPU:        b.CPU,
 		MemoryGB:   b.MemoryGB,
 		GPU:        b.GPU,
+		CPUModel:   b.CPUModel,
 		Commitment: b.Commitment,
 		Generation: b.Generation,
 	})
@@ -387,6 +391,7 @@ func (b *Builder) Update(ctx context.Context, zone string) (*BuildResult, error)
 			GPU:                  b.GPU,
 			ServerPlanGeneration: b.Generation,
 			ServerPlanCommitment: b.Commitment,
+			ServerPlanCPUModel:   b.CPUModel,
 		})
 		if err != nil {
 			return result, err
@@ -442,6 +447,9 @@ func (b *Builder) setDefaults() {
 	if b.GPU == 0 {
 		b.GPU = defaultGPU
 	}
+	if b.CPUModel == "" {
+		b.CPUModel = defaultCPUModel
+	}
 	if b.Commitment == types.ECommitment("") {
 		b.Commitment = defaultCommitment
 	}
@@ -459,6 +467,7 @@ type serverState struct {
 	memoryGB        int
 	cpu             int
 	gpu             int
+	cpuModel        string
 	commitment      types.ECommitment
 	nic             *nicState   // hash
 	additionalNICs  []*nicState // hash
@@ -481,6 +490,7 @@ func (b *Builder) desiredState() *serverState {
 		memoryGB:        b.MemoryGB,
 		cpu:             b.CPU,
 		gpu:             b.GPU,
+		cpuModel:        b.CPUModel,
 		commitment:      b.Commitment,
 		nic:             nic,
 		additionalNICs:  additionalNICs,
@@ -535,6 +545,7 @@ func (b *Builder) currentState(server *iaas.Server) *serverState {
 		memoryGB:        server.GetMemoryGB(),
 		cpu:             server.CPU,
 		gpu:             server.GPU,
+		cpuModel:        server.ServerPlanCPUModel,
 		commitment:      server.ServerPlanCommitment,
 		nic:             nic,
 		additionalNICs:  additionalNICs,
@@ -548,6 +559,7 @@ func (b *Builder) createServer(ctx context.Context, zone string) (*iaas.Server, 
 		CPU:                  b.CPU,
 		MemoryMB:             b.MemoryGB * size.GiB,
 		GPU:                  b.GPU,
+		ServerPlanCPUModel:   b.CPUModel,
 		ServerPlanCommitment: b.Commitment,
 		ServerPlanGeneration: b.Generation,
 		InterfaceDriver:      b.InterfaceDriver,
@@ -798,6 +810,7 @@ func (b *Builder) isPlanChanged(server *iaas.Server) bool {
 	return b.CPU != server.CPU ||
 		b.MemoryGB != server.GetMemoryGB() ||
 		b.GPU != server.GPU ||
+		(b.CPUModel != "" && b.CPUModel != server.ServerPlanCPUModel) ||
 		b.Commitment != server.ServerPlanCommitment ||
 		(b.Generation != types.PlanGenerations.Default && b.Generation != server.ServerPlanGeneration)
 	// b.Generation != server.ServerPlanGeneration

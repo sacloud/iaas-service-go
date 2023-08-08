@@ -43,7 +43,9 @@ func (s *Service) ChangePlanWithContext(ctx context.Context, req *ChangePlanRequ
 
 	changeReq := &iaas.ServerChangePlanRequest{
 		CPU:                  current.CPU,
+		GPU:                  current.GPU,
 		MemoryMB:             current.MemoryMB,
+		ServerPlanCPUModel:   current.ServerPlanCPUModel,
 		ServerPlanGeneration: current.ServerPlanGeneration,
 		ServerPlanCommitment: current.ServerPlanCommitment,
 	}
@@ -53,6 +55,12 @@ func (s *Service) ChangePlanWithContext(ctx context.Context, req *ChangePlanRequ
 	if req.MemoryMB > 0 {
 		changeReq.MemoryMB = req.MemoryMB
 	}
+	if req.GPU > 0 {
+		changeReq.GPU = req.GPU
+	}
+	if req.ServerPlanCPUModel != "" {
+		changeReq.ServerPlanCPUModel = req.ServerPlanCPUModel
+	}
 	if req.ServerPlanGeneration != types.PlanGenerations.Default {
 		changeReq.ServerPlanGeneration = req.ServerPlanGeneration
 	}
@@ -60,7 +68,5 @@ func (s *Service) ChangePlanWithContext(ctx context.Context, req *ChangePlanRequ
 		changeReq.ServerPlanCommitment = req.ServerPlanCommitment
 	}
 
-	return plans.ChangeServerPlan(ctx, s.caller, req.Zone, req.ID,
-		changeReq.CPU, changeReq.GetMemoryGB(),
-		changeReq.ServerPlanCommitment, changeReq.ServerPlanGeneration)
+	return plans.ChangeServerPlan(ctx, s.caller, req.Zone, req.ID, changeReq)
 }

@@ -47,6 +47,8 @@ func TestBuilder_setDefaults(t *testing.T) {
 	expected := &Builder{
 		CPU:             defaultCPU,
 		MemoryGB:        defaultMemoryGB,
+		GPU:             defaultGPU,
+		CPUModel:        defaultCPUModel,
 		Commitment:      defaultCommitment,
 		Generation:      defaultGeneration,
 		InterfaceDriver: defaultInterfaceDriver,
@@ -770,6 +772,7 @@ func TestBuilder_UpdateWithPreviousID(t *testing.T) {
 		Name:            testutil.ResourceName("server-builder"),
 		CPU:             1,
 		MemoryGB:        1,
+		CPUModel:        "uncategorized",
 		Commitment:      types.Commitments.Standard,
 		Generation:      types.PlanGenerations.Default,
 		Tags:            types.Tags{"tag1", "tag2"},

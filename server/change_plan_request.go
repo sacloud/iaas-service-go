@@ -25,6 +25,8 @@ type ChangePlanRequest struct {
 
 	CPU                  int
 	MemoryMB             int
+	GPU                  int
+	ServerPlanCPUModel   string
 	ServerPlanCommitment types.ECommitment
 	ServerPlanGeneration types.EPlanGeneration
 }
