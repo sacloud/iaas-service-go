@@ -36,6 +36,7 @@ type ApplyRequest struct {
 	CPU             int
 	MemoryGB        int
 	GPU             int
+	CPUModel        string
 	Commitment      types.ECommitment
 	Generation      types.EPlanGeneration
 	InterfaceDriver types.EInterfaceDriver
@@ -100,6 +101,7 @@ func (req *ApplyRequest) Builder(caller iaas.APICaller) (*server.Builder, error)
 		CPU:             req.CPU,
 		MemoryGB:        req.MemoryGB,
 		GPU:             req.GPU,
+		CPUModel:        req.CPUModel,
 		Commitment:      req.Commitment,
 		Generation:      req.Generation,
 		InterfaceDriver: req.InterfaceDriver,
