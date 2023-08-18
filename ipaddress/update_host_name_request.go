@@ -22,7 +22,7 @@ type UpdateHostNameRequest struct {
 	Zone string `service:"-" validate:"required"`
 
 	IPAddress     string `service:"-" validate:"required,ipv4"`
-	HostName      string `service:"-" validate:"required"`
+	HostName      string `service:"-" validate:"omitempty,fqdn"`
 	RetryMax      int
 	RetryInterval int
 }
