@@ -23,14 +23,15 @@ import (
 type Director struct {
 	OSType ostype.ArchiveOSType
 
-	Name        string
-	SizeGB      int
-	DistantFrom []types.ID
-	PlanID      types.ID
-	Connection  types.EDiskConnection
-	Description string
-	Tags        types.Tags
-	IconID      types.ID
+	Name                string
+	SizeGB              int
+	DistantFrom         []types.ID
+	PlanID              types.ID
+	Connection          types.EDiskConnection
+	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
+	Description         string
+	Tags                types.Tags
+	IconID              types.ID
 
 	DiskID          types.ID
 	SourceDiskID    types.ID
@@ -49,75 +50,80 @@ func (d *Director) Builder() Builder {
 		switch {
 		case !d.DiskID.IsEmpty():
 			return &ConnectedDiskBuilder{
-				ID:            d.DiskID,
-				Name:          d.Name,
-				Description:   d.Description,
-				Tags:          d.Tags,
-				IconID:        d.IconID,
-				Connection:    d.Connection,
-				EditParameter: d.EditParameter.ToUnixDiskEditRequest(),
-				NoWait:        d.NoWait,
-				Client:        d.Client,
+				ID:                  d.DiskID,
+				Name:                d.Name,
+				Description:         d.Description,
+				Tags:                d.Tags,
+				IconID:              d.IconID,
+				Connection:          d.Connection,
+				EncryptionAlgorithm: d.EncryptionAlgorithm,
+				EditParameter:       d.EditParameter.ToUnixDiskEditRequest(),
+				NoWait:              d.NoWait,
+				Client:              d.Client,
 			}
 		case !d.SourceDiskID.IsEmpty(), !d.SourceArchiveID.IsEmpty():
 			return &FromDiskOrArchiveBuilder{
-				SourceDiskID:    d.SourceDiskID,
-				SourceArchiveID: d.SourceArchiveID,
-				Name:            d.Name,
-				SizeGB:          d.SizeGB,
-				DistantFrom:     d.DistantFrom,
-				PlanID:          d.PlanID,
-				Connection:      d.Connection,
-				Description:     d.Description,
-				Tags:            d.Tags,
-				IconID:          d.IconID,
-				EditParameter:   d.EditParameter.ToUnixDiskEditRequest(),
-				NoWait:          d.NoWait,
-				Client:          d.Client,
+				SourceDiskID:        d.SourceDiskID,
+				SourceArchiveID:     d.SourceArchiveID,
+				Name:                d.Name,
+				SizeGB:              d.SizeGB,
+				DistantFrom:         d.DistantFrom,
+				PlanID:              d.PlanID,
+				Connection:          d.Connection,
+				EncryptionAlgorithm: d.EncryptionAlgorithm,
+				Description:         d.Description,
+				Tags:                d.Tags,
+				IconID:              d.IconID,
+				EditParameter:       d.EditParameter.ToUnixDiskEditRequest(),
+				NoWait:              d.NoWait,
+				Client:              d.Client,
 			}
 		default:
 			return &BlankBuilder{
-				Name:        d.Name,
-				SizeGB:      d.SizeGB,
-				DistantFrom: d.DistantFrom,
-				PlanID:      d.PlanID,
-				Connection:  d.Connection,
-				Description: d.Description,
-				Tags:        d.Tags,
-				IconID:      d.IconID,
-				NoWait:      d.NoWait,
-				Client:      d.Client,
+				Name:                d.Name,
+				SizeGB:              d.SizeGB,
+				DistantFrom:         d.DistantFrom,
+				PlanID:              d.PlanID,
+				Connection:          d.Connection,
+				EncryptionAlgorithm: d.EncryptionAlgorithm,
+				Description:         d.Description,
+				Tags:                d.Tags,
+				IconID:              d.IconID,
+				NoWait:              d.NoWait,
+				Client:              d.Client,
 			}
 		}
 	case d.OSType.IsSupportDiskEdit():
 		return &FromUnixBuilder{
-			OSType:        d.OSType,
-			Name:          d.Name,
-			SizeGB:        d.SizeGB,
-			DistantFrom:   d.DistantFrom,
-			PlanID:        d.PlanID,
-			Connection:    d.Connection,
-			Description:   d.Description,
-			Tags:          d.Tags,
-			IconID:        d.IconID,
-			EditParameter: d.EditParameter.ToUnixDiskEditRequest(),
-			NoWait:        d.NoWait,
-			Client:        d.Client,
+			OSType:              d.OSType,
+			Name:                d.Name,
+			SizeGB:              d.SizeGB,
+			DistantFrom:         d.DistantFrom,
+			PlanID:              d.PlanID,
+			Connection:          d.Connection,
+			EncryptionAlgorithm: d.EncryptionAlgorithm,
+			Description:         d.Description,
+			Tags:                d.Tags,
+			IconID:              d.IconID,
+			EditParameter:       d.EditParameter.ToUnixDiskEditRequest(),
+			NoWait:              d.NoWait,
+			Client:              d.Client,
 		}
 	default:
 		// 現在はOSTypeにディスクの修正不可のアーカイブはないためここには到達しない
 		return &FromFixedArchiveBuilder{
-			OSType:      d.OSType,
-			Name:        d.Name,
-			SizeGB:      d.SizeGB,
-			DistantFrom: d.DistantFrom,
-			PlanID:      d.PlanID,
-			Connection:  d.Connection,
-			Description: d.Description,
-			Tags:        d.Tags,
-			IconID:      d.IconID,
-			NoWait:      d.NoWait,
-			Client:      d.Client,
+			OSType:              d.OSType,
+			Name:                d.Name,
+			SizeGB:              d.SizeGB,
+			DistantFrom:         d.DistantFrom,
+			PlanID:              d.PlanID,
+			Connection:          d.Connection,
+			EncryptionAlgorithm: d.EncryptionAlgorithm,
+			Description:         d.Description,
+			Tags:                d.Tags,
+			IconID:              d.IconID,
+			NoWait:              d.NoWait,
+			Client:              d.Client,
 		}
 	}
 }

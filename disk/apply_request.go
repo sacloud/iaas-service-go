@@ -27,17 +27,18 @@ type ApplyRequest struct {
 	Zone string   `service:"-" validate:"required"`
 	ID   types.ID `service:"-"` // TODO Builderを更新対応させる(変更できない値の場合はエラーにするとか)
 
-	Name            string `validate:"required"`
-	Description     string `validate:"min=0,max=512"`
-	Tags            types.Tags
-	IconID          types.ID
-	DiskPlanID      types.ID
-	Connection      types.EDiskConnection
-	SourceDiskID    types.ID
-	SourceArchiveID types.ID
-	ServerID        types.ID
-	SizeGB          int
-	DistantFrom     []types.ID
+	Name                string `validate:"required"`
+	Description         string `validate:"min=0,max=512"`
+	Tags                types.Tags
+	IconID              types.ID
+	DiskPlanID          types.ID
+	Connection          types.EDiskConnection
+	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
+	SourceDiskID        types.ID
+	SourceArchiveID     types.ID
+	ServerID            types.ID
+	SizeGB              int
+	DistantFrom         []types.ID
 
 	OSType        ostype.ArchiveOSType
 	EditParameter *EditParameter
@@ -84,21 +85,22 @@ func (req *ApplyRequest) Builder(caller iaas.APICaller) (disk.Builder, error) {
 	}
 
 	director := &disk.Director{
-		OSType:          req.OSType,
-		Name:            req.Name,
-		SizeGB:          req.SizeGB,
-		DistantFrom:     req.DistantFrom,
-		PlanID:          req.DiskPlanID,
-		Connection:      req.Connection,
-		Description:     req.Description,
-		Tags:            req.Tags,
-		IconID:          req.IconID,
-		DiskID:          req.ID,
-		SourceDiskID:    req.SourceDiskID,
-		SourceArchiveID: req.SourceArchiveID,
-		EditParameter:   editParameter,
-		NoWait:          req.NoWait,
-		Client:          disk.NewBuildersAPIClient(caller),
+		OSType:              req.OSType,
+		Name:                req.Name,
+		SizeGB:              req.SizeGB,
+		DistantFrom:         req.DistantFrom,
+		PlanID:              req.DiskPlanID,
+		Connection:          req.Connection,
+		EncryptionAlgorithm: req.EncryptionAlgorithm,
+		Description:         req.Description,
+		Tags:                req.Tags,
+		IconID:              req.IconID,
+		DiskID:              req.ID,
+		SourceDiskID:        req.SourceDiskID,
+		SourceArchiveID:     req.SourceArchiveID,
+		EditParameter:       editParameter,
+		NoWait:              req.NoWait,
+		Client:              disk.NewBuildersAPIClient(caller),
 	}
 	return director.Builder(), nil
 }
