@@ -26,19 +26,20 @@ import (
 type CreateRequest struct {
 	Zone string `service:"-" validate:"required"`
 
-	Name            string `validate:"required"`
-	Description     string `validate:"min=0,max=512"`
-	Tags            types.Tags
-	IconID          types.ID
-	DiskPlanID      types.ID              `validate:"oneof=4 2"`
-	Connection      types.EDiskConnection `validate:"oneof=virtio ide"`
-	SourceDiskID    types.ID
-	SourceArchiveID types.ID
-	ServerID        types.ID
-	SizeGB          int `service:"SizeMB,filters=gb_to_mb"`
-	DistantFrom     []types.ID
-	OSType          ostype.ArchiveOSType
-	EditParameter   *EditParameter
+	Name                string `validate:"required"`
+	Description         string `validate:"min=0,max=512"`
+	Tags                types.Tags
+	IconID              types.ID
+	DiskPlanID          types.ID              `validate:"oneof=4 2"`
+	Connection          types.EDiskConnection `validate:"oneof=virtio ide"`
+	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
+	SourceDiskID        types.ID
+	SourceArchiveID     types.ID
+	ServerID            types.ID
+	SizeGB              int `service:"SizeMB,filters=gb_to_mb"`
+	DistantFrom         []types.ID
+	OSType              ostype.ArchiveOSType
+	EditParameter       *EditParameter
 
 	NoWait bool
 }
@@ -54,20 +55,21 @@ func (req *CreateRequest) Validate() error {
 
 func (req *CreateRequest) ApplyRequest() *ApplyRequest {
 	return &ApplyRequest{
-		Zone:            req.Zone,
-		Name:            req.Name,
-		Description:     req.Description,
-		Tags:            req.Tags,
-		IconID:          req.IconID,
-		DiskPlanID:      req.DiskPlanID,
-		Connection:      req.Connection,
-		SourceDiskID:    req.SourceDiskID,
-		SourceArchiveID: req.SourceArchiveID,
-		ServerID:        req.ServerID,
-		SizeGB:          req.SizeGB,
-		DistantFrom:     req.DistantFrom,
-		OSType:          req.OSType,
-		EditParameter:   req.EditParameter,
-		NoWait:          req.NoWait,
+		Zone:                req.Zone,
+		Name:                req.Name,
+		Description:         req.Description,
+		Tags:                req.Tags,
+		IconID:              req.IconID,
+		DiskPlanID:          req.DiskPlanID,
+		Connection:          req.Connection,
+		EncryptionAlgorithm: req.EncryptionAlgorithm,
+		SourceDiskID:        req.SourceDiskID,
+		SourceArchiveID:     req.SourceArchiveID,
+		ServerID:            req.ServerID,
+		SizeGB:              req.SizeGB,
+		DistantFrom:         req.DistantFrom,
+		OSType:              req.OSType,
+		EditParameter:       req.EditParameter,
+		NoWait:              req.NoWait,
 	}
 }

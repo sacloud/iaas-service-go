@@ -29,12 +29,13 @@ func TestDiskService_convertCreateRequest(t *testing.T) {
 	}{
 		{
 			in: &CreateRequest{
-				Zone:       "is1a",
-				Name:       "test",
-				DiskPlanID: types.DiskPlans.SSD,
-				Connection: types.DiskConnections.VirtIO,
-				SizeGB:     20,
-				OSType:     ostype.Ubuntu,
+				Zone:                "is1a",
+				Name:                "test",
+				DiskPlanID:          types.DiskPlans.SSD,
+				Connection:          types.DiskConnections.VirtIO,
+				EncryptionAlgorithm: types.DiskEncryptionAlgorithms.AES256XTS,
+				SizeGB:              20,
+				OSType:              ostype.Ubuntu,
 				EditParameter: &EditParameter{
 					HostName: "hostname",
 					Password: "password",
@@ -42,12 +43,13 @@ func TestDiskService_convertCreateRequest(t *testing.T) {
 				NoWait: true,
 			},
 			expect: &ApplyRequest{
-				Zone:       "is1a",
-				Name:       "test",
-				DiskPlanID: types.DiskPlans.SSD,
-				Connection: types.DiskConnections.VirtIO,
-				SizeGB:     20,
-				OSType:     ostype.Ubuntu,
+				Zone:                "is1a",
+				Name:                "test",
+				DiskPlanID:          types.DiskPlans.SSD,
+				Connection:          types.DiskConnections.VirtIO,
+				EncryptionAlgorithm: types.DiskEncryptionAlgorithms.AES256XTS,
+				SizeGB:              20,
+				OSType:              ostype.Ubuntu,
 				EditParameter: &EditParameter{
 					HostName: "hostname",
 					Password: "password",

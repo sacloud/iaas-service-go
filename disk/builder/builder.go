@@ -53,14 +53,15 @@ type UpdateResult struct {
 type FromUnixBuilder struct {
 	OSType ostype.ArchiveOSType
 
-	Name        string
-	SizeGB      int
-	DistantFrom []types.ID
-	PlanID      types.ID
-	Connection  types.EDiskConnection
-	Description string
-	Tags        types.Tags
-	IconID      types.ID
+	Name                string
+	SizeGB              int
+	DistantFrom         []types.ID
+	PlanID              types.ID
+	Connection          types.EDiskConnection
+	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
+	Description         string
+	Tags                types.Tags
+	IconID              types.ID
 
 	EditParameter *UnixEditRequest
 
@@ -149,15 +150,16 @@ func (d *FromUnixBuilder) createDiskParameter(ctx context.Context, client *APICl
 	}
 
 	createReq := &iaas.DiskCreateRequest{
-		DiskPlanID:      d.PlanID,
-		SizeMB:          d.SizeGB * size.GiB,
-		Connection:      d.Connection,
-		SourceArchiveID: archive.ID,
-		ServerID:        serverID,
-		Name:            d.Name,
-		Description:     d.Description,
-		Tags:            d.Tags,
-		IconID:          d.IconID,
+		DiskPlanID:          d.PlanID,
+		SizeMB:              d.SizeGB * size.GiB,
+		Connection:          d.Connection,
+		EncryptionAlgorithm: d.EncryptionAlgorithm,
+		SourceArchiveID:     archive.ID,
+		ServerID:            serverID,
+		Name:                d.Name,
+		Description:         d.Description,
+		Tags:                d.Tags,
+		IconID:              d.IconID,
 	}
 
 	var editReq *iaas.DiskEditRequest
@@ -186,14 +188,15 @@ func (d *FromUnixBuilder) NoWaitFlag() bool {
 type FromFixedArchiveBuilder struct {
 	OSType ostype.ArchiveOSType
 
-	Name        string
-	SizeGB      int
-	DistantFrom []types.ID
-	PlanID      types.ID
-	Connection  types.EDiskConnection
-	Description string
-	Tags        types.Tags
-	IconID      types.ID
+	Name                string
+	SizeGB              int
+	DistantFrom         []types.ID
+	PlanID              types.ID
+	Connection          types.EDiskConnection
+	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
+	Description         string
+	Tags                types.Tags
+	IconID              types.ID
 
 	Client *APIClient
 	NoWait bool
@@ -260,15 +263,16 @@ func (d *FromFixedArchiveBuilder) createDiskParameter(ctx context.Context, clien
 	}
 
 	createReq := &iaas.DiskCreateRequest{
-		DiskPlanID:      d.PlanID,
-		SizeMB:          d.SizeGB * size.GiB,
-		Connection:      d.Connection,
-		SourceArchiveID: archive.ID,
-		ServerID:        serverID,
-		Name:            d.Name,
-		Description:     d.Description,
-		Tags:            d.Tags,
-		IconID:          d.IconID,
+		DiskPlanID:          d.PlanID,
+		SizeMB:              d.SizeGB * size.GiB,
+		Connection:          d.Connection,
+		EncryptionAlgorithm: d.EncryptionAlgorithm,
+		SourceArchiveID:     archive.ID,
+		ServerID:            serverID,
+		Name:                d.Name,
+		Description:         d.Description,
+		Tags:                d.Tags,
+		IconID:              d.IconID,
 	}
 	return createReq, nil, nil
 }
@@ -284,14 +288,15 @@ type FromDiskOrArchiveBuilder struct {
 	SourceDiskID    types.ID
 	SourceArchiveID types.ID
 
-	Name        string
-	SizeGB      int
-	DistantFrom []types.ID
-	PlanID      types.ID
-	Connection  types.EDiskConnection
-	Description string
-	Tags        types.Tags
-	IconID      types.ID
+	Name                string
+	SizeGB              int
+	DistantFrom         []types.ID
+	PlanID              types.ID
+	Connection          types.EDiskConnection
+	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
+	Description         string
+	Tags                types.Tags
+	IconID              types.ID
 
 	EditParameter *UnixEditRequest
 
@@ -382,16 +387,17 @@ func (d *FromDiskOrArchiveBuilder) updateDiskParameter() *iaas.DiskUpdateRequest
 
 func (d *FromDiskOrArchiveBuilder) createDiskParameter(ctx context.Context, client *APIClient, zone string, serverID types.ID) (*iaas.DiskCreateRequest, *iaas.DiskEditRequest, error) {
 	createReq := &iaas.DiskCreateRequest{
-		DiskPlanID:      d.PlanID,
-		SizeMB:          d.SizeGB * size.GiB,
-		Connection:      d.Connection,
-		SourceArchiveID: d.SourceArchiveID,
-		SourceDiskID:    d.SourceDiskID,
-		ServerID:        serverID,
-		Name:            d.Name,
-		Description:     d.Description,
-		Tags:            d.Tags,
-		IconID:          d.IconID,
+		DiskPlanID:          d.PlanID,
+		SizeMB:              d.SizeGB * size.GiB,
+		Connection:          d.Connection,
+		EncryptionAlgorithm: d.EncryptionAlgorithm,
+		SourceArchiveID:     d.SourceArchiveID,
+		SourceDiskID:        d.SourceDiskID,
+		ServerID:            serverID,
+		Name:                d.Name,
+		Description:         d.Description,
+		Tags:                d.Tags,
+		IconID:              d.IconID,
 	}
 
 	var editReq *iaas.DiskEditRequest
@@ -418,14 +424,15 @@ func (d *FromDiskOrArchiveBuilder) NoWaitFlag() bool {
 
 // BlankBuilder ブランクディスクを作成する場合のリクエスト
 type BlankBuilder struct {
-	Name        string
-	SizeGB      int
-	DistantFrom []types.ID
-	PlanID      types.ID
-	Connection  types.EDiskConnection
-	Description string
-	Tags        types.Tags
-	IconID      types.ID
+	Name                string
+	SizeGB              int
+	DistantFrom         []types.ID
+	PlanID              types.ID
+	Connection          types.EDiskConnection
+	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
+	Description         string
+	Tags                types.Tags
+	IconID              types.ID
 
 	Client *APIClient
 	NoWait bool
@@ -477,14 +484,15 @@ func (d *BlankBuilder) updateDiskParameter() *iaas.DiskUpdateRequest {
 
 func (d *BlankBuilder) createDiskParameter(ctx context.Context, client *APIClient, zone string, serverID types.ID) (*iaas.DiskCreateRequest, *iaas.DiskEditRequest, error) {
 	createReq := &iaas.DiskCreateRequest{
-		DiskPlanID:  d.PlanID,
-		SizeMB:      d.SizeGB * size.GiB,
-		Connection:  d.Connection,
-		ServerID:    serverID,
-		Name:        d.Name,
-		Description: d.Description,
-		Tags:        d.Tags,
-		IconID:      d.IconID,
+		DiskPlanID:          d.PlanID,
+		SizeMB:              d.SizeGB * size.GiB,
+		Connection:          d.Connection,
+		EncryptionAlgorithm: d.EncryptionAlgorithm,
+		ServerID:            serverID,
+		Name:                d.Name,
+		Description:         d.Description,
+		Tags:                d.Tags,
+		IconID:              d.IconID,
 	}
 	return createReq, nil, nil
 }
@@ -498,11 +506,12 @@ type ConnectedDiskBuilder struct {
 	ID            types.ID
 	EditParameter *UnixEditRequest
 
-	Name        string
-	Description string
-	Tags        types.Tags
-	IconID      types.ID
-	Connection  types.EDiskConnection
+	Name                string
+	Description         string
+	Tags                types.Tags
+	IconID              types.ID
+	Connection          types.EDiskConnection
+	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
 
 	NoWait bool
 	Client *APIClient
