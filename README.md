@@ -23,6 +23,6 @@ iaas-service-goは[sacloud/libsacloud v2](https://github.com/sacloud/libsacloud)
 
 ## License
 
-`sacloud/iaas-service-go` Copyright (C) 2022-2023 [The sacloud/iaas-service-go Authors](AUTHORS).
+`sacloud/iaas-service-go` Copyright (C) 2022-2025 [The sacloud/iaas-service-go Authors](AUTHORS).
 
 This project is published under [Apache 2.0 License](LICENSE.txt).
