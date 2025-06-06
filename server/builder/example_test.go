@@ -65,7 +65,7 @@ func Example_builder() {
 		DiskBuilders: []disk.Builder{
 			&disk.FromUnixBuilder{
 				Client:     disk.NewBuildersAPIClient(client),
-				OSType:     ostype.CentOS,
+				OSType:     ostype.Ubuntu,
 				Name:       "libsacloud-example",
 				SizeGB:     20,
 				PlanID:     types.DiskPlans.SSD,
@@ -86,9 +86,6 @@ func Example_builder() {
 					//SSHKeys:                   []string{sshKey1, sshKey2},         // 公開鍵(文字列で指定)
 					//SSHKeyIDs:                 []types.ID{types.ID(123456789012)}, // 公開鍵(IDで指定)
 					//IsSSHKeysEphemeral:        false,                              // 公開鍵をさくらのクラウド側で生成した場合にサーバ作成後に該当鍵の削除を行うか
-					//GenerateSSHKeyName:        "",                                 // 生成する公開鍵の名称
-					//GenerateSSHKeyPassPhrase:  "",                                 // 生成する公開鍵のパスフレーズ
-					//GenerateSSHKeyDescription: "",                                 // 生成する公開鍵の説明
 					//IsNotesEphemeral:          false,                              // Notesで指定したスタートアップスクリプトをサーバ作成後に削除するか
 					//NoteContents:              []string{note1, note2},             // スタートアップスクリプト(文字列で指定)
 					//Notes:                     []*iaas.DiskEditNote{ID:types.ID(123456789012)}, // スタートアップスクリプト(ID+パラメータで指定)

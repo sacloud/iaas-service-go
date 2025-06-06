@@ -68,7 +68,6 @@ type NoteHandler interface {
 // SSHKeyHandler SSHKey参照のためのインターフェース
 type SSHKeyHandler interface {
 	Read(ctx context.Context, id types.ID) (*iaas.SSHKey, error)
-	Generate(ctx context.Context, param *iaas.SSHKeyGenerateRequest) (*iaas.SSHKeyGenerated, error)
 	Delete(ctx context.Context, id types.ID) error
 }
 

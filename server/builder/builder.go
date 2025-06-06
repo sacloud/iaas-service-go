@@ -148,9 +148,8 @@ func BuilderFromResource(ctx context.Context, caller iaas.APICaller, zone string
 
 // BuildResult サーバ構築結果
 type BuildResult struct {
-	ServerID               types.ID
-	DiskIDs                []types.ID
-	GeneratedSSHPrivateKey string
+	ServerID types.ID
+	DiskIDs  []types.ID
 }
 
 var (
@@ -250,9 +249,6 @@ func (b *Builder) Build(ctx context.Context, zone string) (*BuildResult, error) 
 			return result, err
 		}
 		result.DiskIDs = append(result.DiskIDs, builtDisk.DiskID)
-		if builtDisk.GeneratedSSHKey != nil {
-			result.GeneratedSSHPrivateKey = builtDisk.GeneratedSSHKey.PrivateKey
-		}
 	}
 
 	// connect packet filter
@@ -646,12 +642,9 @@ func (b *Builder) reconcileDisks(ctx context.Context, zone string, server *iaas.
 	isDiskUpdated := len(server.Disks) != len(b.DiskBuilders) // isDiskUpdateがtrueの場合、後でディスクの取外&接続を行う
 	for i, diskReq := range b.DiskBuilders {
 		if diskReq.DiskID().IsEmpty() {
-			res, err := diskReq.Build(ctx, zone, server.ID)
+			_, err := diskReq.Build(ctx, zone, server.ID)
 			if err != nil {
 				return err
-			}
-			if res.GeneratedSSHKey != nil {
-				result.GeneratedSSHPrivateKey = res.GeneratedSSHKey.PrivateKey
 			}
 			isDiskUpdated = true
 		}

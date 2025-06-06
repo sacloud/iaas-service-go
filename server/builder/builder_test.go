@@ -378,7 +378,6 @@ func TestBuilder_Build_BlackBox(t *testing.T) {
 	var switchID types.ID
 	var diskIDs []types.ID
 	var blackboxBuilder *Builder
-	var buildResult *BuildResult
 	var testZone = testutil.TestZone()
 
 	testutil.RunCRUD(t, &testutil.CRUDTestCase{
@@ -410,12 +409,10 @@ func TestBuilder_Build_BlackBox(t *testing.T) {
 				result := v.(*BuildResult)
 				err := testutil.DoAsserts(
 					testutil.AssertNotEmptyFunc(t, result.ServerID, "BuildResult.ServerID"),
-					testutil.AssertNotEmptyFunc(t, result.GeneratedSSHPrivateKey, "BuildResult.GeneratedSSHPrivateKey"),
 				)
 				if err != nil {
 					return err
 				}
-				buildResult = result
 				ctx.ID = result.ServerID
 				return nil
 			},
@@ -439,7 +436,7 @@ func TestBuilder_Build_BlackBox(t *testing.T) {
 					time.Sleep(30 * time.Second) // sshd起動まで少し待つ
 					server := i.(*iaas.Server)
 					ip := server.Interfaces[0].IPAddress
-					return connectToServerViaSSH(t, "root", ip, []byte(buildResult.GeneratedSSHPrivateKey), []byte("libsacloud-test-passphrase"))
+					return connectToServerViaSSH(t, "root", ip, nil, []byte("libsacloud-test-passphrase"))
 				}
 				return nil
 			},
@@ -463,7 +460,6 @@ func TestBuilder_Build_BlackBox(t *testing.T) {
 				SkipExtractID: true,
 				CheckFunc: func(t testutil.TestT, ctx *testutil.CRUDTestContext, v interface{}) error {
 					result := v.(*BuildResult)
-					buildResult = result
 					ctx.ID = result.ServerID
 					return nil
 				},
@@ -501,7 +497,7 @@ func getBlackBoxTestBuilder(switchID types.ID) *Builder {
 		},
 		DiskBuilders: []disk.Builder{
 			&disk.FromUnixBuilder{
-				OSType:      ostype.CentOS,
+				OSType:      ostype.Ubuntu,
 				Name:        "libsacloud-disk-builder",
 				SizeGB:      20,
 				PlanID:      types.DiskPlans.SSD,
@@ -509,15 +505,12 @@ func getBlackBoxTestBuilder(switchID types.ID) *Builder {
 				Description: "libsacloud-disk-builder-description",
 				Tags:        types.Tags{"tag1", "tag2"},
 				EditParameter: &disk.UnixEditRequest{
-					HostName:                  "libsacloud-disk-builder",
-					Password:                  "libsacloud-test-password",
-					DisablePWAuth:             true,
-					EnableDHCP:                false,
-					ChangePartitionUUID:       true,
-					IsSSHKeysEphemeral:        true,
-					GenerateSSHKeyName:        "libsacloud-ssh-key-generated",
-					GenerateSSHKeyDescription: "libsacloud-ssh-key-generated-for-builder",
-					GenerateSSHKeyPassPhrase:  "libsacloud-test-passphrase",
+					HostName:            "libsacloud-disk-builder",
+					Password:            "libsacloud-test-password",
+					DisablePWAuth:       true,
+					EnableDHCP:          false,
+					ChangePartitionUUID: true,
+					IsSSHKeysEphemeral:  true,
 					// IPAddress      string
 					// NetworkMaskLen int
 					// DefaultRoute   string
