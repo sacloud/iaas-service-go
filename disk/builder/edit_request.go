@@ -53,10 +53,6 @@ type UnixEditRequest struct {
 
 	// IsSSHKeysEphemeral trueの場合、SSHキーを生成する場合に生成したSSHキーリソースをサーバ作成後に削除する
 	IsSSHKeysEphemeral bool
-	// GenerateSSHKeyName 設定されていた場合、クラウドAPIを用いてキーペアを生成する。
-	GenerateSSHKeyName        string
-	GenerateSSHKeyPassPhrase  string
-	GenerateSSHKeyDescription string
 
 	IsNotesEphemeral bool
 	NoteContents     []string
@@ -78,7 +74,7 @@ func (u *UnixEditRequest) Validate(ctx context.Context, client *APIClient) error
 	return nil
 }
 
-func (u *UnixEditRequest) prepareDiskEditParameter(ctx context.Context, client *APIClient) (*iaas.DiskEditRequest, *iaas.SSHKeyGenerated, []*iaas.Note, error) {
+func (u *UnixEditRequest) prepareDiskEditParameter(ctx context.Context, client *APIClient) (*iaas.DiskEditRequest, []*iaas.Note, error) {
 	editReq := &iaas.DiskEditRequest{
 		Background:          true,
 		Password:            u.Password,
@@ -111,23 +107,6 @@ func (u *UnixEditRequest) prepareDiskEditParameter(ctx context.Context, client *
 		})
 	}
 
-	var generatedSSHKey *iaas.SSHKeyGenerated
-	if u.GenerateSSHKeyName != "" {
-		generated, err := client.SSHKey.Generate(ctx, &iaas.SSHKeyGenerateRequest{
-			Name:        u.GenerateSSHKeyName,
-			PassPhrase:  u.GenerateSSHKeyPassPhrase,
-			Description: u.GenerateSSHKeyDescription,
-		})
-		if err != nil {
-			return nil, nil, nil, err
-		}
-		generatedSSHKey = generated
-		sshKeys = append(sshKeys, &iaas.DiskEditSSHKey{
-			ID: generated.ID,
-		})
-	}
-	editReq.SSHKeys = sshKeys
-
 	// startup script
 	var notes []*iaas.DiskEditNote
 	var generatedNotes []*iaas.Note
@@ -139,7 +118,7 @@ func (u *UnixEditRequest) prepareDiskEditParameter(ctx context.Context, client *
 			Content: note,
 		})
 		if err != nil {
-			return nil, nil, nil, err
+			return nil, nil, err
 		}
 		notes = append(notes, &iaas.DiskEditNote{
 			ID: created.ID,
@@ -155,5 +134,5 @@ func (u *UnixEditRequest) prepareDiskEditParameter(ctx context.Context, client *
 	}
 	editReq.Notes = notes
 
-	return editReq, generatedSSHKey, generatedNotes, nil
+	return editReq, generatedNotes, nil
 }

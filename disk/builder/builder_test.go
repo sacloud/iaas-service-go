@@ -43,7 +43,7 @@ func TestDiskFromUnixRequest_Validate(t *testing.T) {
 		{
 			msg: "size not found",
 			in: &FromUnixBuilder{
-				OSType: ostype.CentOS,
+				OSType: ostype.Ubuntu,
 				PlanID: types.DiskPlans.SSD,
 				SizeGB: 1,
 				Client: &APIClient{
@@ -66,7 +66,7 @@ func TestDiskFromUnixRequest_Validate(t *testing.T) {
 		{
 			msg: "invalid disk edit parameter",
 			in: &FromUnixBuilder{
-				OSType: ostype.CentOS,
+				OSType: ostype.Ubuntu,
 				PlanID: types.DiskPlans.SSD,
 				SizeGB: 1,
 				EditParameter: &UnixEditRequest{

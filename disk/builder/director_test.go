@@ -63,13 +63,13 @@ func TestDiskDirector_Builder(t *testing.T) {
 		{
 			name: "unix",
 			in: &Director{
-				OSType: ostype.CentOS,
+				OSType: ostype.Ubuntu,
 				EditParameter: &EditRequest{
 					HostName: "example",
 				},
 			},
 			out: &FromUnixBuilder{
-				OSType: ostype.CentOS,
+				OSType: ostype.Ubuntu,
 				EditParameter: &UnixEditRequest{
 					HostName: "example",
 				},

@@ -40,8 +40,7 @@ type Builder interface {
 
 // BuildResult ディスク構築結果
 type BuildResult struct {
-	DiskID          types.ID
-	GeneratedSSHKey *iaas.SSHKeyGenerated
+	DiskID types.ID
 }
 
 // UpdateResult ディスク更新結果
@@ -70,8 +69,7 @@ type FromUnixBuilder struct {
 
 	ID types.ID
 
-	generatedSSHKey *iaas.SSHKeyGenerated
-	generatedNotes  []*iaas.Note
+	generatedNotes []*iaas.Note
 }
 
 // Validate 設定値の検証
@@ -97,16 +95,7 @@ func (d *FromUnixBuilder) Build(ctx context.Context, zone string, serverID types
 	}
 	d.ID = res.DiskID
 
-	if d.generatedSSHKey != nil {
-		res.GeneratedSSHKey = d.generatedSSHKey
-	}
-
 	if d.EditParameter != nil {
-		if d.EditParameter.IsSSHKeysEphemeral && d.generatedSSHKey != nil {
-			if err := d.Client.SSHKey.Delete(ctx, d.generatedSSHKey.ID); err != nil {
-				return nil, err
-			}
-		}
 		if d.EditParameter.IsNotesEphemeral {
 			for _, note := range d.generatedNotes {
 				if err := d.Client.Note.Delete(ctx, note.ID); err != nil {
@@ -164,14 +153,11 @@ func (d *FromUnixBuilder) createDiskParameter(ctx context.Context, client *APICl
 
 	var editReq *iaas.DiskEditRequest
 	if d.EditParameter != nil {
-		req, sshKey, notes, err := d.EditParameter.prepareDiskEditParameter(ctx, client)
+		req, notes, err := d.EditParameter.prepareDiskEditParameter(ctx, client)
 		if err != nil {
 			return nil, nil, err
 		}
 		editReq = req
-		if sshKey != nil {
-			d.generatedSSHKey = sshKey
-		}
 		if len(notes) > 0 {
 			d.generatedNotes = notes
 		}
@@ -202,8 +188,6 @@ type FromFixedArchiveBuilder struct {
 	NoWait bool
 
 	ID types.ID
-
-	generatedSSHKey *iaas.SSHKeyGenerated
 }
 
 // Validate 設定値の検証
@@ -225,9 +209,6 @@ func (d *FromFixedArchiveBuilder) Build(ctx context.Context, zone string, server
 		return nil, err
 	}
 	d.ID = res.DiskID
-	if d.generatedSSHKey != nil {
-		res.GeneratedSSHKey = d.generatedSSHKey
-	}
 	return res, nil
 }
 
@@ -305,8 +286,7 @@ type FromDiskOrArchiveBuilder struct {
 	ID     types.ID
 	NoWait bool
 
-	generatedSSHKey *iaas.SSHKeyGenerated
-	generatedNotes  []*iaas.Note
+	generatedNotes []*iaas.Note
 }
 
 // Validate 設定値の検証
@@ -339,16 +319,7 @@ func (d *FromDiskOrArchiveBuilder) Build(ctx context.Context, zone string, serve
 		return nil, err
 	}
 	d.ID = res.DiskID
-	if d.generatedSSHKey != nil {
-		res.GeneratedSSHKey = d.generatedSSHKey
-	}
-
 	if d.EditParameter != nil {
-		if d.EditParameter.IsSSHKeysEphemeral && d.generatedSSHKey != nil {
-			if err := d.Client.SSHKey.Delete(ctx, d.generatedSSHKey.ID); err != nil {
-				return nil, err
-			}
-		}
 		if d.EditParameter.IsNotesEphemeral {
 			for _, note := range d.generatedNotes {
 				if err := d.Client.Note.Delete(ctx, note.ID); err != nil {
@@ -402,14 +373,11 @@ func (d *FromDiskOrArchiveBuilder) createDiskParameter(ctx context.Context, clie
 
 	var editReq *iaas.DiskEditRequest
 	if d.EditParameter != nil {
-		req, sshKey, notes, err := d.EditParameter.prepareDiskEditParameter(ctx, client)
+		req, notes, err := d.EditParameter.prepareDiskEditParameter(ctx, client)
 		if err != nil {
 			return nil, nil, err
 		}
 		editReq = req
-		if sshKey != nil {
-			d.generatedSSHKey = sshKey
-		}
 		if len(notes) > 0 {
 			d.generatedNotes = notes
 		}
@@ -542,11 +510,10 @@ func (d *ConnectedDiskBuilder) Build(ctx context.Context, zone string, serverID 
 	}
 
 	if d.EditParameter != nil {
-		req, sshKey, _, err := d.EditParameter.prepareDiskEditParameter(ctx, d.Client)
+		req, _, err := d.EditParameter.prepareDiskEditParameter(ctx, d.Client)
 		if err != nil {
 			return nil, err
 		}
-		res.GeneratedSSHKey = sshKey
 		if err := d.Client.Disk.Config(ctx, zone, d.ID, req); err != nil {
 			return nil, err
 		}
@@ -568,7 +535,7 @@ func (d *ConnectedDiskBuilder) Update(ctx context.Context, zone string) (*Update
 	}
 
 	if d.EditParameter != nil {
-		req, _, _, err := d.EditParameter.prepareDiskEditParameter(ctx, d.Client)
+		req, _, err := d.EditParameter.prepareDiskEditParameter(ctx, d.Client)
 		if err != nil {
 			return nil, err
 		}
