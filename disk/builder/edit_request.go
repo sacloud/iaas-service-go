@@ -106,6 +106,7 @@ func (u *UnixEditRequest) prepareDiskEditParameter(ctx context.Context, client *
 			ID: id,
 		})
 	}
+	editReq.SSHKeys = sshKeys
 
 	// startup script
 	var notes []*iaas.DiskEditNote
