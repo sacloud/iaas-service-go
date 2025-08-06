@@ -43,7 +43,7 @@ func (s *Service) CreateWithContext(ctx context.Context, req *CreateRequest) (*i
 		if err != nil {
 			return nil, fmt.Errorf("reading source file[%s] failed: %s", req.SourcePath, err)
 		}
-		defer file.Close()
+		defer file.Close() //nolint:errcheck
 		reader = file
 	}
 
