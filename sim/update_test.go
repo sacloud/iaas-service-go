@@ -44,7 +44,7 @@ func TestSIMService_convertUpdateRequest(t *testing.T) {
 		Carriers: []*iaas.SIMNetworkOperatorConfig{
 			{
 				Allow: true,
-				Name:  types.SIMOperators.Docomo.String(),
+				Name:  types.SIMOperators.KDDI.String(),
 			},
 		},
 	})
