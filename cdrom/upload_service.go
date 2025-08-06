@@ -62,7 +62,7 @@ func (s *Service) UploadWithContext(ctx context.Context, req *UploadRequest) err
 		if err != nil {
 			return fmt.Errorf("opening upload file failed: %s", err)
 		}
-		defer f.Close()
+		defer f.Close() //nolint:errcheck
 		reader = f
 	}
 

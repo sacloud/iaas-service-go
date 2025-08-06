@@ -38,7 +38,7 @@ func TestArchiveService_downloadAfterBuild(t *testing.T) {
 	if err := os.WriteFile(filename, []byte("test"), 0600); err != nil {
 		t.Fatal(err)
 	}
-	defer os.Remove(filename)
+	defer os.Remove(filename) //nolint:errcheck
 
 	// create
 	archive, err := svc.Create(&CreateRequest{

@@ -548,13 +548,13 @@ func connectToServerViaSSH(t testutil.TestT, user, ip string, privateKey []byte,
 	if err != nil {
 		return err
 	}
-	defer client.Close()
+	defer client.Close() //nolint:errcheck
 
 	session, err := client.NewSession()
 	if err != nil {
 		return err
 	}
-	defer session.Close()
+	defer session.Close() //nolint:errcheck
 
 	var b bytes.Buffer
 	session.Stdout = &b
