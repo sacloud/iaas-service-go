@@ -4,7 +4,7 @@ go 1.23.0
 
 require (
 	github.com/sacloud/ftps v1.2.0
-	github.com/sacloud/iaas-api-go v1.16.0
+	github.com/sacloud/iaas-api-go v1.17.0
 	github.com/sacloud/packages-go v0.0.11
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/crypto v0.40.0
@@ -22,13 +22,13 @@ require (
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
-	github.com/hashicorp/go-retryablehttp v0.7.7 // indirect
+	github.com/hashicorp/go-retryablehttp v0.7.8 // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/sacloud/api-client-go v0.3.0 // indirect
+	github.com/sacloud/api-client-go v0.3.2 // indirect
 	github.com/sacloud/go-http v0.1.9 // indirect
 	go.uber.org/ratelimit v0.3.1 // indirect
 	golang.org/x/net v0.41.0 // indirect
