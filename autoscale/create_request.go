@@ -29,8 +29,8 @@ type CreateRequest struct {
 	Zones                  []string                      `validate:"required"`
 	Config                 string                        `validate:"required"`
 	TriggerType            types.EAutoScaleTriggerType   `validate:"omitempty,oneof=cpu router schedule"`
-	CPUThresholdScaling    *CreateCPUThresholdScaling    `validate:"omitempty,dive"`
-	RouterThresholdScaling *CreateRouterThresholdScaling `validate:"omitempty,dive"`
+	CPUThresholdScaling    *CreateCPUThresholdScaling    `validate:"omitempty"`
+	RouterThresholdScaling *CreateRouterThresholdScaling `validate:"omitempty"`
 	ScheduleScaling        []*CreateScheduleScaling      `validate:"omitempty,dive"`
 	Disabled               bool
 
