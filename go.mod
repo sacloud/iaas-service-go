@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/sacloud/ftps v1.2.0
-	github.com/sacloud/iaas-api-go v1.17.0
+	github.com/sacloud/iaas-api-go v1.17.2
 	github.com/sacloud/packages-go v0.0.11
 	github.com/stretchr/testify v1.11.1
 	golang.org/x/crypto v0.42.0
@@ -28,7 +28,7 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/sacloud/api-client-go v0.3.2 // indirect
+	github.com/sacloud/api-client-go v0.3.3 // indirect
 	github.com/sacloud/go-http v0.1.9 // indirect
 	go.uber.org/ratelimit v0.3.1 // indirect
 	golang.org/x/net v0.43.0 // indirect

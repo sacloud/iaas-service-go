@@ -32,8 +32,8 @@ type UpdateRequest struct {
 	Zones                  *[]string                     `service:",omitempty" validate:"omitempty,required"`
 	Config                 *string                       `service:",omitempty" validate:"omitempty,required"`
 	TriggerType            *string                       `service:",omitempty" validate:"omitempty,required,oneof=cpu router"`
-	CPUThresholdScaling    *UpdateCPUThresholdScaling    `service:"-" validate:"omitempty,dive"`
-	RouterThresholdScaling *UpdateRouterThresholdScaling `service:"-" validate:"omitempty,dive"`
+	CPUThresholdScaling    *UpdateCPUThresholdScaling    `service:"-" validate:"omitempty"`
+	RouterThresholdScaling *UpdateRouterThresholdScaling `service:"-" validate:"omitempty"`
 	ScheduleScaling        *[]*UpdateScheduleScaling     `service:"-" validate:"omitempty,dive"`
 	Disabled               *bool                         `service:",omitempty"`
 
