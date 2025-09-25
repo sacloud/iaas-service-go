@@ -1,5 +1,14 @@
 # Changelog
 
+## [v1.14.0](https://github.com/sacloud/iaas-service-go/compare/v1.13.0...v1.14.0) - 2025-09-25
+- ubuntu-20.04 -> 22.04, 24.04, latest by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/164
+- go: bump golang.org/x/crypto from 0.40.0 to 0.41.0 by @dependabot[bot] in https://github.com/sacloud/iaas-service-go/pull/163
+- go: bump github.com/stretchr/testify from 1.10.0 to 1.11.1 by @dependabot[bot] in https://github.com/sacloud/iaas-service-go/pull/168
+- ci: bump actions/setup-go from 5 to 6 by @dependabot[bot] in https://github.com/sacloud/iaas-service-go/pull/169
+- ci: bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/sacloud/iaas-service-go/pull/166
+- go: bump golang.org/x/crypto from 0.41.0 to 0.42.0 by @dependabot[bot] in https://github.com/sacloud/iaas-service-go/pull/171
+- iaas-api-go@v1.17.2 and fixes validate tag by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/172
+
 ## [v1.13.0](https://github.com/sacloud/iaas-service-go/compare/v1.12.1...v1.13.0) - 2025-08-06
 - go: bump golang.org/x/crypto from 0.39.0 to 0.40.0 by @dependabot[bot] in https://github.com/sacloud/iaas-service-go/pull/157
 - golangci-lint v2 by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/159
