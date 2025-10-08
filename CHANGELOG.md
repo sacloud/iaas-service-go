@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.14.2](https://github.com/sacloud/iaas-service-go/compare/v1.14.1...v1.14.2) - 2025-10-08
+- iaas-api-go v1.17.4 by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/175
+
 ## [v1.14.1](https://github.com/sacloud/iaas-service-go/compare/v1.14.0...v1.14.1) - 2025-10-07
 - github.com/sacloud/iaas-api-go v1.17.3 by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/173
 
