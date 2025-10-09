@@ -43,6 +43,7 @@ func TestDiskService_convertApplyRequest(t *testing.T) {
 				DiskPlanID:          types.DiskPlans.SSD,
 				Connection:          types.DiskConnections.VirtIO,
 				EncryptionAlgorithm: types.DiskEncryptionAlgorithms.AES256XTS,
+				KMSKeyID:            types.ID(101),
 				SizeGB:              20,
 				DistantFrom:         nil,
 				OSType:              0,
@@ -58,6 +59,7 @@ func TestDiskService_convertApplyRequest(t *testing.T) {
 				PlanID:              types.DiskPlans.SSD,
 				Connection:          types.DiskConnections.VirtIO,
 				EncryptionAlgorithm: types.DiskEncryptionAlgorithms.AES256XTS,
+				KMSKeyID:            types.ID(101),
 				Client:              disk.NewBuildersAPIClient(caller),
 				NoWait:              true,
 			},
@@ -70,6 +72,7 @@ func TestDiskService_convertApplyRequest(t *testing.T) {
 				DiskPlanID:          types.DiskPlans.SSD,
 				Connection:          types.DiskConnections.VirtIO,
 				EncryptionAlgorithm: types.DiskEncryptionAlgorithms.AES256XTS,
+				KMSKeyID:            types.ID(101),
 				SizeGB:              20,
 				OSType:              ostype.Ubuntu,
 				EditParameter: &EditParameter{
@@ -85,6 +88,7 @@ func TestDiskService_convertApplyRequest(t *testing.T) {
 				PlanID:              types.DiskPlans.SSD,
 				Connection:          types.DiskConnections.VirtIO,
 				EncryptionAlgorithm: types.DiskEncryptionAlgorithms.AES256XTS,
+				KMSKeyID:            types.ID(101),
 				EditParameter: &disk.UnixEditRequest{
 					HostName: "hostname",
 					Password: "password",
@@ -102,6 +106,7 @@ func TestDiskService_convertApplyRequest(t *testing.T) {
 				DiskPlanID:          types.DiskPlans.SSD,
 				Connection:          types.DiskConnections.VirtIO,
 				EncryptionAlgorithm: types.DiskEncryptionAlgorithms.AES256XTS,
+				KMSKeyID:            types.ID(101),
 				SourceDiskID:        types.ID(1),
 				SizeGB:              20,
 				EditParameter: &EditParameter{
@@ -116,6 +121,7 @@ func TestDiskService_convertApplyRequest(t *testing.T) {
 				PlanID:              types.DiskPlans.SSD,
 				Connection:          types.DiskConnections.VirtIO,
 				EncryptionAlgorithm: types.DiskEncryptionAlgorithms.AES256XTS,
+				KMSKeyID:            types.ID(101),
 				SourceDiskID:        types.ID(1),
 				EditParameter: &disk.UnixEditRequest{
 					HostName: "hostname",
