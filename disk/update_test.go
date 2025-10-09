@@ -52,7 +52,7 @@ func TestDiskService_convertUpdateRequest(t *testing.T) {
 		Connection: types.DiskConnections.VirtIO,
 		SizeMB:     20 * size.GiB,
 		Name:       name,
-	}, []types.ID{})
+	}, []types.ID{}, 0)
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -34,6 +34,7 @@ type ApplyRequest struct {
 	DiskPlanID          types.ID
 	Connection          types.EDiskConnection
 	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
+	KMSKeyID            types.ID
 	SourceDiskID        types.ID
 	SourceArchiveID     types.ID
 	ServerID            types.ID
@@ -92,6 +93,7 @@ func (req *ApplyRequest) Builder(caller iaas.APICaller) (disk.Builder, error) {
 		PlanID:              req.DiskPlanID,
 		Connection:          req.Connection,
 		EncryptionAlgorithm: req.EncryptionAlgorithm,
+		KMSKeyID:            req.KMSKeyID,
 		Description:         req.Description,
 		Tags:                req.Tags,
 		IconID:              req.IconID,

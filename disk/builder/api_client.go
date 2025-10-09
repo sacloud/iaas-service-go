@@ -38,7 +38,7 @@ type ArchiveFinder interface {
 
 // CreateDiskHandler ディスク操作のためのインターフェース
 type CreateDiskHandler interface {
-	Create(ctx context.Context, zone string, createParam *iaas.DiskCreateRequest, distantFrom []types.ID) (*iaas.Disk, error)
+	Create(ctx context.Context, zone string, createParam *iaas.DiskCreateRequest, distantFrom []types.ID, kmsKeyID types.ID) (*iaas.Disk, error)
 	CreateWithConfig(
 		ctx context.Context,
 		zone string,
@@ -46,6 +46,7 @@ type CreateDiskHandler interface {
 		editParam *iaas.DiskEditRequest,
 		bootAtAvailable bool,
 		distantFrom []types.ID,
+		kmsKeyID types.ID,
 	) (*iaas.Disk, error)
 	Update(ctx context.Context, zone string, id types.ID, updateParam *iaas.DiskUpdateRequest) (*iaas.Disk, error)
 	Config(ctx context.Context, zone string, id types.ID, editParam *iaas.DiskEditRequest) error

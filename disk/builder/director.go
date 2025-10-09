@@ -29,6 +29,7 @@ type Director struct {
 	PlanID              types.ID
 	Connection          types.EDiskConnection
 	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
+	KMSKeyID            types.ID
 	Description         string
 	Tags                types.Tags
 	IconID              types.ID
@@ -50,16 +51,15 @@ func (d *Director) Builder() Builder {
 		switch {
 		case !d.DiskID.IsEmpty():
 			return &ConnectedDiskBuilder{
-				ID:                  d.DiskID,
-				Name:                d.Name,
-				Description:         d.Description,
-				Tags:                d.Tags,
-				IconID:              d.IconID,
-				Connection:          d.Connection,
-				EncryptionAlgorithm: d.EncryptionAlgorithm,
-				EditParameter:       d.EditParameter.ToUnixDiskEditRequest(),
-				NoWait:              d.NoWait,
-				Client:              d.Client,
+				ID:            d.DiskID,
+				Name:          d.Name,
+				Description:   d.Description,
+				Tags:          d.Tags,
+				IconID:        d.IconID,
+				Connection:    d.Connection,
+				EditParameter: d.EditParameter.ToUnixDiskEditRequest(),
+				NoWait:        d.NoWait,
+				Client:        d.Client,
 			}
 		case !d.SourceDiskID.IsEmpty(), !d.SourceArchiveID.IsEmpty():
 			return &FromDiskOrArchiveBuilder{
@@ -71,6 +71,7 @@ func (d *Director) Builder() Builder {
 				PlanID:              d.PlanID,
 				Connection:          d.Connection,
 				EncryptionAlgorithm: d.EncryptionAlgorithm,
+				KMSKeyID:            d.KMSKeyID,
 				Description:         d.Description,
 				Tags:                d.Tags,
 				IconID:              d.IconID,
@@ -86,6 +87,7 @@ func (d *Director) Builder() Builder {
 				PlanID:              d.PlanID,
 				Connection:          d.Connection,
 				EncryptionAlgorithm: d.EncryptionAlgorithm,
+				KMSKeyID:            d.KMSKeyID,
 				Description:         d.Description,
 				Tags:                d.Tags,
 				IconID:              d.IconID,
@@ -102,6 +104,7 @@ func (d *Director) Builder() Builder {
 			PlanID:              d.PlanID,
 			Connection:          d.Connection,
 			EncryptionAlgorithm: d.EncryptionAlgorithm,
+			KMSKeyID:            d.KMSKeyID,
 			Description:         d.Description,
 			Tags:                d.Tags,
 			IconID:              d.IconID,
@@ -119,6 +122,7 @@ func (d *Director) Builder() Builder {
 			PlanID:              d.PlanID,
 			Connection:          d.Connection,
 			EncryptionAlgorithm: d.EncryptionAlgorithm,
+			KMSKeyID:            d.KMSKeyID,
 			Description:         d.Description,
 			Tags:                d.Tags,
 			IconID:              d.IconID,

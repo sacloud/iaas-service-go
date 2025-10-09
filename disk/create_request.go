@@ -33,6 +33,7 @@ type CreateRequest struct {
 	DiskPlanID          types.ID              `validate:"oneof=4 2"`
 	Connection          types.EDiskConnection `validate:"oneof=virtio ide"`
 	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
+	KMSKeyID            types.ID
 	SourceDiskID        types.ID
 	SourceArchiveID     types.ID
 	ServerID            types.ID
@@ -63,6 +64,7 @@ func (req *CreateRequest) ApplyRequest() *ApplyRequest {
 		DiskPlanID:          req.DiskPlanID,
 		Connection:          req.Connection,
 		EncryptionAlgorithm: req.EncryptionAlgorithm,
+		KMSKeyID:            req.KMSKeyID,
 		SourceDiskID:        req.SourceDiskID,
 		SourceArchiveID:     req.SourceArchiveID,
 		ServerID:            req.ServerID,
