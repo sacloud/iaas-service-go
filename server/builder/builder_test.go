@@ -677,9 +677,9 @@ func TestBuilder_IsNeedShutdown(t *testing.T) {
 				Client: &APIClient{
 					Server: &dummyCreateServerHandler{
 						server: &iaas.Server{
-							ID:                   types.ID(1),
-							CPU:                  1,
-							ServerPlanCommitment: types.Commitments.DedicatedCPU,
+							ID:         types.ID(1),
+							CPU:        1,
+							Commitment: types.Commitments.DedicatedCPU,
 						},
 					},
 				},

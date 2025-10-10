@@ -30,6 +30,7 @@ type CreateRequest struct {
 	CPU             int
 	MemoryGB        int
 	GPU             int
+	GPUModel        string
 	CPUModel        string
 	Commitment      types.ECommitment
 	Generation      types.EPlanGeneration
@@ -58,6 +59,7 @@ func (req *CreateRequest) ApplyRequest() *ApplyRequest {
 		CPU:               req.CPU,
 		MemoryGB:          req.MemoryGB,
 		GPU:               req.GPU,
+		GPUModel:          req.GPUModel,
 		CPUModel:          req.CPUModel,
 		Commitment:        req.Commitment,
 		Generation:        req.Generation,

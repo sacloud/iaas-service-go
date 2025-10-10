@@ -136,6 +136,7 @@ func TestServerService_convertUpdateRequest(t *testing.T) {
 				CPU:             2,
 				MemoryGB:        4,
 				GPU:             0,
+				GPUModel:        "",
 				CPUModel:        "uncategorized",
 				Commitment:      types.Commitments.DedicatedCPU,
 				Generation:      types.PlanGenerations.G200,

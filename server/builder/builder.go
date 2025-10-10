@@ -36,6 +36,7 @@ type Builder struct {
 	CPU             int
 	MemoryGB        int
 	GPU             int
+	GPUModel        string
 	CPUModel        string
 	Commitment      types.ECommitment
 	Generation      types.EPlanGeneration
@@ -128,9 +129,10 @@ func BuilderFromResource(ctx context.Context, caller iaas.APICaller, zone string
 		CPU:             current.CPU,
 		MemoryGB:        current.MemoryMB * size.GiB,
 		GPU:             current.GPU,
-		CPUModel:        current.ServerPlanCPUModel,
-		Commitment:      current.ServerPlanCommitment,
-		Generation:      current.ServerPlanGeneration,
+		GPUModel:        current.GPUModel,
+		CPUModel:        current.CPUModel,
+		Commitment:      current.Commitment,
+		Generation:      current.Generation,
 		InterfaceDriver: current.InterfaceDriver,
 		Description:     current.Description,
 		IconID:          current.IconID,
@@ -156,6 +158,7 @@ var (
 	defaultCPU             = 1
 	defaultMemoryGB        = 1
 	defaultGPU             = 0
+	defaultGPUModel        = ""
 	defaultCPUModel        = ""
 	defaultCommitment      = types.Commitments.Standard
 	defaultGeneration      = types.PlanGenerations.Default
@@ -202,6 +205,7 @@ func (b *Builder) Validate(ctx context.Context, zone string) error {
 		CPU:        b.CPU,
 		MemoryGB:   b.MemoryGB,
 		GPU:        b.GPU,
+		GPUModel:   b.GPUModel,
 		CPUModel:   b.CPUModel,
 		Commitment: b.Commitment,
 		Generation: b.Generation,
@@ -382,12 +386,13 @@ func (b *Builder) Update(ctx context.Context, zone string) (*BuildResult, error)
 	if b.isPlanChanged(server) {
 		b.Tags = plans.AppendPreviousIDTagIfAbsent(b.Tags, server.ID)
 		updated, err := b.Client.Server.ChangePlan(ctx, zone, server.ID, &iaas.ServerChangePlanRequest{
-			CPU:                  b.CPU,
-			MemoryMB:             b.MemoryGB * size.GiB,
-			GPU:                  b.GPU,
-			ServerPlanGeneration: b.Generation,
-			ServerPlanCommitment: b.Commitment,
-			ServerPlanCPUModel:   b.CPUModel,
+			CPU:        b.CPU,
+			MemoryMB:   b.MemoryGB * size.GiB,
+			GPU:        b.GPU,
+			GPUModel:   b.GPUModel,
+			Generation: b.Generation,
+			Commitment: b.Commitment,
+			CPUModel:   b.CPUModel,
 		})
 		if err != nil {
 			return result, err
@@ -443,6 +448,9 @@ func (b *Builder) setDefaults() {
 	if b.GPU == 0 {
 		b.GPU = defaultGPU
 	}
+	if b.GPUModel == "" {
+		b.GPUModel = defaultGPUModel
+	}
 	if b.CPUModel == "" {
 		b.CPUModel = defaultCPUModel
 	}
@@ -463,6 +471,7 @@ type serverState struct {
 	memoryGB        int
 	cpu             int
 	gpu             int
+	gpuModel        string
 	cpuModel        string
 	commitment      types.ECommitment
 	nic             *nicState   // hash
@@ -486,6 +495,7 @@ func (b *Builder) desiredState() *serverState {
 		memoryGB:        b.MemoryGB,
 		cpu:             b.CPU,
 		gpu:             b.GPU,
+		gpuModel:        b.GPUModel,
 		cpuModel:        b.CPUModel,
 		commitment:      b.Commitment,
 		nic:             nic,
@@ -541,8 +551,9 @@ func (b *Builder) currentState(server *iaas.Server) *serverState {
 		memoryGB:        server.GetMemoryGB(),
 		cpu:             server.CPU,
 		gpu:             server.GPU,
-		cpuModel:        server.ServerPlanCPUModel,
-		commitment:      server.ServerPlanCommitment,
+		gpuModel:        server.GPUModel,
+		cpuModel:        server.CPUModel,
+		commitment:      server.Commitment,
 		nic:             nic,
 		additionalNICs:  additionalNICs,
 		diskCount:       len(server.Disks),
@@ -552,20 +563,21 @@ func (b *Builder) currentState(server *iaas.Server) *serverState {
 // createServer サーバ作成
 func (b *Builder) createServer(ctx context.Context, zone string) (*iaas.Server, error) {
 	param := &iaas.ServerCreateRequest{
-		CPU:                  b.CPU,
-		MemoryMB:             b.MemoryGB * size.GiB,
-		GPU:                  b.GPU,
-		ServerPlanCPUModel:   b.CPUModel,
-		ServerPlanCommitment: b.Commitment,
-		ServerPlanGeneration: b.Generation,
-		InterfaceDriver:      b.InterfaceDriver,
-		Name:                 b.Name,
-		Description:          b.Description,
-		Tags:                 b.Tags,
-		IconID:               b.IconID,
-		WaitDiskMigration:    false,
-		PrivateHostID:        b.PrivateHostID,
-		ConnectedSwitches:    []*iaas.ConnectedSwitch{},
+		CPU:               b.CPU,
+		MemoryMB:          b.MemoryGB * size.GiB,
+		GPU:               b.GPU,
+		GPUModel:          b.GPUModel,
+		CPUModel:          b.CPUModel,
+		Commitment:        b.Commitment,
+		Generation:        b.Generation,
+		InterfaceDriver:   b.InterfaceDriver,
+		Name:              b.Name,
+		Description:       b.Description,
+		Tags:              b.Tags,
+		IconID:            b.IconID,
+		WaitDiskMigration: false,
+		PrivateHostID:     b.PrivateHostID,
+		ConnectedSwitches: []*iaas.ConnectedSwitch{},
 	}
 	if b.NIC != nil {
 		cs := b.NIC.GetConnectedSwitchParam()
@@ -803,9 +815,10 @@ func (b *Builder) isPlanChanged(server *iaas.Server) bool {
 	return b.CPU != server.CPU ||
 		b.MemoryGB != server.GetMemoryGB() ||
 		b.GPU != server.GPU ||
-		(b.CPUModel != "" && b.CPUModel != server.ServerPlanCPUModel) ||
-		b.Commitment != server.ServerPlanCommitment ||
-		(b.Generation != types.PlanGenerations.Default && b.Generation != server.ServerPlanGeneration)
+		(b.GPUModel != "" && b.GPUModel != server.GPUModel) ||
+		(b.CPUModel != "" && b.CPUModel != server.CPUModel) ||
+		b.Commitment != server.Commitment ||
+		(b.Generation != types.PlanGenerations.Default && b.Generation != server.Generation)
 	// b.Generation != server.ServerPlanGeneration
 }
 
