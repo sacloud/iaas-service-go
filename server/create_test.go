@@ -74,6 +74,7 @@ func TestServerService_convertCreateRequest(t *testing.T) {
 				CPU:             22,
 				MemoryGB:        4,
 				GPU:             0,
+				GPUModel:        "",
 				CPUModel:        "uncategorized",
 				Commitment:      types.Commitments.DedicatedCPU,
 				Generation:      types.PlanGenerations.Default,

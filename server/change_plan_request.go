@@ -23,12 +23,13 @@ type ChangePlanRequest struct {
 	Zone string   `service:"-" validate:"required"`
 	ID   types.ID `service:"-" validate:"required"`
 
-	CPU                  int
-	MemoryMB             int
-	GPU                  int
-	ServerPlanCPUModel   string
-	ServerPlanCommitment types.ECommitment
-	ServerPlanGeneration types.EPlanGeneration
+	CPU        int
+	MemoryMB   int
+	GPU        int
+	GPUModel   string
+	CPUModel   string
+	Commitment types.ECommitment
+	Generation types.EPlanGeneration
 }
 
 func (req *ChangePlanRequest) Validate() error {

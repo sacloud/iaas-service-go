@@ -42,12 +42,13 @@ func (s *Service) ChangePlanWithContext(ctx context.Context, req *ChangePlanRequ
 	}
 
 	changeReq := &iaas.ServerChangePlanRequest{
-		CPU:                  current.CPU,
-		GPU:                  current.GPU,
-		MemoryMB:             current.MemoryMB,
-		ServerPlanCPUModel:   current.ServerPlanCPUModel,
-		ServerPlanGeneration: current.ServerPlanGeneration,
-		ServerPlanCommitment: current.ServerPlanCommitment,
+		CPU:        current.CPU,
+		GPU:        current.GPU,
+		GPUModel:   current.GPUModel,
+		MemoryMB:   current.MemoryMB,
+		CPUModel:   current.CPUModel,
+		Generation: current.Generation,
+		Commitment: current.Commitment,
 	}
 	if req.CPU > 0 {
 		changeReq.CPU = req.CPU
@@ -58,14 +59,17 @@ func (s *Service) ChangePlanWithContext(ctx context.Context, req *ChangePlanRequ
 	if req.GPU > 0 {
 		changeReq.GPU = req.GPU
 	}
-	if req.ServerPlanCPUModel != "" {
-		changeReq.ServerPlanCPUModel = req.ServerPlanCPUModel
+	if req.GPUModel != "" {
+		changeReq.GPUModel = req.GPUModel
 	}
-	if req.ServerPlanGeneration != types.PlanGenerations.Default {
-		changeReq.ServerPlanGeneration = req.ServerPlanGeneration
+	if req.CPUModel != "" {
+		changeReq.CPUModel = req.CPUModel
 	}
-	if req.ServerPlanCommitment != types.Commitments.Unknown {
-		changeReq.ServerPlanCommitment = req.ServerPlanCommitment
+	if req.Generation != types.PlanGenerations.Default {
+		changeReq.Generation = req.Generation
+	}
+	if req.Commitment != types.Commitments.Unknown {
+		changeReq.Commitment = req.Commitment
 	}
 
 	return plans.ChangeServerPlan(ctx, s.caller, req.Zone, req.ID, changeReq)
