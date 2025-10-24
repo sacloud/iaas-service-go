@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.17.0](https://github.com/sacloud/iaas-service-go/compare/v1.16.0...v1.17.0) - 2025-10-24
+- iaas-api-go v1.20.0 by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/182
+
 ## [v1.16.0](https://github.com/sacloud/iaas-service-go/compare/v1.15.0...v1.16.0) - 2025-10-10
 - feat(koukaryoku-vrt): add GPUModel field (#403) by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/180
 
