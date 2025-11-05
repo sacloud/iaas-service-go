@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.18.1](https://github.com/sacloud/iaas-service-go/compare/v1.18.0...v1.18.1) - 2025-11-05
+- Revert "Send signals to MonitoringSuite" by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/188
+- iaas-api-go v1.21.1 by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/190
+
 ## [v1.18.0](https://github.com/sacloud/iaas-service-go/compare/v1.17.0...v1.18.0) - 2025-11-05
 - iaas-api-go v1.21.0 by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/185
 - Send signals to MonitoringSuite by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/187
