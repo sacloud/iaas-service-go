@@ -63,6 +63,7 @@ type RouterSetting struct {
 	StaticRoute               []*iaas.VPCRouterStaticRoute
 	SyslogHost                string
 	ScheduledMaintenance      *iaas.VPCRouterScheduledMaintenance
+	MonitoringSuite           *iaas.MonitoringSuite
 }
 
 func (req *ApplyRequest) Builder(caller iaas.APICaller) *builder.Builder {
@@ -109,5 +110,6 @@ func (req *ApplyRequest) routerSetting() *builder.RouterSetting {
 		StaticRoute:               req.RouterSetting.StaticRoute,
 		SyslogHost:                req.RouterSetting.SyslogHost,
 		ScheduledMaintenance:      req.RouterSetting.ScheduledMaintenance,
+		MonitoringSuite:           req.RouterSetting.MonitoringSuite,
 	}
 }
