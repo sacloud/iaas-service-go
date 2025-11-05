@@ -38,7 +38,6 @@ type UpdateRequest struct {
 	SlackWebhooksURL   *string                        `service:",omitempty"`
 	NotifyInterval     *int                           `service:",omitempty"`
 	Timeout            *int                           `service:",omitempty"`
-	MonitoringSuiteLog *iaas.MonitoringSuiteLog       `service:",omitempty"`
 	SettingsHash       string
 }
 

@@ -24,12 +24,11 @@ import (
 type UpdateRequest struct {
 	ID types.ID `service:"-" validate:"required"`
 
-	Description        *string                  `service:",omitempty" validate:"omitempty,max=512"`
-	Tags               *types.Tags              `service:",omitempty"`
-	IconID             *types.ID                `service:",omitempty"`
-	Records            iaas.DNSRecords          `service:",omitempty,dive"`
-	MonitoringSuiteLog *iaas.MonitoringSuiteLog `service:",omitempty"`
-	SettingsHash       string
+	Description  *string         `service:",omitempty" validate:"omitempty,max=512"`
+	Tags         *types.Tags     `service:",omitempty"`
+	IconID       *types.ID       `service:",omitempty"`
+	Records      iaas.DNSRecords `service:",omitempty,dive"`
+	SettingsHash string
 }
 
 func (req *UpdateRequest) Validate() error {

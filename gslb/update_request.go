@@ -24,16 +24,15 @@ import (
 type UpdateRequest struct {
 	ID types.ID `service:"-" validate:"required"`
 
-	Name               *string                  `service:",omitempty" validate:"omitempty,min=1"`
-	Description        *string                  `service:",omitempty" validate:"omitempty,max=512"`
-	Tags               *types.Tags              `service:",omitempty"`
-	IconID             *types.ID                `service:",omitempty"`
-	HealthCheck        *iaas.GSLBHealthCheck    `service:",omitempty"`
-	DelayLoop          *int                     `service:",omitempty"`
-	Weighted           *types.StringFlag        `service:",omitempty"`
-	SorryServer        *string                  `service:",omitempty"`
-	DestinationServers iaas.GSLBServers         `service:",omitempty"`
-	MonitoringSuiteLog *iaas.MonitoringSuiteLog `service:",omitempty"`
+	Name               *string               `service:",omitempty" validate:"omitempty,min=1"`
+	Description        *string               `service:",omitempty" validate:"omitempty,max=512"`
+	Tags               *types.Tags           `service:",omitempty"`
+	IconID             *types.ID             `service:",omitempty"`
+	HealthCheck        *iaas.GSLBHealthCheck `service:",omitempty"`
+	DelayLoop          *int                  `service:",omitempty"`
+	Weighted           *types.StringFlag     `service:",omitempty"`
+	SorryServer        *string               `service:",omitempty"`
+	DestinationServers iaas.GSLBServers      `service:",omitempty"`
 	SettingsHash       string
 }
 

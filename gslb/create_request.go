@@ -31,7 +31,6 @@ type CreateRequest struct {
 	Weighted           types.StringFlag
 	SorryServer        string
 	DestinationServers iaas.GSLBServers
-	MonitoringSuiteLog *iaas.MonitoringSuiteLog
 }
 
 func (req *CreateRequest) Validate() error {

@@ -118,7 +118,6 @@ func (req *UpdateStandardRequest) ApplyRequest(ctx context.Context, caller iaas.
 			SiteToSiteIPsecVPN:        current.Settings.SiteToSiteIPsecVPN,
 			StaticRoute:               current.Settings.StaticRoute,
 			SyslogHost:                current.Settings.SyslogHost,
-			MonitoringSuite:           current.Settings.MonitoringSuite,
 		},
 		NoWait: false,
 	}

@@ -41,7 +41,6 @@ type CreateRequest struct {
 	Timeout              *iaas.ProxyLBTimeout
 	UseVIPFailover       bool
 	Region               types.EProxyLBRegion
-	MonitoringSuiteLog   *iaas.MonitoringSuiteLog
 }
 
 func (req *CreateRequest) Validate() error {
