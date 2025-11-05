@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.18.0](https://github.com/sacloud/iaas-service-go/compare/v1.17.0...v1.18.0) - 2025-11-05
+- iaas-api-go v1.21.0 by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/185
+- Send signals to MonitoringSuite by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/187
+
 ## [v1.17.0](https://github.com/sacloud/iaas-service-go/compare/v1.16.0...v1.17.0) - 2025-10-24
 - iaas-api-go v1.20.0 by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/182
 
