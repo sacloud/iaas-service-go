@@ -65,6 +65,7 @@ type RouterSetting struct {
 	StaticRoute               []*iaas.VPCRouterStaticRoute
 	SyslogHost                string
 	ScheduledMaintenance      *iaas.VPCRouterScheduledMaintenance
+	MonitoringSuite           *iaas.MonitoringSuite
 }
 
 func (b *Builder) init() {
@@ -250,6 +251,7 @@ func (b *Builder) create(ctx context.Context, zone string) (*iaas.VPCRouter, err
 					StaticRoute:               b.RouterSetting.StaticRoute,
 					SyslogHost:                b.RouterSetting.SyslogHost,
 					ScheduledMaintenance:      b.RouterSetting.ScheduledMaintenance,
+					MonitoringSuite:           b.RouterSetting.MonitoringSuite,
 				},
 				SettingsHash: vpcRouter.SettingsHash,
 			})
@@ -383,6 +385,7 @@ func (b *Builder) update(ctx context.Context, zone string, id types.ID) (*iaas.V
 			StaticRoute:               b.RouterSetting.StaticRoute,
 			SyslogHost:                b.RouterSetting.SyslogHost,
 			ScheduledMaintenance:      b.RouterSetting.ScheduledMaintenance,
+			MonitoringSuite:           b.RouterSetting.MonitoringSuite,
 		},
 		SettingsHash: vpcRouter.SettingsHash,
 	})

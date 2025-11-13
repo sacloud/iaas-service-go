@@ -71,6 +71,7 @@ type RouterSettingUpdate struct {
 	StaticRoute               *[]*iaas.VPCRouterStaticRoute       `service:",omitempty,recursive"`
 	SyslogHost                *string                             `service:",omitempty"`
 	ScheduledMaintenance      *iaas.VPCRouterScheduledMaintenance `service:",omitempty,recursive"`
+	MonitoringSuite           *iaas.MonitoringSuite               `service:",omitempty,recursive"`
 }
 
 func (req *UpdateRequest) Validate() error {
@@ -153,6 +154,7 @@ func (req *UpdateRequest) ApplyRequest(ctx context.Context, caller iaas.APICalle
 			SiteToSiteIPsecVPN:        current.Settings.SiteToSiteIPsecVPN,
 			StaticRoute:               current.Settings.StaticRoute,
 			SyslogHost:                current.Settings.SyslogHost,
+			MonitoringSuite:           current.Settings.MonitoringSuite,
 		},
 		NoWait: false,
 	}
