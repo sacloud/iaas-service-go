@@ -22,11 +22,12 @@ import (
 )
 
 type CreateRequest struct {
-	Name        string `validate:"required"`
-	Description string `validate:"min=0,max=512"`
-	Tags        types.Tags
-	IconID      types.ID
-	Records     iaas.DNSRecords `validate:"min=0,max=1000"`
+	Name               string `validate:"required"`
+	Description        string `validate:"min=0,max=512"`
+	Tags               types.Tags
+	IconID             types.ID
+	Records            iaas.DNSRecords `validate:"min=0,max=1000"`
+	MonitoringSuiteLog *iaas.MonitoringSuiteLog
 }
 
 func (req *CreateRequest) Validate() error {

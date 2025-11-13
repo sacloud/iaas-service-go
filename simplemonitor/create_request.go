@@ -37,6 +37,7 @@ type CreateRequest struct {
 	SlackWebhooksURL   string                         `mapconv:"Settings.SimpleMonitor.NotifySlack.IncomingWebhooksURL"`
 	NotifyInterval     int                            `mapconv:"Settings.SimpleMonitor.NotifyInterval" validate:"min=3600,max=259200"`
 	Timeout            int
+	MonitoringSuiteLog *iaas.MonitoringSuiteLog
 }
 
 func (req *CreateRequest) Validate() error {
