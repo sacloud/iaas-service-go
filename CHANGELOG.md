@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.20.0](https://github.com/sacloud/iaas-service-go/compare/v1.19.0...v1.20.0) - 2025-12-10
+- Database: MonitoringSuite,ContinuousBackup,DiskEncryption by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/198
+- go: bump golang.org/x/crypto from 0.44.0 to 0.46.0 by @dependabot[bot] in https://github.com/sacloud/iaas-service-go/pull/197
+- ci: bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/sacloud/iaas-service-go/pull/195
+- sacloud/iaas-api-go v1.23.0 by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/200
+
 ## [v1.19.0](https://github.com/sacloud/iaas-service-go/compare/v1.18.1...v1.19.0) - 2025-11-13
 - Send signals to MonitoringSuite by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/192
 
