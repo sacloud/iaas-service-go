@@ -34,6 +34,16 @@ func BuilderFromResource(ctx context.Context, caller iaas.APICaller, zone string
 		return nil, err
 	}
 
+	var backupv2Settings *iaas.DatabaseSettingBackupv2
+	if current.Backupv2Setting != nil {
+		backupv2Settings = &iaas.DatabaseSettingBackupv2{
+			Rotate:    current.Backupv2Setting.Rotate,
+			Time:      current.Backupv2Setting.Time,
+			DayOfWeek: current.Backupv2Setting.DayOfWeek,
+			Connect:   current.Backupv2Setting.Connect,
+		}
+	}
+
 	return &builder.Builder{
 		ID:                 current.ID,
 		Zone:               zone,
@@ -45,7 +55,10 @@ func BuilderFromResource(ctx context.Context, caller iaas.APICaller, zone string
 		Conf:               current.Conf,
 		CommonSetting:      current.CommonSetting,
 		BackupSetting:      current.BackupSetting,
+		Backupv2Setting:    backupv2Settings,
 		ReplicationSetting: current.ReplicationSetting,
+		MonitoringSuite:    current.MonitoringSuite,
+		Disk:               current.Disk,
 		Name:               current.Name,
 		Description:        current.Description,
 		Tags:               current.Tags,
