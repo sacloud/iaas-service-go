@@ -78,7 +78,7 @@ func TestDatabaseBuilder_Build(t *testing.T) {
 						ReplicaPassword: "",
 					},
 					BackupSetting: &iaas.DatabaseSettingBackup{
-						Rotate:    7,
+						Rotate:    8,
 						Time:      "00:00",
 						DayOfWeek: []types.EDayOfTheWeek{types.DaysOfTheWeek.Monday},
 					},

@@ -41,7 +41,10 @@ type Builder struct {
 	SourceID           types.ID
 	CommonSetting      *iaas.DatabaseSettingCommon
 	BackupSetting      *iaas.DatabaseSettingBackup
+	Backupv2Setting    *iaas.DatabaseSettingBackupv2
 	ReplicationSetting *iaas.DatabaseReplicationSetting
+	MonitoringSuite    *iaas.MonitoringSuite
+	Disk               *iaas.DatabaseDisk
 	Name               string
 	Description        string
 	Tags               types.Tags
@@ -113,7 +116,10 @@ func (b *Builder) create(ctx context.Context, zone string) (*iaas.Database, erro
 				SourceID:           b.SourceID,
 				CommonSetting:      b.CommonSetting,
 				BackupSetting:      b.BackupSetting,
+				Backupv2Setting:    b.Backupv2Setting,
 				ReplicationSetting: b.ReplicationSetting,
+				MonitoringSuite:    b.MonitoringSuite,
+				Disk:               b.Disk,
 				Name:               b.Name,
 				Description:        b.Description,
 				Tags:               b.Tags,
@@ -208,7 +214,9 @@ func (b *Builder) update(ctx context.Context, zone string, id types.ID) (*iaas.D
 		IconID:             b.IconID,
 		CommonSetting:      b.CommonSetting,
 		BackupSetting:      b.BackupSetting,
+		Backupv2Setting:    b.Backupv2Setting,
 		ReplicationSetting: b.ReplicationSetting,
+		MonitoringSuite:    b.MonitoringSuite,
 		SettingsHash:       b.SettingsHash,
 	})
 	if err != nil {

@@ -46,6 +46,17 @@ type CreateRequest struct {
 	BackupStartTimeMinute int                   `validate:"omitempty,oneof=0 15 30 45"`
 	Parameters            map[string]interface{}
 
+	EnableBackupv2          bool
+	Backupv2Weekdays        []types.EDayOfTheWeek `validate:"required_with=EnableBackupv2,max=7"`
+	Backupv2StartTimeHour   int                   `validate:"omitempty,min=0,max=23"`
+	Backupv2StartTimeMinute int                   `validate:"omitempty,oneof=0 15 30 45"`
+	Backupv2Connect         string                `validate:"required_with=EnableBackupv2"`
+
+	EnableMonitoringSuite bool
+
+	DiskEncryptionAlgorithm types.EDiskEncryptionAlgorithm
+	DiskEncryptionKMSKey    types.ID
+
 	NoWait bool
 }
 
@@ -55,30 +66,38 @@ func (req *CreateRequest) Validate() error {
 
 func (req *CreateRequest) ApplyRequest() *ApplyRequest {
 	return &ApplyRequest{
-		Zone:                  req.Zone,
-		Name:                  req.Name,
-		Description:           req.Description,
-		Tags:                  req.Tags,
-		IconID:                req.IconID,
-		PlanID:                req.PlanID,
-		SwitchID:              req.SwitchID,
-		IPAddresses:           req.IPAddresses,
-		NetworkMaskLen:        req.NetworkMaskLen,
-		DefaultRoute:          req.DefaultRoute,
-		Port:                  req.Port,
-		SourceNetwork:         req.SourceNetwork,
-		DatabaseType:          req.DatabaseType,
-		DatabaseVersion:       req.DatabaseVersion,
-		Username:              req.Username,
-		Password:              req.Password,
-		EnableReplication:     req.EnableBackup,
-		ReplicaUserPassword:   req.ReplicaUserPassword,
-		EnableWebUI:           req.EnableWebUI,
-		EnableBackup:          req.EnableBackup,
-		BackupWeekdays:        req.BackupWeekdays,
-		BackupStartTimeHour:   req.BackupStartTimeHour,
-		BackupStartTimeMinute: req.BackupStartTimeMinute,
-		Parameters:            req.Parameters,
-		NoWait:                req.NoWait,
+		Zone:                    req.Zone,
+		Name:                    req.Name,
+		Description:             req.Description,
+		Tags:                    req.Tags,
+		IconID:                  req.IconID,
+		PlanID:                  req.PlanID,
+		SwitchID:                req.SwitchID,
+		IPAddresses:             req.IPAddresses,
+		NetworkMaskLen:          req.NetworkMaskLen,
+		DefaultRoute:            req.DefaultRoute,
+		Port:                    req.Port,
+		SourceNetwork:           req.SourceNetwork,
+		DatabaseType:            req.DatabaseType,
+		DatabaseVersion:         req.DatabaseVersion,
+		Username:                req.Username,
+		Password:                req.Password,
+		EnableReplication:       req.EnableBackup,
+		ReplicaUserPassword:     req.ReplicaUserPassword,
+		EnableWebUI:             req.EnableWebUI,
+		EnableBackup:            req.EnableBackup,
+		BackupWeekdays:          req.BackupWeekdays,
+		BackupStartTimeHour:     req.BackupStartTimeHour,
+		BackupStartTimeMinute:   req.BackupStartTimeMinute,
+		Parameters:              req.Parameters,
+		EnableBackupv2:          req.EnableBackupv2,
+		Backupv2Weekdays:        req.Backupv2Weekdays,
+		Backupv2StartTimeHour:   req.Backupv2StartTimeHour,
+		Backupv2StartTimeMinute: req.Backupv2StartTimeMinute,
+		Backupv2Connect:         req.Backupv2Connect,
+		EnableMonitoringSuite:   req.EnableMonitoringSuite,
+		DiskEncryptionAlgorithm: req.DiskEncryptionAlgorithm,
+		DiskEncryptionKMSKey:    req.DiskEncryptionKMSKey,
+		NoWait:                  req.NoWait,
 	}
 }
