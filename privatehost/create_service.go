@@ -53,5 +53,9 @@ func (s *Service) CreateWithContext(ctx context.Context, req *CreateRequest) (*i
 	}
 
 	privateHostOp := iaas.NewPrivateHostOp(s.caller)
-	return privateHostOp.Create(ctx, req.Zone, params)
+
+	if req.DedicatedStorageContractID.IsEmpty() {
+		return privateHostOp.Create(ctx, req.Zone, params)
+	}
+	return privateHostOp.CreateWithDedicatedStorage(ctx, req.Zone, params, req.DedicatedStorageContractID)
 }

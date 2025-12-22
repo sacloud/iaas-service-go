@@ -24,12 +24,13 @@ import (
 type CreateRequest struct {
 	Zone string `service:"-" validate:"required"`
 
-	Name        string `validate:"required"`
-	Description string `validate:"min=0,max=512"`
-	Tags        types.Tags
-	IconID      types.ID
-	PlanID      types.ID `validate:"required_without_all=Class"`
-	Class       string   `validate:"required_without_all=PlanID,oneof=dynamic ms_windows"`
+	Name                       string `validate:"required"`
+	Description                string `validate:"min=0,max=512"`
+	Tags                       types.Tags
+	IconID                     types.ID
+	PlanID                     types.ID `validate:"required_without_all=Class"`
+	Class                      string   `validate:"required_without_all=PlanID,oneof=dynamic ms_windows"`
+	DedicatedStorageContractID types.ID
 }
 
 func (req *CreateRequest) Validate() error {

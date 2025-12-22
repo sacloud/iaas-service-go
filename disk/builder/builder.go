@@ -52,16 +52,17 @@ type UpdateResult struct {
 type FromUnixBuilder struct {
 	OSType ostype.ArchiveOSType
 
-	Name                string
-	SizeGB              int
-	DistantFrom         []types.ID
-	PlanID              types.ID
-	Connection          types.EDiskConnection
-	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
-	KMSKeyID            types.ID
-	Description         string
-	Tags                types.Tags
-	IconID              types.ID
+	Name                       string
+	SizeGB                     int
+	DistantFrom                []types.ID
+	PlanID                     types.ID
+	Connection                 types.EDiskConnection
+	EncryptionAlgorithm        types.EDiskEncryptionAlgorithm
+	KMSKeyID                   types.ID
+	DedicatedStorageContractID types.ID
+	Description                string
+	Tags                       types.Tags
+	IconID                     types.ID
 
 	EditParameter *UnixEditRequest
 
@@ -90,7 +91,7 @@ func (d *FromUnixBuilder) Validate(ctx context.Context, zone string) error {
 
 // Build ディスクの構築
 func (d *FromUnixBuilder) Build(ctx context.Context, zone string, serverID types.ID) (*BuildResult, error) {
-	res, err := build(ctx, d.Client, zone, serverID, d.DistantFrom, d.KMSKeyID, d)
+	res, err := build(ctx, d.Client, zone, serverID, d.DistantFrom, d.KMSKeyID, d.DedicatedStorageContractID, d)
 	if err != nil {
 		return nil, err
 	}
@@ -175,16 +176,17 @@ func (d *FromUnixBuilder) NoWaitFlag() bool {
 type FromFixedArchiveBuilder struct {
 	OSType ostype.ArchiveOSType
 
-	Name                string
-	SizeGB              int
-	DistantFrom         []types.ID
-	PlanID              types.ID
-	Connection          types.EDiskConnection
-	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
-	KMSKeyID            types.ID
-	Description         string
-	Tags                types.Tags
-	IconID              types.ID
+	Name                       string
+	SizeGB                     int
+	DistantFrom                []types.ID
+	PlanID                     types.ID
+	Connection                 types.EDiskConnection
+	EncryptionAlgorithm        types.EDiskEncryptionAlgorithm
+	KMSKeyID                   types.ID
+	DedicatedStorageContractID types.ID
+	Description                string
+	Tags                       types.Tags
+	IconID                     types.ID
 
 	Client *APIClient
 	NoWait bool
@@ -206,7 +208,7 @@ func (d *FromFixedArchiveBuilder) Validate(ctx context.Context, zone string) err
 
 // Build ディスクの構築
 func (d *FromFixedArchiveBuilder) Build(ctx context.Context, zone string, serverID types.ID) (*BuildResult, error) {
-	res, err := build(ctx, d.Client, zone, serverID, d.DistantFrom, d.KMSKeyID, d)
+	res, err := build(ctx, d.Client, zone, serverID, d.DistantFrom, d.KMSKeyID, d.DedicatedStorageContractID, d)
 	if err != nil {
 		return nil, err
 	}
@@ -271,16 +273,17 @@ type FromDiskOrArchiveBuilder struct {
 	SourceDiskID    types.ID
 	SourceArchiveID types.ID
 
-	Name                string
-	SizeGB              int
-	DistantFrom         []types.ID
-	PlanID              types.ID
-	Connection          types.EDiskConnection
-	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
-	KMSKeyID            types.ID
-	Description         string
-	Tags                types.Tags
-	IconID              types.ID
+	Name                       string
+	SizeGB                     int
+	DistantFrom                []types.ID
+	PlanID                     types.ID
+	Connection                 types.EDiskConnection
+	EncryptionAlgorithm        types.EDiskEncryptionAlgorithm
+	KMSKeyID                   types.ID
+	DedicatedStorageContractID types.ID
+	Description                string
+	Tags                       types.Tags
+	IconID                     types.ID
 
 	EditParameter *UnixEditRequest
 
@@ -317,7 +320,7 @@ func (d *FromDiskOrArchiveBuilder) Validate(ctx context.Context, zone string) er
 
 // Build ディスクの構築
 func (d *FromDiskOrArchiveBuilder) Build(ctx context.Context, zone string, serverID types.ID) (*BuildResult, error) {
-	res, err := build(ctx, d.Client, zone, serverID, d.DistantFrom, d.KMSKeyID, d)
+	res, err := build(ctx, d.Client, zone, serverID, d.DistantFrom, d.KMSKeyID, d.DedicatedStorageContractID, d)
 	if err != nil {
 		return nil, err
 	}
@@ -395,16 +398,17 @@ func (d *FromDiskOrArchiveBuilder) NoWaitFlag() bool {
 
 // BlankBuilder ブランクディスクを作成する場合のリクエスト
 type BlankBuilder struct {
-	Name                string
-	SizeGB              int
-	DistantFrom         []types.ID
-	PlanID              types.ID
-	Connection          types.EDiskConnection
-	EncryptionAlgorithm types.EDiskEncryptionAlgorithm
-	KMSKeyID            types.ID
-	Description         string
-	Tags                types.Tags
-	IconID              types.ID
+	Name                       string
+	SizeGB                     int
+	DistantFrom                []types.ID
+	PlanID                     types.ID
+	Connection                 types.EDiskConnection
+	EncryptionAlgorithm        types.EDiskEncryptionAlgorithm
+	KMSKeyID                   types.ID
+	DedicatedStorageContractID types.ID
+	Description                string
+	Tags                       types.Tags
+	IconID                     types.ID
 
 	Client *APIClient
 	NoWait bool
@@ -421,7 +425,7 @@ func (d *BlankBuilder) Validate(ctx context.Context, zone string) error {
 
 // Build ディスクの構築
 func (d *BlankBuilder) Build(ctx context.Context, zone string, serverID types.ID) (*BuildResult, error) {
-	res, err := build(ctx, d.Client, zone, serverID, d.DistantFrom, d.KMSKeyID, d)
+	res, err := build(ctx, d.Client, zone, serverID, d.DistantFrom, d.KMSKeyID, d.DedicatedStorageContractID, d)
 	if err != nil {
 		return nil, err
 	}
@@ -602,7 +606,7 @@ type diskBuilder interface {
 	NoWaitFlag() bool
 }
 
-func build(ctx context.Context, client *APIClient, zone string, serverID types.ID, distantFrom []types.ID, kmsKeyID types.ID, builder diskBuilder) (*BuildResult, error) {
+func build(ctx context.Context, client *APIClient, zone string, serverID types.ID, distantFrom []types.ID, kmsKeyID, dedicatedStorageContractID types.ID, builder diskBuilder) (*BuildResult, error) {
 	var err error
 
 	diskReq, editReq, err := builder.createDiskParameter(ctx, client, zone, serverID)
@@ -617,9 +621,17 @@ func build(ctx context.Context, client *APIClient, zone string, serverID types.I
 	var disk *iaas.Disk
 
 	if editReq == nil {
-		disk, err = client.Disk.Create(ctx, zone, diskReq, distantFrom, kmsKeyID)
+		if dedicatedStorageContractID.IsEmpty() {
+			disk, err = client.Disk.Create(ctx, zone, diskReq, distantFrom, kmsKeyID)
+		} else {
+			disk, err = client.Disk.CreateOnDedicatedStorage(ctx, zone, diskReq, distantFrom, kmsKeyID, dedicatedStorageContractID)
+		}
 	} else {
-		disk, err = client.Disk.CreateWithConfig(ctx, zone, diskReq, editReq, false, distantFrom, kmsKeyID)
+		if dedicatedStorageContractID.IsEmpty() {
+			disk, err = client.Disk.CreateWithConfig(ctx, zone, diskReq, editReq, false, distantFrom, kmsKeyID)
+		} else {
+			disk, err = client.Disk.CreateOnDedicatedStorageWithConfig(ctx, zone, diskReq, editReq, false, distantFrom, kmsKeyID, dedicatedStorageContractID)
+		}
 	}
 	if err != nil {
 		if disk != nil {
