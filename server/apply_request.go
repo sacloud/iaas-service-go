@@ -40,6 +40,7 @@ type ApplyRequest struct {
 	CPUModel        string
 	Commitment      types.ECommitment
 	Generation      types.EPlanGeneration
+	ConfidentialVM  bool
 	InterfaceDriver types.EInterfaceDriver
 
 	BootAfterCreate bool
@@ -106,6 +107,7 @@ func (req *ApplyRequest) Builder(caller iaas.APICaller) (*server.Builder, error)
 		CPUModel:        req.CPUModel,
 		Commitment:      req.Commitment,
 		Generation:      req.Generation,
+		ConfidentialVM:  req.ConfidentialVM,
 		InterfaceDriver: req.InterfaceDriver,
 		Description:     req.Description,
 		IconID:          req.IconID,
