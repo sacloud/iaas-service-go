@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.21.0](https://github.com/sacloud/iaas-service-go/compare/v1.20.1...v1.21.0) - 2025-12-22
+- feat: dedicated storage API by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/203
+- feat: Confidential VM by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/205
+
 ## [v1.20.1](https://github.com/sacloud/iaas-service-go/compare/v1.20.0...v1.20.1) - 2025-12-11
 - sacloud/iaas-api-go@v1.23.1 by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/201
 
