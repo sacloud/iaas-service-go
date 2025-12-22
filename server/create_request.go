@@ -34,6 +34,7 @@ type CreateRequest struct {
 	CPUModel        string
 	Commitment      types.ECommitment
 	Generation      types.EPlanGeneration
+	ConfidentialVM  bool
 	InterfaceDriver types.EInterfaceDriver
 
 	BootAfterCreate bool
@@ -63,6 +64,7 @@ func (req *CreateRequest) ApplyRequest() *ApplyRequest {
 		CPUModel:          req.CPUModel,
 		Commitment:        req.Commitment,
 		Generation:        req.Generation,
+		ConfidentialVM:    req.ConfidentialVM,
 		InterfaceDriver:   req.InterfaceDriver,
 		BootAfterCreate:   req.BootAfterCreate,
 		CDROMID:           req.CDROMID,

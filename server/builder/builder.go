@@ -40,6 +40,7 @@ type Builder struct {
 	CPUModel        string
 	Commitment      types.ECommitment
 	Generation      types.EPlanGeneration
+	ConfidentialVM  bool
 	InterfaceDriver types.EInterfaceDriver
 	Description     string
 	IconID          types.ID
@@ -133,6 +134,7 @@ func BuilderFromResource(ctx context.Context, caller iaas.APICaller, zone string
 		CPUModel:        current.CPUModel,
 		Commitment:      current.Commitment,
 		Generation:      current.Generation,
+		ConfidentialVM:  current.ConfidentialVM,
 		InterfaceDriver: current.InterfaceDriver,
 		Description:     current.Description,
 		IconID:          current.IconID,
@@ -202,13 +204,14 @@ func (b *Builder) Validate(ctx context.Context, zone string) error {
 
 	// server plan
 	_, err := query.FindServerPlan(ctx, b.Client.ServerPlan, zone, &query.FindServerPlanRequest{
-		CPU:        b.CPU,
-		MemoryGB:   b.MemoryGB,
-		GPU:        b.GPU,
-		GPUModel:   b.GPUModel,
-		CPUModel:   b.CPUModel,
-		Commitment: b.Commitment,
-		Generation: b.Generation,
+		CPU:            b.CPU,
+		MemoryGB:       b.MemoryGB,
+		GPU:            b.GPU,
+		GPUModel:       b.GPUModel,
+		CPUModel:       b.CPUModel,
+		Commitment:     b.Commitment,
+		Generation:     b.Generation,
+		ConfidentialVM: b.ConfidentialVM,
 	})
 	if err != nil {
 		return err
@@ -354,6 +357,11 @@ func (b *Builder) Update(ctx context.Context, zone string) (*BuildResult, error)
 	server, err := b.Client.Server.Read(ctx, zone, b.ServerID)
 	if err != nil {
 		return result, err
+	}
+
+	// validate with current state
+	if server.ConfidentialVM != b.ConfidentialVM {
+		return result, fmt.Errorf("ConfidentialVM cannot be changed on update")
 	}
 
 	isNeedShutdown, err := b.IsNeedShutdown(ctx, zone)
@@ -570,6 +578,7 @@ func (b *Builder) createServer(ctx context.Context, zone string) (*iaas.Server, 
 		CPUModel:          b.CPUModel,
 		Commitment:        b.Commitment,
 		Generation:        b.Generation,
+		ConfidentialVM:    b.ConfidentialVM,
 		InterfaceDriver:   b.InterfaceDriver,
 		Name:              b.Name,
 		Description:       b.Description,
@@ -818,7 +827,8 @@ func (b *Builder) isPlanChanged(server *iaas.Server) bool {
 		(b.GPUModel != "" && b.GPUModel != server.GPUModel) ||
 		(b.CPUModel != "" && b.CPUModel != server.CPUModel) ||
 		b.Commitment != server.Commitment ||
-		(b.Generation != types.PlanGenerations.Default && b.Generation != server.Generation)
+		(b.Generation != types.PlanGenerations.Default && b.Generation != server.Generation) ||
+		b.ConfidentialVM != server.ConfidentialVM
 	// b.Generation != server.ServerPlanGeneration
 }
 
