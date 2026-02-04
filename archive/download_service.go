@@ -44,7 +44,7 @@ func (s *Service) DownloadWithContext(ctx context.Context, req *DownloadRequest)
 		return fmt.Errorf("archive[%s] is not allowed to download", req.ID)
 	}
 
-	ftpServer, err := client.OpenFTP(ctx, req.Zone, req.ID, &iaas.OpenFTPRequest{ChangePassword: true})
+	ftpServer, err := client.OpenFTP(ctx, req.Zone, req.ID, &iaas.OpenFTPRequest{ChangePassword: false})
 	if err != nil {
 		return fmt.Errorf("requesting FTP server information failed: %s", err)
 	}

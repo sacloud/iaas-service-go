@@ -22,7 +22,8 @@ import (
 
 func NewClient(user, password, hostName string) *ftps.Client {
 	return ftps.NewClientWithTLSConfig(user, password, hostName, &tls.Config{
-		InsecureSkipVerify: true, //nolint:gosec
-		MaxVersion:         tls.VersionTLS12,
+		ServerName: hostName,
+		MinVersion: tls.VersionTLS12,
+		MaxVersion: tls.VersionTLS13,
 	})
 }
