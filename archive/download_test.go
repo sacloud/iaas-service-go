@@ -19,6 +19,9 @@ import (
 	"os"
 	"testing"
 
+	client "github.com/sacloud/api-client-go"
+	"github.com/sacloud/iaas-api-go"
+	"github.com/sacloud/iaas-api-go/helper/api"
 	"github.com/sacloud/iaas-api-go/testutil"
 	"github.com/sacloud/iaas-api-go/types"
 	"github.com/stretchr/testify/require"
@@ -29,7 +32,16 @@ func TestArchiveService_downloadAfterBuild(t *testing.T) {
 		t.SkipNow()
 	}
 
-	caller := testutil.SingletonAPICaller()
+	caller := api.NewCallerWithOptions(&api.CallerOptions{
+		Options: &client.Options{
+			AccessToken:       os.Getenv("SAKURACLOUD_ACCESS_TOKEN"),
+			AccessTokenSecret: os.Getenv("SAKURACLOUD_ACCESS_TOKEN_SECRET"),
+			UserAgent:         "test-" + iaas.DefaultUserAgent,
+			RetryMax:          20,
+			Trace:             testutil.IsEnableTrace() || testutil.IsEnableHTTPTrace(),
+		},
+		TraceAPI: testutil.IsEnableTrace() || testutil.IsEnableHTTPTrace(),
+	})
 	zone := testutil.TestZone()
 	svc := New(caller)
 
