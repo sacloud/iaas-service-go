@@ -41,9 +41,6 @@ func (s *Service) ListWithContext(ctx context.Context, req *ListRequest) ([]*iaa
 	if auth.AccountID.IsEmpty() {
 		return nil, errors.New("invalid account id")
 	}
-	if !auth.ExternalPermission.PermittedBill() {
-		return nil, errors.New("you don't have a permission")
-	}
 
 	// get bills
 	var bills []*iaas.Bill
