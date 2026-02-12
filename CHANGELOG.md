@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.23.0](https://github.com/sacloud/iaas-service-go/compare/v1.22.1...v1.23.0) - 2026-02-12
+- bill: remove ExternalPermission check for bill APIs by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/215
+- go: bump golang.org/x/crypto from 0.47.0 to 0.48.0 by @dependabot[bot] in https://github.com/sacloud/iaas-service-go/pull/214
+- tagpr: use custom major/minorLabels by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/217
+
 ## [v1.22.1](https://github.com/sacloud/iaas-service-go/compare/v1.22.0...v1.22.1) - 2026-02-04
 - ftps: configure TLS versions and ServerName in tls.Config by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/212
 
