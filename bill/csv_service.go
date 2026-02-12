@@ -41,9 +41,6 @@ func (s *Service) CsvWithContext(ctx context.Context, req *CsvRequest) (*iaas.Bi
 	if auth.AccountID.IsEmpty() {
 		return nil, errors.New("invalid account id")
 	}
-	if !auth.ExternalPermission.PermittedBill() {
-		return nil, errors.New("you don't have a permission")
-	}
 
 	// get latest bill ID if empty
 	billID := req.ID
