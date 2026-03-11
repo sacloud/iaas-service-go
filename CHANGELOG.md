@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.22.3](https://github.com/sacloud/iaas-service-go/compare/v1.22.2...v1.22.3) - 2026-03-10
+- iaas-api-go v1.26.0 by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/219
+
 ## [v1.22.2](https://github.com/sacloud/iaas-service-go/compare/v1.22.1...v1.22.2) - 2026-02-12
 - bill: remove ExternalPermission check for bill APIs by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/215
 - go: bump golang.org/x/crypto from 0.47.0 to 0.48.0 by @dependabot[bot] in https://github.com/sacloud/iaas-service-go/pull/214
