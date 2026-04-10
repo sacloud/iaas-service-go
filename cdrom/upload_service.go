@@ -22,7 +22,7 @@ import (
 
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/iaas-service-go/ftps"
+	"github.com/sacloud/iaas-service-go/internal/ftps"
 )
 
 func (s *Service) Upload(req *UploadRequest) error {
@@ -49,7 +49,10 @@ func (s *Service) UploadWithContext(ctx context.Context, req *UploadRequest) err
 		return fmt.Errorf("requesting FTP server information failed: %s", err)
 	}
 
-	ftpsClient := ftps.NewClient(ftpServer.User, ftpServer.Password, ftpServer.HostName)
+	ftpsClient, err := ftps.NewClient(ftpServer)
+	if err != nil {
+		return fmt.Errorf("cannot create ftp client: %s", err)
+	}
 	var reader io.Reader
 	switch req.Path {
 	case "":
@@ -66,8 +69,12 @@ func (s *Service) UploadWithContext(ctx context.Context, req *UploadRequest) err
 		reader = f
 	}
 
-	if err := ftpsClient.UploadReader("upload.raw", reader); err != nil {
+	if err := ftpsClient.Stor("upload.raw", reader); err != nil {
 		return fmt.Errorf("uploading file failed: %s", err)
+	}
+
+	if err := ftpsClient.Quit(); err != nil {
+		return fmt.Errorf("closing FTP connection failed: %s", err)
 	}
 
 	// close FTP

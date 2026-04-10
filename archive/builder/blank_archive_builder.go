@@ -22,7 +22,7 @@ import (
 
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/iaas-service-go/ftps"
+	"github.com/sacloud/iaas-service-go/internal/ftps"
 	"github.com/sacloud/packages-go/size"
 )
 
@@ -77,10 +77,17 @@ func (b *BlankArchiveBuilder) Build(ctx context.Context, zone string) (*iaas.Arc
 	}
 
 	// upload sources via FTPS
-	ftpsClient := ftps.NewClient(ftpServer.User, ftpServer.Password, ftpServer.HostName)
+	ftpsClient, err := ftps.NewClient(ftpServer)
+	if err != nil {
+		return nil, fmt.Errorf("cannot create ftp client: %s", err)
+	}
 
-	if err := ftpsClient.UploadReader("data.raw", b.SourceReader); err != nil {
+	if err := ftpsClient.Stor("data.raw", b.SourceReader); err != nil {
 		return archive, fmt.Errorf("uploading file via FTPS is failed: %s", err)
+	}
+
+	if err := ftpsClient.Quit(); err != nil {
+		return nil, fmt.Errorf("closing FTP connection failed: %s", err)
 	}
 
 	// close FTP
