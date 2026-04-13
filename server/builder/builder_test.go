@@ -504,7 +504,7 @@ func getBlackBoxTestBuilder(switchID types.ID) *Builder {
 				Connection:  types.DiskConnections.VirtIO,
 				Description: "libsacloud-disk-builder-description",
 				Tags:        types.Tags{"tag1", "tag2"},
-				EditParameter: &disk.UnixEditRequest{
+				EditParameter: &disk.UnixEditRequest{ //nolint:gosec
 					HostName:            "libsacloud-disk-builder",
 					Password:            "libsacloud-test-password",
 					DisablePWAuth:       true,

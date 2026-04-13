@@ -37,7 +37,7 @@ func NewClient(ftpServer *iaas.FTPServer) (*ftp.ServerConn, error) {
 // - Create a local file at filePath
 // - Use DownloadWriter to download the first regular file from the FTP server and write to the local file
 func Download(ftpClient *ftp.ServerConn, filePath string) error {
-	file, err := os.Create(filePath)
+	file, err := os.Create(filePath) //nolint:gosec
 	if err != nil {
 		return err
 	}

@@ -4,12 +4,10 @@ import (
 	"io"
 	"testing"
 
-	"github.com/sacloud/iaas-service-go/internal/ftps"
-)
-
-import (
 	"bytes"
 	"os"
+
+	"github.com/sacloud/iaas-service-go/internal/ftps"
 
 	client "github.com/sacloud/api-client-go"
 	"github.com/sacloud/iaas-api-go"
