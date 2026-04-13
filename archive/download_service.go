@@ -22,7 +22,7 @@ import (
 
 	"github.com/sacloud/iaas-api-go"
 	"github.com/sacloud/iaas-api-go/types"
-	"github.com/sacloud/iaas-service-go/ftps"
+	"github.com/sacloud/iaas-service-go/internal/ftps"
 )
 
 func (s *Service) Download(req *DownloadRequest) error {
@@ -49,20 +49,27 @@ func (s *Service) DownloadWithContext(ctx context.Context, req *DownloadRequest)
 		return fmt.Errorf("requesting FTP server information failed: %s", err)
 	}
 
-	ftpsClient := ftps.NewClient(ftpServer.User, ftpServer.Password, ftpServer.HostName)
+	ftpsClient, err := ftps.NewClient(ftpServer)
+	if err != nil {
+		return fmt.Errorf("cannot create ftp client: %s", err)
+	}
 	switch req.Path {
 	case "":
 		var out io.Writer = os.Stdout
 		if req.Writer != nil {
 			out = req.Writer
 		}
-		if err := ftpsClient.DownloadWriter(out); err != nil {
+		if err := ftps.DownloadWriter(ftpsClient, out); err != nil {
 			return fmt.Errorf("downloading via FTP failed: %s", err)
 		}
 	default:
-		if err := ftpsClient.Download(req.Path); err != nil {
+		if err := ftps.Download(ftpsClient, req.Path); err != nil {
 			return fmt.Errorf("downloading via FTP failed: %s", err)
 		}
+	}
+
+	if err := ftpsClient.Quit(); err != nil {
+		return fmt.Errorf("closing FTP connection failed: %s", err)
 	}
 
 	// close

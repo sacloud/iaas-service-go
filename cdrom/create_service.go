@@ -21,7 +21,7 @@ import (
 	"os"
 
 	"github.com/sacloud/iaas-api-go"
-	"github.com/sacloud/iaas-service-go/ftps"
+	"github.com/sacloud/iaas-service-go/internal/ftps"
 	"github.com/sacloud/packages-go/size"
 )
 
@@ -59,9 +59,17 @@ func (s *Service) CreateWithContext(ctx context.Context, req *CreateRequest) (*i
 		return nil, err
 	}
 
-	ftpsClient := ftps.NewClient(ftpServer.User, ftpServer.Password, ftpServer.HostName)
-	if err := ftpsClient.UploadReader("data.iso", reader); err != nil {
+	ftpsClient, err := ftps.NewClient(ftpServer)
+	if err != nil {
+		return nil, fmt.Errorf("cannot create ftp client: %s", err)
+	}
+
+	if err := ftpsClient.Stor("data.iso", reader); err != nil {
 		return nil, err
+	}
+
+	if err := ftpsClient.Quit(); err != nil {
+		return nil, fmt.Errorf("closing FTP connection failed: %s", err)
 	}
 
 	if err := client.CloseFTP(ctx, req.Zone, cdrom.ID); err != nil {
