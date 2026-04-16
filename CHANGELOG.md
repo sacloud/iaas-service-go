@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.23.0](https://github.com/sacloud/iaas-service-go/compare/v1.22.3...v1.23.0) - 2026-04-16
+- use jlaffaye/ftp instead of sacloud/ftps by @tokuhirom in https://github.com/sacloud/iaas-service-go/pull/223
+- mark authstatus package as deprecated & use iam-api-go auth context API by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/225
+- go: bump golang.org/x/crypto from 0.49.0 to 0.50.0 by @dependabot[bot] in https://github.com/sacloud/iaas-service-go/pull/222
+
 ## [v1.22.3](https://github.com/sacloud/iaas-service-go/compare/v1.22.2...v1.22.3) - 2026-03-10
 - iaas-api-go v1.26.0 by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/219
 
