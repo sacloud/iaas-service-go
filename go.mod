@@ -1,13 +1,13 @@
 module github.com/sacloud/iaas-service-go
 
-go 1.25.5
+go 1.25.8
 
 require (
 	github.com/jlaffaye/ftp v0.2.0
 	github.com/sacloud/api-client-go v0.3.5
 	github.com/sacloud/iaas-api-go v1.26.0
 	github.com/sacloud/iam-api-go v0.3.0
-	github.com/sacloud/packages-go v0.0.12
+	github.com/sacloud/packages-go v0.0.13
 	github.com/sacloud/saclient-go v0.3.6
 	github.com/stretchr/testify v1.11.1
 	golang.org/x/crypto v0.50.0
@@ -20,14 +20,14 @@ require (
 	github.com/fatih/color v1.19.0 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
-	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.13 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/go-faster/errors v0.7.1 // indirect
 	github.com/go-faster/jx v1.2.0 // indirect
 	github.com/go-faster/yaml v0.4.6 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.23.0 // indirect
+	github.com/go-playground/validator/v10 v10.30.2 // indirect
 	github.com/gofrs/flock v0.13.0 // indirect
 	github.com/golang-jwt/jwt/v5 v5.3.1 // indirect
 	github.com/google/uuid v1.6.0 // indirect
