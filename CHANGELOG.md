@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.24.0](https://github.com/sacloud/iaas-service-go/compare/v1.23.0...v1.24.0) - 2026-04-23
+- fix: adapt to iaas-api-go v1.27.0 breaking changes by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/228
+- fix: pass zone to NFS plan query functions by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/230
+
 ## [v1.23.0](https://github.com/sacloud/iaas-service-go/compare/v1.22.3...v1.23.0) - 2026-04-16
 - use jlaffaye/ftp instead of sacloud/ftps by @tokuhirom in https://github.com/sacloud/iaas-service-go/pull/223
 - mark authstatus package as deprecated & use iam-api-go auth context API by @yamamoto-febc in https://github.com/sacloud/iaas-service-go/pull/225
