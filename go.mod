@@ -1,13 +1,15 @@
 module github.com/sacloud/iaas-service-go
 
-go 1.25.8
+go 1.25.0
+
+toolchain go1.26.2
 
 require (
 	github.com/jlaffaye/ftp v0.2.0
 	github.com/sacloud/api-client-go v0.3.5
-	github.com/sacloud/iaas-api-go v1.27.0
+	github.com/sacloud/iaas-api-go v1.28.0
 	github.com/sacloud/iam-api-go v0.3.0
-	github.com/sacloud/packages-go v0.0.13
+	github.com/sacloud/packages-go v0.1.0
 	github.com/sacloud/saclient-go v0.3.7
 	github.com/stretchr/testify v1.11.1
 	golang.org/x/crypto v0.50.0
