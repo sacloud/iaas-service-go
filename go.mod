@@ -1,11 +1,11 @@
 module github.com/sacloud/iaas-service-go
 
-go 1.25.0
+go 1.26
 
 toolchain go1.26.2
 
 require (
-	github.com/jlaffaye/ftp v0.2.0
+	github.com/jlaffaye/ftp v0.2.1
 	github.com/sacloud/api-client-go v0.3.5
 	github.com/sacloud/iaas-api-go v1.29.1
 	github.com/sacloud/iam-api-go v0.3.0
